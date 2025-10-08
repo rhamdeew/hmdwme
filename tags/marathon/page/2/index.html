@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  
+  <title>Tag: marathon | HMDW/me - блог веб-разработчика | Страница 2</title>
+  <meta name="viewport" content="width=device-width">
+  
+  
+  <meta name="description" content="Tag: marathon. Блог веб-разработчика | Страница 2">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HMDW&#x2F;me">
+<meta property="og:url" content="https://hmdw.me/tags/marathon/page/2/">
+<meta property="og:site_name" content="HMDW&#x2F;me">
+<meta property="og:description" content="Tag: marathon. Блог веб-разработчика | Страница 2">
+<meta property="og:locale" content="ru_RU">
+<meta property="article:author" content="Rail">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@rhamdeew">
+  
+  
+  <link rel="alternate" href="/atom.xml" title="HMDW/me" type="application/atom+xml">
+  
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+  <i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+  <h2 class="blog-title">
+    <a href="/">HMDW/me</a>
+  </h2>
+  <nav class="nav">
+    <ul>
+      <li><a href="/">Home</a></li><li><a href="/projects/">Projects</a></li><li><a href="/about/">About</a></li>
+      <li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+      <li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+    </ul>
+  </nav>
+  <div id="search-form-wrap">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Поискать"><button type="submit" class="search-form-submit">&#xF002;</button></form>
+  </div>
+</header>
+
+    <div id="main">
+      
+  
+    <article id="post-telegram-bots" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h2 itemprop="name" class="entry-title">
+      <a class="article-title" href="/telegram-bots/">Перспективы ботов в Телеграм</a>
+    </h2>
+  
+
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/telegram-bots/" class="article-date">
+  <time datetime="2015-09-16T23:59:33.000Z" itemprop="datePublished">сент. 16 2015</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="description">
+    
+    
+      <p>Всем привет! Еще в мае я запустил <a href="http://telegram-club.ru" target="_blank" rel="noopener">Telegram club</a> - проект из одной html-странички и конференции в Telegram.<br>Развивать это направление сейчас нет времени, но хотелось бы поделиться своими мыслями по поводу возмножных применений ботов в данном мессенджере.</p>
+<p>Побудило меня написать этот пост огорчение от нынешних школьников которые кроме 100500 копии бота отдающего рандомное изображение с гугла по запросу и бота-флудера ничего писать не хотят. Есть конечно и приятные исключения, но сегодня я напишу о таких штуках реализацию которых еще не видел.</p>
+<p>Начнем с того что у Telegram есть весьма удобный, но в то же время ограниченный Bot API. При помощи этого API нельзя создать бота ведущего лог всех разговоров и самовольно флудящего в конференциях. Также ник у бота всегда должен оканчиваться на *bot.<br>Для деструктивных же функций лучше взять одну из реализаций пользовательского клиента и переписать ее для программного управления. Если не хочется особо углубляться то можно запустить на сервере telegram-cli и давать ему команды с вашей утилиты. Получится что придется написать только логику, а рутиной будет заниматься консольный клиент.</p>
+<p>Сегодня же я вам расскажу про перспективы стандартных ботов.<br>
+      
+        <p class="article-more-link">
+          <a href="/telegram-bots/">Read More</a>
+        </p>
+      
+    
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ithink/" rel="tag">ithink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/marathon/" rel="tag">marathon</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/telegram/" rel="tag">telegram</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+  <hr class="article-devider">
+
+
+
+
+  
+    <article id="post-default-invites" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h2 itemprop="name" class="entry-title">
+      <a class="article-title" href="/default-invites/">Приглашения</a>
+    </h2>
+  
+
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/default-invites/" class="article-date">
+  <time datetime="2015-09-15T23:56:55.000Z" itemprop="datePublished">сент. 15 2015</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="description">
+    
+    
+      <p>Сегодня делюсь инвайтами.</p>
+<p>fb1a5a55d3bb0bec29479d6805c79de3</p>
+<p>b50f7c40410cc98000a3c70099426e92</p>
+<p>44561016f67c4c14cd0d2f56c072cf1c</p>
+<p>ee090bf678b3925ac58419a0e9d56e5f</p>
+<p>613a55d58f657f2cc854d579a40ab97e</p>
+<p>Заходить вот сюда:</p>
+<pre>
+011001000110010101100110011000010111010101101100011101000010111001100001011000100110001101100100001011100110001001111010
+</pre>
+    
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ithink/" rel="tag">ithink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/marathon/" rel="tag">marathon</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+  <hr class="article-devider">
+
+
+
+
+  
+    <article id="post-mr-robot" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h2 itemprop="name" class="entry-title">
+      <a class="article-title" href="/mr-robot/">Mr. Robot</a>
+    </h2>
+  
+
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/mr-robot/" class="article-date">
+  <time datetime="2015-09-14T23:59:57.000Z" itemprop="datePublished">сент. 14 2015</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="description">
+    
+    
+      <p><img src="/images/i/2015/09/c112fc648da094dcae0cf2bb0.jpg" alt=""></p>
+<p>Привет! Я редко смотрю сериалы, но вчера вечером совершенно случайно наткнулся на новый сериал про хакеров - “Мистер Робот”. Сериал настолько понравился что просмотрел аж две серии подряд. Пересказывать его содержание не буду, расскажу лишь чем меня он зацепил.</p>
+<p>Уже в первых двух сериях упоминаются Tor, Gnome, KDE, руткиты, демонстрируются красиво раскрашенные терминалы. Есть даже демонстрация быстрого уничтожения данных со своего личного компьютера на случай если приедут копы. Здесь уже демонстрируемое не вызывает дикий смех из-за своей нелепости как это обычно бывает в кинофильмах про хакеров. Видно что к созданию сериала приложили руку технари. Реальные ОС, реальные утилиты и даже реальные соцсети (Twitter, Facebook, Instagram).</p>
+<p>Настоятельно рекомендую к просмотру.</p>
+
+    
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cinema/" rel="tag">cinema</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ithink/" rel="tag">ithink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/marathon/" rel="tag">marathon</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+  <hr class="article-devider">
+
+
+
+
+  
+    <article id="post-golang" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h2 itemprop="name" class="entry-title">
+      <a class="article-title" href="/golang/">Golang</a>
+    </h2>
+  
+
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/golang/" class="article-date">
+  <time datetime="2015-09-13T23:59:27.000Z" itemprop="datePublished">сент. 13 2015</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="description">
+    
+    
+      <p><img src="/images/i/2015/09/0a11164d6551d658e493c0ef9.png" alt=""></p>
+<p>Выходные выдались на редкость бурными. Так что буду краток - до конца этого года обещаю прочитать книгу про Go и написать на нем какой-то полезный код.<br>Метод с обещаниями пока работает =)</p>
+
+    
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ithink/" rel="tag">ithink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/marathon/" rel="tag">marathon</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+  <hr class="article-devider">
+
+
+
+
+  
+    <article id="post-shared-ideas" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h2 itemprop="name" class="entry-title">
+      <a class="article-title" href="/shared-ideas/">Стоит ли делиться идеями?</a>
+    </h2>
+  
+
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/shared-ideas/" class="article-date">
+  <time datetime="2015-09-12T02:18:32.000Z" itemprop="datePublished">сент. 12 2015</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="description">
+    
+    
+      <p>Наверняка каждый человек хоть раз в жизни да придумывал в голове что-то такое интересное. Например завод по производству воздушных шаров из б/у-шных покрышек или инновационную соцсеть для одноклассников. В основном эти мимолетные идеи не оседают надолго в голове и спустя непродолжительное время исчезают. В редких случаях люди начинают шевелиться и реализовывать свою идею. В еще более редких случаях она таки выстреливает.</p>
+<p>Так вот и у меня иногда возникают всякие шальные мысли и в силу своей сферы деятельности все они в основном о веб-сайтах и сервисах. В некоторых случаях я даже успеваю дойти до стадии регистрации домена и продумывании архитектуры. И только потом начинаю задавать себе вопросы - “нужно ли это кому то?”, “есть ли конкуренты?”. Ну а дальше все по сценарию описанному выше и с примерно такой же вероятностью.</p>
+<p>Но ведь можно было сперва опубликовать где-то идею и получить некий фидбек. С одной стороны жалко выкладывать готовую идею и бояться что ее кто-то украдет и реализует быстрее чем ты. С другой - подобные мысли могут запросто придти и другим людям. Так что не поделившись своей идеей мы тоже рискуем не успеть ее реализовать раньше других =)</p>
+      
+        <p class="article-more-link">
+          <a href="/shared-ideas/">Read More</a>
+        </p>
+      
+    
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ithink/" rel="tag">ithink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/marathon/" rel="tag">marathon</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+  <hr class="article-devider">
+
+
+
+
+  
+    <article id="post-friday-evening-vacuum" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h2 itemprop="name" class="entry-title">
+      <a class="article-title" href="/friday-evening-vacuum/">Пятничная вечерняя пустота</a>
+    </h2>
+  
+
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/friday-evening-vacuum/" class="article-date">
+  <time datetime="2015-09-11T23:59:36.000Z" itemprop="datePublished">сент. 11 2015</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="description">
+    
+    
+      <p>Мозг переключился на режим энергосбережения. Впереди выходные. Сейчас ничего не буду рассказывать. Пишу только потому что сам себе обещал.</p>
+<p>Хороших вам выходных! =)</p>
+
+    
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ithink/" rel="tag">ithink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/marathon/" rel="tag">marathon</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+  <hr class="article-devider">
+
+
+
+
+  
+    <article id="post-about-cscart" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h2 itemprop="name" class="entry-title">
+      <a class="article-title" href="/about-cscart/">Пара слов о CS-cart</a>
+    </h2>
+  
+
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/about-cscart/" class="article-date">
+  <time datetime="2015-09-10T23:59:26.000Z" itemprop="datePublished">сент. 10 2015</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="description">
+    
+    
+      <p>Всем привет! Очень коротко пишу свои впечатления от более тесного знакомства со свежей версией этой CMS.</p>
+<p><strong>Что понравилось:</strong></p>
+<ul>
+<li>Очень простая в управлении админка</li>
+<li>Быстрая реакция техподдержки</li>
+<li>Визуальная настройка дизайна</li>
+<li>Наличие доки с рекомендациями для разработчиков под эту платформу</li>
+</ul>
+<p><strong>Что не понравилось:</strong></p>
+<ul>
+<li>Маркетинг, маркетинг и еще раз маркетинг. Слишком навязчиво.</li>
+<li>Скромные базовые возможности в настройке (по сравнению с 1С-Битрикс)</li>
+<li>Местами сложный и запутанный код</li>
+<li>Smarty</li>
+<li>Рекомендации в официальной документации просто брать и модифицировать код модуля. Не расширять базовый класс или использовать спец. файл с хуками, а просто брать и править код модуля. Даже про систему контроля версий ни слова.</li>
+</ul>
+
+    
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cs-cart/" rel="tag">cs-cart</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ithink/" rel="tag">ithink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/marathon/" rel="tag">marathon</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+  <hr class="article-devider">
+
+
+
+
+  
+    <article id="post-neocities" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h2 itemprop="name" class="entry-title">
+      <a class="article-title" href="/neocities/">Neocities и P2P</a>
+    </h2>
+  
+
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/neocities/" class="article-date">
+  <time datetime="2015-09-09T23:54:10.000Z" itemprop="datePublished">сент. 9 2015</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="description">
+    
+    
+      <p>Сегодня расскажу коротко. Та штука о которой писал вчера - <a href="https://instagram.com/p/7aoK3Pp5rl/" target="_blank" rel="noopener">https://instagram.com/p/7aoK3Pp5rl/</a><br>Мне самому понравилось. Поэтому продолжению быть! =)</p>
+<p>Ну а теперь о сервисе который в заголовке. По сути это бесплатный хостинг для веб-сайтов судя по названию черпавший вдохновение у древнего Geocities. 100 мегабайт места, домен третьего уровня и простенький редактор в панели управления сайтом. В принципе это набор 15-летней давности. Ничем такой сервис вроде бы заинтересовать не может.</p>
+<p>Но тут есть <a href="https://xakep.ru/2015/09/09/ipfs/" target="_blank" rel="noopener">нюансы</a>. Да, этот сервис поддерживает p2p-раздачу контента и теоретически такие сайты невозможно заблокировать. Глубоко в тему не вникал, но на всякий случай <a href="http://rhtest.neocities.org" target="_blank" rel="noopener">зарегистрировался</a>.</p>
+<p>Под катом пара скриншотов панели управления.</p>
+      
+        <p class="article-more-link">
+          <a href="/neocities/">Read More</a>
+        </p>
+      
+    
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ithink/" rel="tag">ithink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/marathon/" rel="tag">marathon</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+  <hr class="article-devider">
+
+
+
+
+  
+    <article id="post-bst" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h2 itemprop="name" class="entry-title">
+      <a class="article-title" href="/bst/">Одна штука в Instagram</a>
+    </h2>
+  
+
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/bst/" class="article-date">
+  <time datetime="2015-09-08T23:33:57.000Z" itemprop="datePublished">сент. 8 2015</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="description">
+    
+    
+      <p><blockquote class="instagram-media" data-instgrm-captioned data-instgrm-version="4" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:8px;"> <div style=" background:#F8F8F8; line-height:0; margin-top:40px; padding:50.0% 0; text-align:center; width:100%;"> <div style=" background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAAGFBMVEUiIiI9PT0eHh4gIB4hIBkcHBwcHBwcHBydr+JQAAAACHRSTlMABA4YHyQsM5jtaMwAAADfSURBVDjL7ZVBEgMhCAQBAf//42xcNbpAqakcM0ftUmFAAIBE81IqBJdS3lS6zs3bIpB9WED3YYXFPmHRfT8sgyrCP1x8uEUxLMzNWElFOYCV6mHWWwMzdPEKHlhLw7NWJqkHc4uIZphavDzA2JPzUDsBZziNae2S6owH8xPmX8G7zzgKEOPUoYHvGz1TBCxMkd3kwNVbU0gKHkx+iZILf77IofhrY1nYFnB/lQPb79drWOyJVa/DAvg9B/rLB4cC+Nqgdz/TvBbBnr6GBReqn/nRmDgaQEej7WhonozjF+Y2I/fZou/qAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;"></div></div> <p style=" margin:8px 0 0 0; padding:0 4px;"> <a href="https://instagram.com/p/54QDKGp5lT/" style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;" target="_top">Ну я пошёл! #ulsk</a></p> <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">Фото опубликовано Раиль (@rhamdeew) <time style=" font-family:Arial,sans-serif; font-size:14px; line-height:17px;" datetime="2015-08-02T11:14:12+00:00">Авг 2 2015 в 4:14 PDT</time></p></div></blockquote></p>
+<script async defer src="//platform.instagram.com/en_US/embeds.js"></script>
+
+<p>Завтра запускаю одну интересную штуку у себя в <a href="https://instagram.com/rhamdeew/" target="_blank" rel="noopener">Instagram-аккаунте</a>. Времени практически у меня не отнимет, но надеюсь что будет интересно. Завтра расскажу все подробнее.</p>
+<p>Для чего я все это пишу сегодня? А для того чтобы завтра не было шансов отмазаться и перенести все на другое число. Вот такие дела. Завтра все будет )</p>
+
+    
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/instagram/" rel="tag">instagram</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ithink/" rel="tag">ithink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/marathon/" rel="tag">marathon</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+  <hr class="article-devider">
+
+
+
+
+  
+    <article id="post-hardcoding" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h2 itemprop="name" class="entry-title">
+      <a class="article-title" href="/hardcoding/">Хардкодинг</a>
+    </h2>
+  
+
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/hardcoding/" class="article-date">
+  <time datetime="2015-09-07T23:01:21.000Z" itemprop="datePublished">сент. 7 2015</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="description">
+    
+    
+      <p>Всем привет! Сегодня кратко опишу вам вредный совет по неправильному использованию git.<br>Итак, предположим у вас есть какой-то проект который по некоторым причинам нельзя развернуть на локальной машине, но очень хочется кодить локально в любимом редакторе.</p>
+      
+        <p class="article-more-link">
+          <a href="/hardcoding/">Read More</a>
+        </p>
+      
+    
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ithink/" rel="tag">ithink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/marathon/" rel="tag">marathon</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/" rel="tag">tech</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+</article>
+
+
+  <hr class="article-devider">
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/tags/marathon/">❮ Prev</a><a class="page-number" href="/tags/marathon/">1</a><span class="page-number current">2</span><a class="page-number" href="/tags/marathon/page/3/">3</a><a class="page-number" href="/tags/marathon/page/4/">4</a><a class="extend next" rel="next" href="/tags/marathon/page/3/">Next ❯</a>
+    </nav>
+  
+
+
+    </div>
+    <footer id="footer">
+  <h4 class="footer-blog-title">
+    <a href="/">HMDW/me</a>
+  </h4>
+  <div class="copyright">
+  <!--noindex-->
+    &copy; 2025 Rail<br>
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+  <!--/noindex-->
+  </div>
+</footer>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+  (function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+      try {
+        w.yaCounter32857010 = new Ya.Metrika({
+          id:32857010,
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true
+        });
+      } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+  })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/32857010" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+    
+<script>
+  var disqus_shortname = 'hmdw';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
