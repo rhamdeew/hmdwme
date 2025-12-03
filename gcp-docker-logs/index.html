@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  
+  <title>Логи из Docker в Google Cloud | HMDW/me - блог веб-разработчика</title>
+  <meta name="viewport" content="width=device-width">
+  
+  
+  <meta name="description" content="Настраиваем отправку логов из Docker-контейнеров в Google Cloud">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Логи из Docker в Google Cloud">
+<meta property="og:url" content="https://hmdw.me/gcp-docker-logs/">
+<meta property="og:site_name" content="HMDW&#x2F;me">
+<meta property="og:description" content="Настраиваем отправку логов из Docker-контейнеров в Google Cloud">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://hmdw.me/images/logs_explorer.jpg">
+<meta property="og:image" content="https://hmdw.me/images/gcp-1.jpg">
+<meta property="og:image" content="https://hmdw.me/images/gcp-2.png">
+<meta property="og:image" content="https://hmdw.me/images/gcp-3.png">
+<meta property="og:image" content="https://hmdw.me/images/gcp-4.png">
+<meta property="og:image" content="https://hmdw.me/images/gcp-5.png">
+<meta property="og:image" content="https://hmdw.me/images/gcp-6.png">
+<meta property="og:image" content="https://hmdw.me/images/gcp-7.png">
+<meta property="og:image" content="https://hmdw.me/images/gcp-8.png">
+<meta property="article:published_time" content="2021-04-28T20:27:01.000Z">
+<meta property="article:modified_time" content="2025-12-03T14:41:19.520Z">
+<meta property="article:author" content="Rail">
+<meta property="article:tag" content="tech">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hmdw.me/images/logs_explorer.jpg">
+<meta name="twitter:creator" content="@rhamdeew">
+  
+  
+  <link rel="alternate" href="/atom.xml" title="HMDW/me" type="application/atom+xml">
+  
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+  <i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+  <h2 class="blog-title">
+    <a href="/">HMDW/me</a>
+  </h2>
+  <nav class="nav">
+    <ul>
+      <li><a href="/">Home</a></li><li><a href="/projects/">Projects</a></li><li><a href="/about/">About</a></li>
+      <li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+      <li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+    </ul>
+  </nav>
+  <div id="search-form-wrap">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Поискать"><button type="submit" class="search-form-submit">&#xF002;</button></form>
+  </div>
+</header>
+
+    <div id="main">
+      <article id="post-gcp-docker-logs" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      Логи из Docker в Google Cloud
+    </h1>
+    
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/gcp-docker-logs/" class="article-date">
+  <time datetime="2021-04-28T20:27:01.000Z" itemprop="datePublished">апр. 28 2021</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="articleBody">
+    
+    <p>Есть у меня pet-проджекты которые крутятся в докер-контейнерах на VPS. На хостовой системе обычно установлен необходимый минимум ПО для запуска контейнеров.</p>
+<p>И вот хотелось еще прикрутить отправку логов в какой-нибудь удобный внешний сервис в котором их можно удобно хранить и анализировать, но при этом не хотелось ставить и конфигурировать дополнительный софт типа fluentd и т.д.</p>
+<p>Короче мне было просто лень на самом деле 😃. А потом я случайно увидел что в докере из коробки есть драйвер для записи логов который называется gcplogs.</p>
+<a id="more"></a>
+<h3 id="Google-Cloud"><a href="#Google-Cloud" class="headerlink" title="Google Cloud"></a>Google Cloud</h3><p>Итак, какие условия предоставляет Google Cloud. Если верить вот <a href="https://cloud.google.com/stackdriver/pricing" target="_blank" rel="noopener">этой странице</a> то нам доступно сохранение первых 50 гигабайт логов в месяц на проект бесплатно и далее по 0.5$ за гигабайт. В аккаунте по-умолчанию можно создать до 25 проектов.</p>
+<p>В конце месяца я на всякий случай проверю сколько это в итоге стоит)</p>
+<p><strong>Дашборд для просмотра логов в real-time выглядит вот так:</strong></p>
+<p><img src="/images/logs_explorer.jpg" alt="Logs explorer"></p>
+<p>Также здесь есть продвинутые средства для поиска и анализа логов с кучей фильтров.</p>
+<p>Итак, решено. Прикручиваем 😉</p>
+<h3 id="Пример-настройки"><a href="#Пример-настройки" class="headerlink" title="Пример настройки"></a>Пример настройки</h3><p>Тут все можно поделить на 3 шага</p>
+<ol>
+<li>Создание проекта, создание сервис-аккаунта, получение ключа доступа в GCP</li>
+<li>Добавление ключа в Docker</li>
+<li>Переключение настроек логирования в docker-compose.yml</li>
+</ol>
+<h4 id="1-Получаем-ключ-в-Google-Cloud"><a href="#1-Получаем-ключ-в-Google-Cloud" class="headerlink" title="1. Получаем ключ в Google Cloud"></a>1. Получаем ключ в Google Cloud</h4><p>Допустим что вы успешно зарегистрировались в GCP и создали проект. Теперь в строке поиска пишем Service Accounts и попадаем на страницу настройки сервисных аккаунтов.</p>
+<p><img src="/images/gcp-1.jpg" alt="GCP IAM"></p>
+<hr>
+<p>Отлично!<br>Здесь мы создаем новый сервисный аккаунт.</p>
+<p><img src="/images/gcp-2.png" alt="GCP IAM Create service account"></p>
+<hr>
+<p>Придумываем идентификатор для нового сервисного аккаунта.<br>В моем случае это просто ‘test’.</p>
+<p><img src="/images/gcp-3.png" alt="GCP Service account name"></p>
+<hr>
+<p>Добавляем созданному аккаунту роль “Logs Writer”.</p>
+<p><img src="/images/gcp-4.png" alt="GCP Service account role"></p>
+<hr>
+<p>Добавляем себя в owner’ов сервисного аккаунта.</p>
+<p><img src="/images/gcp-5.png" alt="GCP IAM"></p>
+<hr>
+<p>Теперь в списке сервисных аккаунтов у нас появился наш только что созданный. Теперь идем в Manage keys и генерируем ключ доступа для этого аккаунта.</p>
+<p><img src="/images/gcp-6.png" alt="GCP IAM"></p>
+<hr>
+<p>Генерируем ключ в формате JSON.</p>
+<p><img src="/images/gcp-7.png" alt="GCP IAM"></p>
+<hr>
+<p>Сохраняем файл с ключом у себя на компьютере.</p>
+<p><img src="/images/gcp-8.png" alt="GCP IAM"></p>
+<h4 id="2-Добавляем-ключ-в-Docker"><a href="#2-Добавляем-ключ-в-Docker" class="headerlink" title="2. Добавляем ключ в Docker"></a>2. Добавляем ключ в Docker</h4><p>Теперь заливаем ключ на сервер. В качестве примера пусть будет путь <code>/root/.gcp.json</code></p>
+<p>Затем редактируем сервис в systemd</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;docker.service</span><br></pre></td></tr></table></figure>
+<p>И добавляем строчку <code>Environment=&quot;GOOGLE_APPLICATION_CREDENTIALS=/root/.gcp.json&quot;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Service]</span><br><span class="line">Type&#x3D;notify</span><br><span class="line">Environment&#x3D;&quot;GOOGLE_APPLICATION_CREDENTIALS&#x3D;&#x2F;root&#x2F;.gcp.json&quot;</span><br></pre></td></tr></table></figure>
+<p>Перезапускаем Docker</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+<h4 id="3-Переключаем-настройки-в-Docker-compose"><a href="#3-Переключаем-настройки-в-Docker-compose" class="headerlink" title="3. Переключаем настройки в Docker-compose"></a>3. Переключаем настройки в Docker-compose</h4><p>Открываем docker-compose.yml и меняем настройки логирования</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3.7'</span></span><br><span class="line"><span class="attr">x-logging:</span></span><br><span class="line">  <span class="string">&amp;default-logging</span></span><br><span class="line">  <span class="attr">driver:</span> <span class="string">gcplogs</span></span><br><span class="line">  <span class="attr">options:</span></span><br><span class="line">    <span class="attr">gcp-project:</span> <span class="string">"test"</span></span><br><span class="line">    <span class="attr">gcp-meta-name:</span> <span class="string">"test_instance"</span></span><br></pre></td></tr></table></figure>
+<p>Затем рестартим docker-compose и идем смотреть наши логи в Google Cloud Log Explorer.</p>
+<p>Готово =)</p>
+
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/" rel="tag">tech</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+  
+<nav id="article-nav">
+  
+    <a href="/weekly-digest-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Weekly Digest #2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/gitlab-ci-cache-en/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          How to cache dependencies in GitLab
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+    </div>
+    <footer id="footer">
+  <h4 class="footer-blog-title">
+    <a href="/">HMDW/me</a>
+  </h4>
+  <div class="copyright">
+  <!--noindex-->
+    &copy; 2025 Rail<br>
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+  <!--/noindex-->
+  </div>
+</footer>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+  (function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+      try {
+        w.yaCounter32857010 = new Ya.Metrika({
+          id:32857010,
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true
+        });
+      } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+  })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/32857010" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+    
+<script>
+  var disqus_shortname = 'hmdw';
+  
+  var disqus_url = 'https://hmdw.me/gcp-docker-logs/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
