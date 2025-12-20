@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  
+  <title>Про VIM | HMDW/me - блог веб-разработчика</title>
+  <meta name="viewport" content="width=device-width">
+  
+  
+  <meta name="description" content="Блог веб-разработчика">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Про VIM">
+<meta property="og:url" content="https://hmdw.me/vim/">
+<meta property="og:site_name" content="HMDW&#x2F;me">
+<meta property="og:description" content="Блог веб-разработчика">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://hmdw.me/images/vimlogo.png">
+<meta property="article:published_time" content="2016-02-08T22:12:21.000Z">
+<meta property="article:modified_time" content="2025-12-20T11:03:02.067Z">
+<meta property="article:author" content="Rail">
+<meta property="article:tag" content="tech">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hmdw.me/images/vimlogo.png">
+<meta name="twitter:creator" content="@rhamdeew">
+  
+  
+  <link rel="alternate" href="/atom.xml" title="HMDW/me" type="application/atom+xml">
+  
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+  <i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+  <h2 class="blog-title">
+    <a href="/">HMDW/me</a>
+  </h2>
+  <nav class="nav">
+    <ul>
+      <li><a href="/">Home</a></li><li><a href="/projects/">Projects</a></li><li><a href="/about/">About</a></li>
+      <li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+      <li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+    </ul>
+  </nav>
+  <div id="search-form-wrap">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Поискать"><button type="submit" class="search-form-submit">&#xF002;</button></form>
+  </div>
+</header>
+
+    <div id="main">
+      <article id="post-vim" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      Про VIM
+    </h1>
+    
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/vim/" class="article-date">
+  <time datetime="2016-02-08T22:12:21.000Z" itemprop="datePublished">февр. 8 2016</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="articleBody">
+    
+    <p><img src="/images/vimlogo.png" alt="Vim logo"></p>
+<p>С началом года решил плотнее подсесть на Vim. На серверах то я его давно уже юзаю для правки конфигов, но тут захотелось максимально прокачанную конфигурацию для веб-разработки.</p>
+<p>Опытные люди посоветовали <a href="https://github.com/amix/vimrc" target="_blank" rel="noopener">vimrc от amix</a>. Практически все мне подошло, но кое что пришлось подпилить.</p>
+<a id="more"></a>
+<h2 id="Правки-конфигов"><a href="#Правки-конфигов" class="headerlink" title="Правки конфигов"></a>Правки конфигов</h2><p>Вот что я вписал в .vim_runtime/my_configs.vim</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&quot; colorscheme desert</span><br><span class="line">nnoremap &lt;F12&gt; :TlistToggle&lt;enter&gt;</span><br><span class="line">&quot; inoremap $5 &lt;?php&lt;esc&gt;o?&gt;&lt;esc&gt;O</span><br><span class="line">if has(&#39;gui_running&#39;)</span><br><span class="line">      &quot; set gfn&#x3D;Droid\ Sans\ Mono\ 13</span><br><span class="line">      :map &lt;silent&gt; &lt;S-Insert&gt; &quot;+gP</span><br><span class="line">      imap &lt;silent&gt;  &lt;S-Insert&gt;  &lt;Esc&gt;&quot;+pa</span><br><span class="line">endif</span><br></pre></td></tr></table></figure>
+<p>Тут я выбрал более подходящие для себя цветовую схему и шрифт, а также включил вставку по Shift+Insert. Также добавил показ Tlist по F12 и вставку php-скобок по $5 (Shift+4 Shift+5)</p>
+<p>Подправил цветовую схему в zenroom2.vim</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">&quot;File:        zenroom2.vim</span><br><span class="line">&quot;Description: Emulates iA Writer environment when editing Markdown, reStructuredText</span><br><span class="line">&quot;             or text files.</span><br><span class="line">&quot;Maintainer:  Amir Salihefendic &lt;amix@doist.io&gt;</span><br><span class="line">&quot;Version:     0.1</span><br><span class="line">&quot;Last Change: 2013-12-29</span><br><span class="line">&quot;License:     BSD</span><br><span class="line">&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">if exists( &quot;g:loaded_zenroom2_plugin&quot; )</span><br><span class="line">    finish</span><br><span class="line">endif</span><br><span class="line">let g:loaded_zenroom2_plugin &#x3D; 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span><br><span class="line">&quot; Plugin Configuration</span><br><span class="line">&quot;</span><br><span class="line">&quot; Save the current &#96;background&#96; value for reset later</span><br><span class="line">let s:save_background &#x3D; &quot;&quot;</span><br><span class="line">if exists( &quot;&amp;background&quot; )</span><br><span class="line">    let s:save_background &#x3D; &amp;background</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">function! s:markdown_room()</span><br><span class="line">    set background&#x3D;dark</span><br><span class="line">    set linespace&#x3D;8</span><br><span class="line"></span><br><span class="line">    hi Normal guibg&#x3D;gray95</span><br><span class="line">    hi NonText guifg&#x3D;gray95</span><br><span class="line">    hi FoldColumn guibg&#x3D;#333333</span><br><span class="line">    hi CursorLine guibg&#x3D;gray90</span><br><span class="line">    hi Title gui&#x3D;bold guifg&#x3D;gray45</span><br><span class="line">    hi MarkdownHeadingDelimiter gui&#x3D;bold guifg&#x3D;gray45</span><br><span class="line">    hi htmlSpecialChar guifg&#x3D;gray45</span><br><span class="line">    hi markdownError guifg&#x3D;black</span><br><span class="line">    hi markdownBold gui&#x3D;bold guifg&#x3D;gray45</span><br><span class="line">    hi markdownItalic guifg&#x3D;gray45 gui&#x3D;underline</span><br><span class="line">    hi markdownUrl guifg&#x3D;#2fb3a6</span><br><span class="line">    hi markdownAutomaticLink guifg&#x3D;#2fb3a6</span><br><span class="line">    hi markdownLinkText guifg&#x3D;#317849</span><br><span class="line">    hi markdownUrlTitle guifg&#x3D;#317849</span><br><span class="line">    hi markdownBlockquote guifg&#x3D;#317849 gui&#x3D;bold</span><br><span class="line">    hi markdownId guifg&#x3D;#2fb3a6</span><br><span class="line">    hi markdownIdDeclaration guifg&#x3D;#317849 gui&#x3D;bold</span><br><span class="line">    hi markdownListMarker guifg&#x3D;#317849</span><br><span class="line">    hi Cursor guibg&#x3D;#15abdd</span><br><span class="line"></span><br><span class="line">    if has(&#39;gui_running&#39;)</span><br><span class="line">        let l:highlightbgcolor &#x3D; &quot;guibg&#x3D;#333333&quot;</span><br><span class="line">        let l:highlightfgbgcolor &#x3D; &quot;guifg&#x3D;#333333&quot; . &quot; &quot; . l:highlightbgcolor</span><br><span class="line">    else</span><br><span class="line">        let l:highlightbgcolor &#x3D; &quot;ctermbg&#x3D;bg&quot;</span><br><span class="line">        let l:highlightfgbgcolor &#x3D; &quot;ctermfg&#x3D;bg&quot; . &quot; &quot; . l:highlightbgcolor</span><br><span class="line">    endif</span><br><span class="line"></span><br><span class="line">    exec( &quot;hi Normal &quot; . l:highlightbgcolor )</span><br><span class="line">    exec( &quot;hi VertSplit &quot; . l:highlightfgbgcolor )</span><br><span class="line">    exec( &quot;hi NonText &quot; . l:highlightfgbgcolor )</span><br><span class="line">    exec( &quot;hi StatusLine &quot; . l:highlightfgbgcolor )</span><br><span class="line">    exec( &quot;hi StatusLineNC &quot; . l:highlightfgbgcolor )</span><br><span class="line">endfunction</span><br><span class="line"></span><br><span class="line">function! s:zenroom_goyo_before()</span><br><span class="line">    if !has(&quot;gui_running&quot;)</span><br><span class="line">        return</span><br><span class="line">    endif</span><br><span class="line">    let is_mark_or_rst &#x3D; &amp;filetype &#x3D;&#x3D; &quot;markdown&quot; || &amp;filetype &#x3D;&#x3D; &quot;rst&quot; || &amp;filetype &#x3D;&#x3D; &quot;text&quot;</span><br><span class="line"></span><br><span class="line">    if is_mark_or_rst</span><br><span class="line">        call s:markdown_room()</span><br><span class="line">    endif</span><br><span class="line">endfunction</span><br><span class="line"></span><br><span class="line">function! s:zenroom_goyo_after()</span><br><span class="line">    if !has(&quot;gui_running&quot;)</span><br><span class="line">        return</span><br><span class="line">    endif</span><br><span class="line">    let is_mark_or_rst &#x3D; &amp;filetype &#x3D;&#x3D; &quot;markdown&quot; || &amp;filetype &#x3D;&#x3D; &quot;rst&quot; || &amp;filetype &#x3D;&#x3D; &quot;text&quot;</span><br><span class="line">    if is_mark_or_rst</span><br><span class="line">        set linespace&#x3D;0</span><br><span class="line"></span><br><span class="line">        if s:save_background !&#x3D; &quot;&quot;</span><br><span class="line">            exec( &quot;set background&#x3D;&quot; . s:save_background )</span><br><span class="line">        endif</span><br><span class="line">    endif</span><br><span class="line">endfunction</span><br><span class="line"></span><br><span class="line">let g:goyo_callbacks &#x3D; [ function(&#39;s:zenroom_goyo_before&#39;), function(&#39;s:zenroom_goyo_after&#39;) ]</span><br></pre></td></tr></table></figure>
+<h2 id="Горячие-клавиши"><a href="#Горячие-клавиши" class="headerlink" title="Горячие клавиши"></a>Горячие клавиши</h2><p>Вот памятка по часто используемым горячим клавишам:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">,w - :w!</span><br><span class="line">,nn - toggle Nerd Tree</span><br><span class="line">Ctrl+F - Fuzzy search</span><br><span class="line">:Ag (PATTERN) - Fast grep analogue</span><br><span class="line">Ctrl+N , Ctrl+S - Multiline editing</span><br><span class="line">* - search word from cursor</span><br><span class="line">Ctrl+Y+, - Emmet expand</span><br><span class="line">+,- - visual select</span><br><span class="line">gcc,gc,gcu - comment&#x2F;uncomment line</span><br><span class="line">,z - zen mode</span><br><span class="line">,f - MRU</span><br><span class="line">Ctrl+P - YankRing</span><br><span class="line">Ctrl+N - Autocomplete</span><br><span class="line">$4 - &#123;&#125;</span><br><span class="line">* - search next</span><br><span class="line">p - search prev</span><br><span class="line"></span><br><span class="line">&lt;tab&gt; - Snippets!</span><br><span class="line">F12 - Taglist Toggle</span><br><span class="line">cs &quot;&#39; - change &quot; to &#39; - surround</span><br><span class="line">yss&quot; - add wrap to line with &quot;</span><br><span class="line">yssb - wrap line with (</span><br></pre></td></tr></table></figure>
+<p>Пишите если нужны дополнительные комментарии.</p>
+
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/" rel="tag">tech</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+  
+<nav id="article-nav">
+  
+    <a href="/ulcamp-winter-2016/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Ulcamp Winter 2016
+        
+      </div>
+    </a>
+  
+  
+    <a href="/lada-vesta/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          Lada Vesta
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+    </div>
+    <footer id="footer">
+  <h4 class="footer-blog-title">
+    <a href="/">HMDW/me</a>
+  </h4>
+  <div class="copyright">
+  <!--noindex-->
+    &copy; 2025 Rail<br>
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+  <!--/noindex-->
+  </div>
+</footer>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+  (function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+      try {
+        w.yaCounter32857010 = new Ya.Metrika({
+          id:32857010,
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true
+        });
+      } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+  })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/32857010" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+    
+<script>
+  var disqus_shortname = 'hmdw';
+  
+  var disqus_url = 'https://hmdw.me/vim/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

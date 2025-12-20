@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  
+  <title>How to create your own hosting for static websites | HMDW/me - блог веб-разработчика</title>
+  <meta name="viewport" content="width=device-width">
+  
+  
+  <meta name="description" content="Блог веб-разработчика">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to create your own hosting for static websites">
+<meta property="og:url" content="https://hmdw.me/how-to-create-your-hosting-static-websites/">
+<meta property="og:site_name" content="HMDW&#x2F;me">
+<meta property="og:description" content="Блог веб-разработчика">
+<meta property="og:locale" content="ru_RU">
+<meta property="article:published_time" content="2016-01-18T22:31:52.000Z">
+<meta property="article:modified_time" content="2025-12-20T11:03:02.058Z">
+<meta property="article:author" content="Rail">
+<meta property="article:tag" content="tech">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="bash">
+<meta property="article:tag" content="nginx">
+<meta property="article:tag" content="english">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@rhamdeew">
+  
+  
+  <link rel="alternate" href="/atom.xml" title="HMDW/me" type="application/atom+xml">
+  
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+  <i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+  <h2 class="blog-title">
+    <a href="/">HMDW/me</a>
+  </h2>
+  <nav class="nav">
+    <ul>
+      <li><a href="/">Home</a></li><li><a href="/projects/">Projects</a></li><li><a href="/about/">About</a></li>
+      <li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+      <li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+    </ul>
+  </nav>
+  <div id="search-form-wrap">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Поискать"><button type="submit" class="search-form-submit">&#xF002;</button></form>
+  </div>
+</header>
+
+    <div id="main">
+      <article id="post-how-to-create-your-hosting-static-websites" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      How to create your own hosting for static websites
+    </h1>
+    
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/how-to-create-your-hosting-static-websites/" class="article-date">
+  <time datetime="2016-01-18T22:31:52.000Z" itemprop="datePublished">янв. 18 2016</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="articleBody">
+    
+    <p>Hello!<br>Today I’ll show you how to make simple and convenient hosting for static websites based on DigitalOcean droplet.</p>
+<a id="more"></a>
+<p>Begin:</p>
+<h3 id="Prepare"><a href="#Prepare" class="headerlink" title="Prepare"></a>Prepare</h3><p>1) We register <a href="https://www.digitalocean.com/?refcode=02102c6f64b8" target="_blank" rel="noopener">VPS on DigitalOcean</a>.<br>Choose image Ubuntu 14.04.3 and suiting your region.</p>
+<p>2) Adjust our VPS</p>
+<pre><code>ssh root@ip_addr (где ip_addr адрес нашей VPS)
+</code></pre><p>Create user for static sites:</p>
+<pre><code>useradd -m -d /home/static static
+usermod -s /bin/bash static
+</code></pre><p>Install additional software</p>
+<pre><code>apt-get update
+apt-get install nginx git nano rsync
+</code></pre><p>Give permissions to user “static” for reload Nginx</p>
+<pre><code>nano /etc/sudoers
+</code></pre><p>Add line to end:</p>
+<pre><code>static ALL=(ALL) NOPASSWD: /usr/sbin/service nginx reload
+</code></pre><p>Save file</p>
+<p>3) Secure server</p>
+<pre><code>nano /etc/ssh/sshd_config
+</code></pre><p>Change standard SSH-port</p>
+<pre><code>Port 20002
+</code></pre><p>Deny root login</p>
+<pre><code>PermitRootLogin no
+</code></pre><p>Save file</p>
+<p>Restart SSH daemon</p>
+<pre><code>service ssh restart
+</code></pre><p>Set password for user “static”</p>
+<pre><code>passwd static
+</code></pre><p><em>The password should not match the root password!</em></p>
+<p>Edit default Nginx config</p>
+<pre><code>nano /etc/nginx/nginx.conf
+</code></pre><p>Uncomment</p>
+<pre><code>server_tokens off;
+
+gzip types ...;
+
+gzip_comp_level 6;
+</code></pre><p>Delete</p>
+<pre><code>include /etc/nginx/conf.d/*.conf;
+include /etc/nginx/sites-enabled/*;
+</code></pre><p>Add line to end</p>
+<pre><code>include /home/static/nginx/*.conf;
+
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server ipv6only=on;
+
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+
+        server_name localhost;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+</code></pre><p>Save file</p>
+<p>Delete default configuration files</p>
+<pre><code>rm -rf /etc/nginx/sites-available
+rm -rf /etc/nginx/sites-enabled
+</code></pre><p>Add shared config</p>
+<pre><code>mkdir /etc/nginx/global
+
+nano /etc/nginx/global/drop.conf
+</code></pre><p>Insert</p>
+<pre><code># log access to drop file in /etc/nginx/ but don&apos;t log 404
+location = /robots.txt {
+        access_log drop;
+        log_not_found off;
+}
+
+# log access to drop file in /etc/nginx/ but don&apos;t log 404
+location = /favicon.ico {
+        access_log drop;
+        log_not_found off;
+}
+
+# log access to denied file in /etc/nginx/ but don&apos;t log 404 and also deny all to dot files
+location ~ /\. {
+        access_log denied;
+        log_not_found off;
+        deny all;
+}
+
+# log access to drop file in /etc/nginx/ but don&apos;t log 404 and also deny all to files starting with a dollar sign ($temp.config.php)
+location ~ ~$ {
+        access_log denied;
+        log_not_found off;
+        deny all;
+}
+</code></pre><p>Save file</p>
+<p>Create directories need for user “static”</p>
+<pre><code>su static
+mkdir ~/nginx
+mkdir ~/git
+mkdir ~/bin
+mkdir ~/www
+mkdir ~/.ssh
+</code></pre><p>Do not close the terminal</p>
+<p>4) Trying connection</p>
+<p><strong>On local machine</strong></p>
+<p>Generate ssh-keys. Example <a href="https://help.github.com/articles/generating-ssh-keys/" target="_blank" rel="noopener">here</a></p>
+<pre><code>cat ~/.ssh/id_rsa.pub
+</code></pre><p><strong>On server</strong></p>
+<pre><code>nano ~/.ssh/authorized_keys
+</code></pre><p>And paste id_rsa.pub content here</p>
+<p><strong>On local machine</strong></p>
+<p>Trying connection</p>
+<pre><code>ssh static@ip_addr -p20002
+</code></pre><p>If success add local ssh config</p>
+<pre><code>nano ~/.ssh/config
+
+Host static
+User static
+Port 20002
+Hostname 188.166.69.147
+</code></pre><p>Now add local part of script</p>
+<pre><code>mkdir ~/.bin
+
+nano ~/.bin/static.sh
+</code></pre><p>Insert</p>
+<pre><code>#!/bin/bash
+echo &quot;Site domain (without www.)?&quot;
+read domain
+
+echo &quot;Site data directory?&quot;
+read directory
+
+ssh static -t &quot;~/bin/static.sh $domain $directory&quot;
+
+
+echo &quot;$directory/&quot; &gt;&gt; .gitignore
+git init
+git add -A
+git commit -m \&quot;first\&quot;
+git remote add origin static:~/git/$domain
+
+echo &quot;
+#!/bin/bash
+git add -A &amp;&amp; git commit -m &apos;revision&apos; &amp;&amp; git push origin master
+rsync -avz $directory/ static:~/www/$domain
+&quot; &gt; deploy.sh
+chmod +x deploy.sh
+</code></pre><p>Save file and make it executable</p>
+<pre><code>chmod +x ~/.bin/static.sh
+</code></pre><p>Edit our bashrc</p>
+<pre><code>nano ~/bashrc
+</code></pre><p>And add alias to end of file</p>
+<pre><code>alias static=&quot;~/.bin/static.sh&quot;
+</code></pre><p>Save file</p>
+<p>Execute bash</p>
+<pre><code>bash -l
+</code></pre><p><strong>On server</strong><br>For user “static”:</p>
+<pre><code>nano ~/bin/static.sh
+</code></pre><p>Insert</p>
+<pre><code>#!/bin/bash
+domain=$1
+directory=$2
+
+echo &quot;Configure git&quot;;
+echo &quot;---------------&quot;;
+mkdir ~/git/$domain
+cd ~/git/$domain
+git --bare init
+
+mkdir ~/www/$domain
+cd ~/www/$domain
+echo &quot;---------------&quot;;
+
+echo &quot;Configure Nginx&quot;;
+echo &quot;---------------&quot;;
+
+echo &quot;
+server {
+        listen 80;
+        listen [::]:80;
+        server_name www.$domain;
+        rewrite ^ \$scheme://$domain\$request_uri redirect;
+}
+
+server {
+    listen       80;
+    listen [::]:80;
+    server_name  $domain;
+
+    set \$root_path /home/static/www/$domain;
+
+    include global/drop.conf;
+    location ~* ^.+\.(jpg|jpeg|gif|png|svg|js|css|mp3|ogg|mpe?g|avi|zip|gz|bz2?|rar|swf|woff|eot|ttf)$ {
+        root   \$root_path;
+        expires 30d;
+        access_log off;
+    }
+
+    location / {
+        root   \$root_path;
+        index  index.html;
+    }
+
+    error_page  404  /404.html;
+}
+&quot; &gt; ~/nginx/$domain.conf
+echo &quot;---------------&quot;;
+
+
+echo &quot;Reloading Nginx\&apos;s&quot;;
+echo &quot;---------------&quot;;
+
+sudo service nginx reload
+
+echo &quot;---------------&quot;;
+</code></pre><p>Save and make executable</p>
+<pre><code>chmod +x ~/bin/static.sh
+</code></pre><h3 id="Ready-to-deploy"><a href="#Ready-to-deploy" class="headerlink" title="Ready to deploy!"></a>Ready to deploy!</h3><p>Please install git and rsync locally!</p>
+<p>Now we make static-site with lovely static-generator.</p>
+<p>Here is example with <a href="http://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+<p>Make new site and generate</p>
+<pre><code>mkdir ~/site1.ru
+cd ~/site1.ru
+hexo init
+npm install
+hexo generate
+</code></pre><p>Now in ~/site1.ru isset “public” directory with content.</p>
+<p>Trying to add site on server</p>
+<pre><code>static
+</code></pre><p>Answer to questions… (site.ru, public)</p>
+<p>Now we should see “deploy.sh”</p>
+<p>Execute:</p>
+<pre><code>./deploy.sh
+</code></pre><p>It’s all!  Now server configured to site1.ru</p>
+<p>For update site simply execute script ./deploy.sh</p>
+<p>Also on server exists git-repository with site code. Clone it later if you need:</p>
+<pre><code>git clone static:~/git/site1.ru
+</code></pre><h3 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h3><p>We make self hosting for static sites and get easy script to add new hosts to server.</p>
+
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/english/" rel="tag">english</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/" rel="tag">tech</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+  
+<nav id="article-nav">
+  
+    <a href="/ru-domains-stat/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          RU-домены, часть 2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/create-static-site-hosting/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          Пилим свой хостинг статичных сайтов
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+    </div>
+    <footer id="footer">
+  <h4 class="footer-blog-title">
+    <a href="/">HMDW/me</a>
+  </h4>
+  <div class="copyright">
+  <!--noindex-->
+    &copy; 2025 Rail<br>
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+  <!--/noindex-->
+  </div>
+</footer>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+  (function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+      try {
+        w.yaCounter32857010 = new Ya.Metrika({
+          id:32857010,
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true
+        });
+      } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+  })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/32857010" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+    
+<script>
+  var disqus_shortname = 'hmdw';
+  
+  var disqus_url = 'https://hmdw.me/how-to-create-your-hosting-static-websites/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

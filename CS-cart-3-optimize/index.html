@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  
+  <title>CS-Cart 3 optimize | HMDW/me - блог веб-разработчика</title>
+  <meta name="viewport" content="width=device-width">
+  
+  <meta name="keywords" content="cscart, mysql">
+  
+  
+  <meta name="description" content="Пост с примером оптимизации запросов внутри CS-Cart">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS-Cart 3 optimize">
+<meta property="og:url" content="https://hmdw.me/CS-cart-3-optimize/">
+<meta property="og:site_name" content="HMDW&#x2F;me">
+<meta property="og:description" content="Пост с примером оптимизации запросов внутри CS-Cart">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://hmdw.me/images/i/2015/03/cd953aed207b3a4122e9d1c80.png">
+<meta property="og:image" content="https://hmdw.me/images/i/2015/03/0c407e3cd3100d0287402e36b.png">
+<meta property="article:published_time" content="2015-03-14T21:16:41.000Z">
+<meta property="article:modified_time" content="2025-12-20T11:03:02.054Z">
+<meta property="article:author" content="Rail">
+<meta property="article:tag" content="cscart">
+<meta property="article:tag" content=" mysql">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hmdw.me/images/i/2015/03/cd953aed207b3a4122e9d1c80.png">
+<meta name="twitter:creator" content="@rhamdeew">
+  
+  
+  <link rel="alternate" href="/atom.xml" title="HMDW/me" type="application/atom+xml">
+  
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+  <i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+  <h2 class="blog-title">
+    <a href="/">HMDW/me</a>
+  </h2>
+  <nav class="nav">
+    <ul>
+      <li><a href="/">Home</a></li><li><a href="/projects/">Projects</a></li><li><a href="/about/">About</a></li>
+      <li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+      <li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+    </ul>
+  </nav>
+  <div id="search-form-wrap">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Поискать"><button type="submit" class="search-form-submit">&#xF002;</button></form>
+  </div>
+</header>
+
+    <div id="main">
+      <article id="post-CS-cart-3-optimize" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      CS-Cart 3 optimize
+    </h1>
+    
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/CS-cart-3-optimize/" class="article-date">
+  <time datetime="2015-03-14T21:16:41.000Z" itemprop="datePublished">март 14 2015</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="articleBody">
+    
+    <p>Всем привет! Прошлую ночь я провел за черной ssh-консолью в попытках заставить работать быстрее один сайт на CS-cart 3.0.6. Сам сайт крутится один одинешенек на выделенном сервере <a href="https://clstr.ru/2014/10/test-vydelennogo-servera-ot-reg-ru/" target="_blank" rel="noopener">СPU 1 x Xeon E3-1230v3, Mem 2 x 8 192 MB, HDD 2 x 1000 GB SATA</a> и умудряется там тормозить. Отчего становится совсем уж грустно. Ситуацию усугубляет что конкретно эта версия CMS требует для работы уже древний PHP 5.3 (вообще не заводится) и не приемлет подключение оп-кешеров (отваливается ajax).</p>
+<p>Сперва я начал грешить на сервер от reg.ru и собственные кривые руки поэтому развернул копию сайта на другом сервере (<strong>EVO12-SSD от FastVPS</strong>). Да тут всего 2 ядра CPU и 12Gb RAM, но зато быстрый SSD-диск. Плюс конфигурацию я решил делать с упором на максимальную производительность. В итоге оказалось что дело не в сервере - сайт ощутимо тормозит и там.</p>
+<p>Далее опишу что я делал. Сразу скажу что проблему полностью решить не удалось (пока), так что не обессудьте.</p>
+<a id="more"></a>
+<h4 id="Включаем-отладку"><a href="#Включаем-отладку" class="headerlink" title="Включаем отладку"></a>Включаем отладку</h4><p>Итак, первым делом нужно иметь возможность удобного включения отладочного режима.<br>Для этого открываем /config.php и ищем закомментированную строчку define(‘DEBUG_MODE’…</p>
+<p>Заменяем ее на:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_REQUEST[<span class="string">'mysuperpouper'</span>]))</span><br><span class="line">        define(<span class="string">'DEBUG_MODE'</span>, <span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+<p>В итоге мы имеем возможность включить отладку простым добавлением GET-параметра mysuperpouper=Y к URL.</p>
+<p>Собственно отладка показывает примерно вот такую картину:</p>
+<p><img src="/images/i/2015/03/cd953aed207b3a4122e9d1c80.png" alt="Вывод отладки в конце страницы"></p>
+<p>Теперь мы видим за какое время выполнились SQL-запросы (Queries time) и отрендерились шаблоны (render location).<br>Это далеко не самая тяжелая страница на сервере, но на SQL-запросы ушло почти 3 секунды!</p>
+<h4 id="Всем-запросам-запрос"><a href="#Всем-запросам-запрос" class="headerlink" title="Всем запросам запрос"></a>Всем запросам запрос</h4><p>Всему виной оказался один запрос который занимается самым важным - получает список товаров для отображения на странице (генерируется огромной функцией fn_get_products() в огромном 330 кб файле /core/fn.catalog.php).<br>Думаю нетрудно догадаться что функция генерирует многоэтажный SQL-запрос с кучей IF,JOIN и GROUP BY с ORDER BY в конце. В итоге получается что запрос что 10 что 100 товаров выполняется практически одинаково медленно т.к. бедному серверу БД приходится перелопачивать огромные объемы данных чтобы все получить и отсортировать.</p>
+<p>Сперва мне было непонятно почему при каждом запуске mysqltuner рекомендует мне увеличивать лимиты в my.cnf до безумных высот, а потом рекомендует «add more RAM». При этом существенного прироста в загрузке страниц не наблюдается. А потом я решил глянуть какие временные таблицы создаются во время загрузки страницы.</p>
+<blockquote><p>Я увидел несколько мелких таблиц и одну огромную в 2 гигабайта. Тут все вопросы отпали сами собой. Даже для того чтобы создать такую таблицу даже в RAM потребуется приличное время.</p>
+</blockquote>
+<p>Поэтому я выставил разумные лимиты в конфиге, еще раз рестартнул MySQL-сервер и продолжил попытки увеличить производительность сайта.</p>
+<h4 id="Варианты-ускорения"><a href="#Варианты-ускорения" class="headerlink" title="Варианты ускорения"></a>Варианты ускорения</h4><p>Вот строчка генерирующая злосчастный запрос.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$products = db_get_array(<span class="string">"SELECT SQL_CALC_FOUND_ROWS "</span> . implode(<span class="string">', '</span>, $fields) . <span class="string">" FROM ?:products as products $join WHERE 1 $condition GROUP BY $group_by ORDER BY $sorting $limit"</span>);</span><br></pre></td></tr></table></figure>
+<p>Как мы видим это SQL в открытом виде и человеку хорошо разбирающемуся в готовке тяжелых запросов не составит труда разделить его на несколько более простых тем самым радикально улучшив производительность.<br>У меня же времени на подобные эксперименты не было и поэтому я выбрал вариант с костылем =)</p>
+<h4 id="Костыльное-решение"><a href="#Костыльное-решение" class="headerlink" title="Костыльное решение"></a>Костыльное решение</h4><p>Я просто поставил memcached на сервер и стал класть сериализованные результаты запросов в кэш.<br>В итоге получается что страдает только первый посетитель открывший страничку. А у остальных все грузится быстро.<br>Memcached в дефолтной конфигурации слушает локальный 11211 порт и 64 мегабайт выделенных ему по умолчанию хватит за глаза.</p>
+<p>Кусок кода которым я заменил ту строчку:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Rail changes begin</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">$unique_key = md5($join.$condition.$group_by.$sorting.$limit);</span><br><span class="line"></span><br><span class="line">$memcache_obj = <span class="keyword">new</span> Memcached();</span><br><span class="line">$memcache_obj-&gt;addServer(<span class="string">'127.0.0.1'</span>, <span class="number">11211</span>);</span><br><span class="line">$var_key = @$memcache_obj-&gt;get($unique_key);</span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">empty</span>($var_key))</span><br><span class="line">&#123;</span><br><span class="line">        $products = unserialize($var_key);</span><br><span class="line">        $my_count = $products[<span class="string">'found_rows'</span>];</span><br><span class="line">        <span class="keyword">unset</span>($products[<span class="string">'found_rows'</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">        $products = db_get_array(<span class="string">"SELECT SQL_CALC_FOUND_ROWS "</span> . implode(<span class="string">', '</span>, $fields) . <span class="string">" FROM ?:products as products $join WHERE 1 $condition GROUP BY $group_by ORDER BY $sorting $limit"</span>);</span><br><span class="line">        $products[<span class="string">'found_rows'</span>] = db_get_found_rows();</span><br><span class="line">        @$memcache_obj-&gt;set($unique_key,serialize($products));</span><br><span class="line">        $my_count = $products[<span class="string">'found_rows'</span>];</span><br><span class="line">        <span class="keyword">unset</span>($products[<span class="string">'found_rows'</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">empty</span>($items_per_page)) &#123;</span><br><span class="line">                $total = !<span class="keyword">empty</span>($total)? $total : $my_count;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Rail changes end</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Standart begin</span></span><br><span class="line"><span class="comment">        $products = db_get_array("SELECT SQL_CALC_FOUND_ROWS " . implode(', ', $fields) . " FROM ?:products as products $join WHERE 1 $condition GROUP BY $group_by ORDER BY $sorting $limit");</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        if (!empty($items_per_page)) &#123;</span></span><br><span class="line"><span class="comment">                $total = !empty($total)? $total : db_get_found_rows();*</span></span><br><span class="line"><span class="comment">Standart end</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<p>Тут все просто - на основе параметров для SQL-запроса генерируем уникальный ключ по которому будем обращаться к данным в memcached и туда же их класть. Мутные строчки с $products[‘found_rows’] нужны для того чтобы куда то записывать полное количество товаров в списке (нужно для пагинации).</p>
+<p>Итак, теперь проверяем скорость загрузки странички просто обратившись к ней повторно:</p>
+<p><img src="/images/i/2015/03/0c407e3cd3100d0287402e36b.png" alt="Вывод отладки в конце страницы"></p>
+<p>Согласитесь, 0.02 секунды это намного лучше чем 2.9 =)</p>
+<h4 id="Выводы"><a href="#Выводы" class="headerlink" title="Выводы"></a>Выводы</h4><p>Да, конечно получилось не самое элегантное решение к тому же обладающее своими минусами (необходимо периодически рестартить memcached для сброса кеша), но зато рабочее. Возможно когда-нибудь я найду время на то чтобы переписать этот запрос и тем самым решить на корню.</p>
+<p><strong>А пока вот такие тезисы исходя из опыта возни с CS-cart:</strong></p>
+<ul>
+<li>В CS-cart 4 версии код этой злосчастной функции практически идентичен</li>
+<li>Рендер tpl-кусков шаблона не ускорился от того что сайт стал крутиться на SSD-диске</li>
+<li>Рендер tpl-кусков шаблона не ускорился от того что директория с шаблонами была перенесена в tmpfs</li>
+<li>Рендер tpl-кусков шаблона на сервере с более мощным процем и SATA-диском пока выигрывает у более слабого проца + SSD и более слабого проца + tmpfs, а значит дело тут не в диске</li>
+<li>Перенос файлового кэша в tmpfs также не дал никакого эффекта по сравнению с SSD хотя скорость записи у RAM выше в 3 раза (1.5Гбит/сек)</li>
+<li>Подключение Nginx заметно ускорило сайт за счет раздачи им статики</li>
+<li>Переключение на Nginx + PHP-FPM не дало никакого ощутимого ускорения по отношению к Nginx + Apache. Разве что памяти стало тратиться меньше, но времени на перенастройку ушло большое</li>
+<li>Подключение APC с забиванием болта на нерабочий AJAX не ускорило сборку tpl-файлов и не оказало значимого эффекта на скорость загрузки сайта</li>
+<li>На 2000 тысячах уников в сутки и на движке без самопальных модификаций кеша mysqladmin показывает Queries per second avg: 187.149</li>
+</ul>
+<h4 id="UPD-26-03-15"><a href="#UPD-26-03-15" class="headerlink" title="UPD 26.03.15"></a>UPD 26.03.15</h4><p>Так как никакого ответа я от представителей CS-cart не получил, то пришлось внедрять это решение на живую. Нагрузка на сайт значительно упала и Munin перестал ежедневно присылать мне грустные сообщения о высоком Write IO Wait time. Для посетителей также все стало открываться шустрее несмотря на 800-900(sic!) запросов к БД на одну страничку.</p>
+<p><em>Как оказалось мое решение несет в себе небольшое неудобство - в админ-панели также стали кэшироваться некоторые вещи и с ней стало очень неудобно работать и грязный хак с мемкэшем пришлось временно отключить.</em></p>
+<p><strong>Решения я тут вижу 2:</strong><br>1) Не включать кеш на запросах идущих к админке (тут легко ибо все запросы к админке идут через 1 скрипт)<br>2) Проверять пользователя на авторизацию и наличие у него администраторских прав. Грубо говоря не кэшировать для админов. В документацию к движку я не лез, но по уму должен быть доступ к какому либо объекту User который будет возвращать требуемые данные.</p>
+<p>Вот такие дела.</p>
+
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cscart/" rel="tag">cscart</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/" rel="tag">tech</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+  
+<nav id="article-nav">
+  
+    <a href="/vk-interest/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          VK interest
+        
+      </div>
+    </a>
+  
+  
+    <a href="/yet-another/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          Yet another
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+    </div>
+    <footer id="footer">
+  <h4 class="footer-blog-title">
+    <a href="/">HMDW/me</a>
+  </h4>
+  <div class="copyright">
+  <!--noindex-->
+    &copy; 2025 Rail<br>
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+  <!--/noindex-->
+  </div>
+</footer>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+  (function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+      try {
+        w.yaCounter32857010 = new Ya.Metrika({
+          id:32857010,
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true
+        });
+      } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+  })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/32857010" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+    
+<script>
+  var disqus_shortname = 'hmdw';
+  
+  var disqus_url = 'https://hmdw.me/CS-cart-3-optimize/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

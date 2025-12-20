@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  
+  <title>RU-домены, часть 2 | HMDW/me - блог веб-разработчика</title>
+  <meta name="viewport" content="width=device-width">
+  
+  
+  <meta name="description" content="Блог веб-разработчика">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RU-домены, часть 2">
+<meta property="og:url" content="https://hmdw.me/ru-domains-stat/">
+<meta property="og:site_name" content="HMDW&#x2F;me">
+<meta property="og:description" content="Блог веб-разработчика">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://hmdw.me/images/i/2016/01/a8371297d523d7bf8af9deefc.JPG">
+<meta property="article:published_time" content="2016-01-20T18:46:29.000Z">
+<meta property="article:modified_time" content="2025-12-20T11:03:02.063Z">
+<meta property="article:author" content="Rail">
+<meta property="article:tag" content="tech">
+<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="domains">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hmdw.me/images/i/2016/01/a8371297d523d7bf8af9deefc.JPG">
+<meta name="twitter:creator" content="@rhamdeew">
+  
+  
+  <link rel="alternate" href="/atom.xml" title="HMDW/me" type="application/atom+xml">
+  
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+  <i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+  <h2 class="blog-title">
+    <a href="/">HMDW/me</a>
+  </h2>
+  <nav class="nav">
+    <ul>
+      <li><a href="/">Home</a></li><li><a href="/projects/">Projects</a></li><li><a href="/about/">About</a></li>
+      <li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+      <li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+    </ul>
+  </nav>
+  <div id="search-form-wrap">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Поискать"><button type="submit" class="search-form-submit">&#xF002;</button></form>
+  </div>
+</header>
+
+    <div id="main">
+      <article id="post-ru-domains-stat" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      RU-домены, часть 2
+    </h1>
+    
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/ru-domains-stat/" class="article-date">
+  <time datetime="2016-01-20T18:46:29.000Z" itemprop="datePublished">янв. 20 2016</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="articleBody">
+    
+    <p><img src="/images/i/2016/01/a8371297d523d7bf8af9deefc.JPG" alt="КПДВ"></p>
+<p>Всем привет!<br>Итак, совсем недавно я писал коротенькую заметку с картинками касательно <a href="/domains/">ru-доменов</a>. Все бы хорошо, но мне никак не давало покоя то что эти данные лежат в csv который довольно просто импортнуть в БД и получить еще больше интересных данных.</p>
+<p>Под катом мои наблюдения.</p>
+<a id="more"></a>
+<h3 id="Приготовления"><a href="#Приготовления" class="headerlink" title="Приготовления"></a>Приготовления</h3><p>Для начала я решил выделить из названий доменов отдельные слова чтобы посчитать их вхождения. Алгоритм прост - отсекаем .ru, а в том что осталось выделяем отдельные слова выкидыванием лишних дефисов.<br>Отдельно составил вхождения «слов» состоящих из последовательности цифр и отдельно слов без цифр.<br>То есть получилось 3 файла - full,letter,digit. Где например домен site24.ru попал бы как site24,site и 24 в разные таблицы.</p>
+<p>Теперь кроме одного csv под названием ru_domains у меня еще появились fullWord.csv, letterWord.csv и digitWord.csv.</p>
+<p>Код сортировщика написан по всем канонам костыльного говнокодинга и приводить его здесь даже стыдно =)</p>
+<h3 id="Импорт-в-БД"><a href="#Импорт-в-БД" class="headerlink" title="Импорт в БД"></a>Импорт в БД</h3><p>Для опытов я создал отдельную БД в MySQL и создал там 4 таблицы - full,letter,digit и original. Первые 3 имеют в себе только по 2 поля - word и count. Это cлово и кол-во его вхождений соответственно.<br>Таблица original содержит в себе 6 полей - домен, регистратор, дата регистрации, продлен до, дата окончания регистрации и какой-то еще один параметр (ну лень было разбираться).</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">INFILE</span> <span class="string">"/var/www/srv/www/fullWords.csv"</span> <span class="keyword">INTO</span> <span class="keyword">TABLE</span> <span class="keyword">full</span></span><br><span class="line"><span class="keyword">FIELDS</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">','</span></span><br><span class="line"><span class="keyword">ENCLOSED</span> <span class="keyword">BY</span> <span class="string">'"'</span></span><br><span class="line"><span class="keyword">LINES</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">INFILE</span> <span class="string">"/var/www/srv/www/letterWords.csv"</span> <span class="keyword">INTO</span> <span class="keyword">TABLE</span> letter</span><br><span class="line"><span class="keyword">FIELDS</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">','</span></span><br><span class="line"><span class="keyword">ENCLOSED</span> <span class="keyword">BY</span> <span class="string">'"'</span></span><br><span class="line"><span class="keyword">LINES</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">INFILE</span> <span class="string">"/var/www/srv/www/digitWords.csv"</span> <span class="keyword">INTO</span> <span class="keyword">TABLE</span> digit</span><br><span class="line"><span class="keyword">FIELDS</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">','</span></span><br><span class="line"><span class="keyword">ENCLOSED</span> <span class="keyword">BY</span> <span class="string">'"'</span></span><br><span class="line"><span class="keyword">LINES</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">'\n'</span>;</span><br></pre></td></tr></table></figure>
+<p>И отдельно импортируем оригинальный csv с 5млн. записей. Тут заодно конвертируем дату в правильный формат. Данная конструкция отрабатывает на моем ноутбуке за 32 секунды. Так что это и правда быстро.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">INFILE</span> <span class="string">"/var/www/srv/www/ru_domains"</span></span><br><span class="line"><span class="keyword">INTO</span> <span class="keyword">TABLE</span> original</span><br><span class="line"><span class="keyword">FIELDS</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">'\t'</span></span><br><span class="line"><span class="keyword">ENCLOSED</span> <span class="keyword">BY</span> <span class="string">'"'</span></span><br><span class="line"><span class="keyword">LINES</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">'\n'</span></span><br><span class="line">(<span class="keyword">name</span>,reg,@reg_date,@ext_date,@off_date,hz)</span><br><span class="line"><span class="keyword">SET</span> reg_date = <span class="keyword">STR_TO_DATE</span>(@reg_date, <span class="string">'%d.%m.%Y'</span>) ,</span><br><span class="line">exp_date = <span class="keyword">STR_TO_DATE</span>(@exp_date, <span class="string">'%d.%m.%Y'</span>),</span><br><span class="line">off_date = <span class="keyword">STR_TO_DATE</span>(@off_date, <span class="string">'%d.%m.%Y'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="Статистика"><a href="#Статистика" class="headerlink" title="Статистика"></a>Статистика</h3><p>Ну а теперь я покажу вам свои мэдскиллз в MySQL =)</p>
+<p>Начнем с самых популярных слов входящих в название домена:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">+---------+-------+</span><br><span class="line">| word    | count |</span><br><span class="line">+---------+-------+</span><br><span class="line">| SHOP    | 22940 |</span><br><span class="line">| SPB     | 18391 |</span><br><span class="line">| V       | 15741 |</span><br><span class="line">| S       | 14021 |</span><br><span class="line">| ONLINE  | 14011 |</span><br><span class="line">| M       | 13854 |</span><br><span class="line">| PRO     | 12460 |</span><br><span class="line">| I       | 12019 |</span><br><span class="line">| A       | 11625 |</span><br><span class="line">| D       | 10882 |</span><br><span class="line">| CLUB    | 10650 |</span><br><span class="line">| E       | 10594 |</span><br><span class="line">| AUTO    | 10361 |</span><br><span class="line">| REMONT  | 10141 |</span><br><span class="line">| ART     |  9757 |</span><br><span class="line">| MEBEL   |  9588 |</span><br><span class="line">| DOM     |  9333 |</span><br><span class="line">| GROUP   |  9128 |</span><br><span class="line">| NN      |  8798 |</span><br><span class="line">| SERVICE |  8737 |</span><br><span class="line">| AVTO    |  8473 |</span><br><span class="line">| RUS     |  8319 |</span><br><span class="line">| RUSSIA  |  8310 |</span><br><span class="line">| K       |  8070 |</span><br><span class="line">| MSK     |  7907 |</span><br><span class="line">| B       |  7650 |</span><br><span class="line">| X       |  7561 |</span><br><span class="line">| STROY   |  7298 |</span><br><span class="line">| C       |  7186 |</span><br><span class="line">| INFO    |  7120 |</span><br><span class="line">| NA      |  7105 |</span><br><span class="line">| U       |  6989 |</span><br><span class="line">| STUDIO  |  6915 |</span><br><span class="line">| MASTER  |  6835 |</span><br><span class="line">| IT      |  6817 |</span><br><span class="line">| R       |  6762 |</span><br><span class="line">| MARKET  |  6562 |</span><br><span class="line">| WEB     |  6451 |</span><br><span class="line">| T       |  6395 |</span><br><span class="line">| MY      |  6143 |</span><br><span class="line">| UFA     |  5979 |</span><br><span class="line">| RU      |  5737 |</span><br><span class="line">| HOTEL   |  5711 |</span><br><span class="line">| NSK     |  5699 |</span><br><span class="line">| DESIGN  |  5568 |</span><br><span class="line">| N       |  5552 |</span><br><span class="line">| O       |  5473 |</span><br><span class="line">| BEST    |  5391 |</span><br><span class="line">| SCHOOL  |  5311 |</span><br><span class="line">| TOP     |  5167 |</span><br><span class="line">+---------+-------+</span><br></pre></td></tr></table></figure>
+<p>Крепко задумайтесь о выборе домена когда будете делать интернет-магазин.</p>
+<p>Цифры не так интересны, поэтому выведу только 20 самых частых вхождений.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">+------+-------+</span><br><span class="line">| word | count |</span><br><span class="line">+------+-------+</span><br><span class="line">| 24   | 41549 |</span><br><span class="line">| 1    | 40014 |</span><br><span class="line">| 2    | 36706 |</span><br><span class="line">| 4    | 36272 |</span><br><span class="line">| 3    | 24932 |</span><br><span class="line">| 5    | 14782 |</span><br><span class="line">| 74   | 13824 |</span><br><span class="line">| 7    | 13116 |</span><br><span class="line">| 72   |  8494 |</span><br><span class="line">| 8    |  7626 |</span><br><span class="line">| 21   |  7014 |</span><br><span class="line">| 63   |  7007 |</span><br><span class="line">| 33   |  6764 |</span><br><span class="line">| 66   |  6526 |</span><br><span class="line">| 0    |  6422 |</span><br><span class="line">| 39   |  6130 |</span><br><span class="line">| 6    |  5923 |</span><br><span class="line">| 100  |  5763 |</span><br><span class="line">| 9    |  5641 |</span><br><span class="line">| 34   |  5587 |</span><br><span class="line">+------+-------+</span><br></pre></td></tr></table></figure>
+<p>Крепко призадумайтесь если собираетесь делать круглосуточный интернет-магазин.</p>
+<p><strong>Теперь посмотрим на 10 самых длинных доменов в зоне ru.</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> original <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">LENGTH</span>(<span class="keyword">name</span>) <span class="keyword">DESC</span> <span class="keyword">LIMIT</span> <span class="number">20</span>;</span><br><span class="line">+<span class="comment">--------------------------------------------------------------------+--------------+------------+------------+------------+----+</span></span><br><span class="line">| name                                                               | reg          | reg_date   | exp_date   | off_date   | hz |</span><br><span class="line">+<span class="comment">--------------------------------------------------------------------+--------------+------------+------------+------------+----+</span></span><br><span class="line">| 0<span class="comment">--0----------------------------------------------------------0.RU | REGRU-RU     | 2015-11-18 | 2016-04-27 | 2016-12-19 |  1 |</span></span><br><span class="line">| 0<span class="comment">--0--------------------------ROSSIYSKY--------------------0--0.RU | REGRU-RU     | 2015-10-30 | 2016-04-27 | 2016-11-30 |  1 |</span></span><br><span class="line">| 0<span class="comment">--0------------------0----0----------0-------0---------------0.RU | REGRU-RU     | 2015-12-23 | 2016-04-27 | 2017-01-23 |  0 |</span></span><br><span class="line">| 0<span class="comment">--0------------MAXIM--SEMENOV--KISLOVODSK--NARZAN------------0.RU | REGRU-RU     | 2015-02-24 | 2016-04-27 | 2017-03-27 |  1 |</span></span><br><span class="line">| 0<span class="comment">--0--------DRA-DOT-RU-PREMIUM-DOMAINS-AND-SERVICES-----------0.RU | REGRU-RU     | 2011-03-24 | 2016-04-27 | 2016-04-24 |  1 |</span></span><br><span class="line">| 0<span class="comment">--0-HOSTING-OBZOR--HOSTING-OBZOR--HOSTING-OBZOR--HOSTING-OBZOR.RU | REGTIME-RU   | 2009-11-09 | 2016-04-27 | 2016-12-10 |  1 |</span></span><br><span class="line">| 0-1-1-2-3-5-8-13-21-34-55-89-144-233-377-610-987-1597-2584-4181.RU | REGRU-RU     | 2011-04-11 | 2016-04-27 | 2016-05-12 |  1 |</span><br><span class="line">| 000000000000000000000000000000000000000000000000000000000000000.RU | RU-CENTER-RU | 2008-05-21 | 2016-04-27 | 2016-06-21 |  1 |</span><br><span class="line">| 000000000000000000000000000000000000000000000000000000000000999.RU | REGRU-RU     | 2014-07-10 | 2016-04-27 | 2016-08-10 |  1 |</span><br><span class="line">| 141592653589793238462643383279502884197169399375105820974944592.RU | RU-CENTER-RU | 2005-04-13 | 2016-04-27 | 2016-05-14 |  1 |</span><br><span class="line">| 314159265358979323846264338327950288419716939937510582097494459.RU | R01-RU       | 2010-10-25 | 2016-04-27 | 2016-11-25 |  1 |</span><br><span class="line">| 333333333333333333333333333333333333333333333333333333333333333.RU | REGTIME-RU   | 2010-07-31 | 2016-04-27 | 2016-08-31 |  1 |</span><br><span class="line">| 999999999999999999999999999999999999999999999999999999999999999.RU | RU-CENTER-RU | 2008-05-16 | 2016-04-27 | 2016-06-16 |  1 |</span><br><span class="line">| 9E9999999999999999999999999999999999999999999999999999999999999.RU | RU-CENTER-RU | 2008-05-26 | 2016-04-27 | 2016-06-26 |  1 |</span><br><span class="line">| AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA.RU | R01-RU       | 2010-12-10 | 2016-04-27 | 2017-01-10 |  1 |</span><br><span class="line">| ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJK.RU | REGRU-RU     | 2013-04-04 | 2016-04-27 | 2016-05-05 |  1 |</span><br><span class="line">| ARTVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV3.RU | NAUNET-RU    | 2013-10-25 | 2016-04-27 | 2016-11-25 |  1 |</span><br><span class="line">| AUTH-PRIVATBANK-UA-PROMINSHEL-CONFIRM-<span class="keyword">START</span>-PRIVATBANK-REDIRECT.RU | REGRU-RU     | <span class="number">2015</span><span class="number">-05</span><span class="number">-22</span> | <span class="number">2016</span><span class="number">-04</span><span class="number">-27</span> | <span class="number">2016</span><span class="number">-06</span><span class="number">-22</span> |  <span class="number">1</span> |</span><br><span class="line">| AUTH-PRIVATBANK-UA-PROMINSHELL-ENTER-REDIRECT-FSTART-PRIVATBANK.RU | REGRU-RU     | <span class="number">2015</span><span class="number">-05</span><span class="number">-18</span> | <span class="number">2016</span><span class="number">-04</span><span class="number">-27</span> | <span class="number">2016</span><span class="number">-06</span><span class="number">-18</span> |  <span class="number">1</span> |</span><br><span class="line">| AXAXAXAXAXAXAXAXAXAXAXAXAXAXAXAXAXAXAXAXAXAXAXAXAXAXAXAXAXAXAXA.RU | REGRU-RU     | <span class="number">2011</span><span class="number">-08</span><span class="number">-07</span> | <span class="number">2016</span><span class="number">-04</span><span class="number">-27</span> | <span class="number">2016</span><span class="number">-09</span><span class="number">-07</span> |  <span class="number">1</span> |</span><br><span class="line">+<span class="comment">--------------------------------------------------------------------+--------------+------------+------------+------------+----+</span></span><br></pre></td></tr></table></figure>
+<p>Из всего этого списка мне больше всех понравился разве что самый «смешной» домен с многочисленным «AXAXAXAXA» =). По этому адресу нас встречает какая-то странная картинка и счетчик liveinternet.</p>
+<p><strong>Самые короткие рушки начинаются от 2 символов и они абсолютно все заняты:</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> original <span class="keyword">WHERE</span> <span class="keyword">LENGTH</span>(<span class="keyword">name</span>) = <span class="number">5</span>;</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| COUNT(*) |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">|     1296 |</span><br><span class="line">+<span class="comment">----------+</span></span><br></pre></td></tr></table></figure>
+<p>Но сегодня один домен освобождается и я попробую успеть его застолбить ).</p>
+<p>Кстати, конкретно сегодня освобождается вот такое кол-во доменов:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> original <span class="keyword">WHERE</span> off_date=<span class="string">'2016-01-20'</span>;</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| COUNT(*) |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">|     3455 |</span><br><span class="line">+<span class="comment">----------+</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>Теперь посмотрим на 20 самых старых доменов в зоне ru:</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> original <span class="keyword">ORDER</span> <span class="keyword">BY</span> reg_date <span class="keyword">ASC</span> <span class="keyword">LIMIT</span> <span class="number">20</span>;</span><br><span class="line">+<span class="comment">--------------+--------------+------------+------------+------------+----+</span></span><br><span class="line">| name         | reg          | reg_date   | exp_date   | off_date   | hz |</span><br><span class="line">+<span class="comment">--------------+--------------+------------+------------+------------+----+</span></span><br><span class="line">| NOSTALGIE.RU | REGRU-RU     | 1996-09-04 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| BAIKAL.RU    | RU-CENTER-RU | 1996-09-10 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| CIG.RU       | RU-CENTER-RU | 1996-09-10 | 2016-04-27 | 2016-11-01 |  0 |</span><br><span class="line">| ALCATEL.RU   | RU-CENTER-RU | 1996-09-11 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| ORENBURG.RU  | RU-CENTER-RU | 1996-09-11 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| PERM.RU      | RU-CENTER-RU | 1996-09-11 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| ORGLAND.RU   | RU-CENTER-RU | 1996-09-13 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| CTINET.RU    | RU-CENTER-RU | 1996-09-13 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| DELTA.RU     | RU-CENTER-RU | 1996-09-13 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| SIMPLEX.RU   | RU-CENTER-RU | 1996-09-13 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| SOFTLINE.RU  | RU-CENTER-RU | 1996-09-13 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| MERA.RU      | RU-CENTER-RU | 1996-09-14 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| A800.RU      | RU-CENTER-RU | 1996-09-14 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| KIS.RU       | RU-CENTER-RU | 1996-09-14 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| IDM.RU       | RU-CENTER-RU | 1996-09-15 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| INPRO.RU     | RU-CENTER-RU | 1996-09-15 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| MVKS.RU      | ELVIS-RU     | 1996-09-15 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| TMN.RU       | RU-CENTER-RU | 1996-09-15 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| VVNB.RU      | REGRU-RU     | 1996-09-15 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">| VIMCOM.RU    | RU-CENTER-RU | 1996-09-16 | 2016-04-27 | 2016-11-01 |  1 |</span><br><span class="line">+<span class="comment">--------------+--------------+------------+------------+------------+----+</span></span><br></pre></td></tr></table></figure>
+<p><strong>Социальные сети</strong></p>
+<p>Посмотрим сколько доменов имеет прямое вхождение с названием одной из известных соцсетей:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> original <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'%periscope%'</span>;</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| COUNT(*) |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">|      163 |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> original <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'%instagram%'</span>;</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| COUNT(*) |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">|      332 |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> original <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'%insta%'</span>;</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| COUNT(*) |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">|     3733 |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> original <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'%vkontakte%'</span>;</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| COUNT(*) |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">|      447 |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> original <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'%telegram%'</span>;</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| COUNT(*) |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">|       98 |</span><br><span class="line">+<span class="comment">----------+</span></span><br></pre></td></tr></table></figure>
+<p>Не так уж и много как оказалось.</p>
+<p>Ну и под конец немного Ульяновска.</p>
+<h4 id="Ульяновские-домены"><a href="#Ульяновские-домены" class="headerlink" title="Ульяновские домены"></a>Ульяновские домены</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> original <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'%ulsk%'</span>;</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| COUNT(*) |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">|      186 |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> original <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'ul-%'</span>;</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| COUNT(*) |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">|      293 |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> original <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'%-ul.ru'</span>;</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| COUNT(*) |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">|      300 |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> original <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'%73.ru'</span>;</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| COUNT(*) |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">|     4222 |</span><br><span class="line">+<span class="comment">----------+</span></span><br></pre></td></tr></table></figure>
+<p>И с большим отрывом суффикс 73 обгоняет всевозможные вариации с ul.<br>Казалось бы, это всего лишь цифры из списка субъектов РФ для автомобильных номеров. Но каждый ульяновец знает что по адресу rosstroymehcement73.ru нас будет ожидать ульяновский сайт =)</p>
+<p><strong>UPD:</strong><br>После важного комментария в Fb добавил к сравнению также вот такой вариант без дефиса:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> original <span class="keyword">WHERE</span> <span class="keyword">name</span> <span class="keyword">LIKE</span> <span class="string">'ul%'</span>;</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| COUNT(*) |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">|     5852 |</span><br><span class="line">+<span class="comment">----------+</span></span><br></pre></td></tr></table></figure>
+<p>Тогда получается что такой вариант легко обходит даже сумму первых вариантов с префиксом с суффиксом 73. Не все конечно к Ульяновску относится, но все равно так точнее =)</p>
+<h3 id="P-S"><a href="#P-S" class="headerlink" title="P.S."></a>P.S.</h3><p>Для тех кто дочитал эту длинную телегу есть приятный бонус - <a href="http://u.hmdw.me/rudomains" target="_blank" rel="noopener">SQL-база актуальная на сегодня</a>.<br>Там еще много всего интересного. А еще можно строить графики.</p>
+
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/domains/" rel="tag">domains</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/" rel="tag">tech</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+  
+<nav id="article-nav">
+  
+    <a href="/tld-stats/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Статистика по всем доменам
+        
+      </div>
+    </a>
+  
+  
+    <a href="/how-to-create-your-hosting-static-websites/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          How to create your own hosting for static websites
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+    </div>
+    <footer id="footer">
+  <h4 class="footer-blog-title">
+    <a href="/">HMDW/me</a>
+  </h4>
+  <div class="copyright">
+  <!--noindex-->
+    &copy; 2025 Rail<br>
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+  <!--/noindex-->
+  </div>
+</footer>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+  (function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+      try {
+        w.yaCounter32857010 = new Ya.Metrika({
+          id:32857010,
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true
+        });
+      } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+  })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/32857010" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+    
+<script>
+  var disqus_shortname = 'hmdw';
+  
+  var disqus_url = 'https://hmdw.me/ru-domains-stat/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  
+  <title>Ставим PHP 5.6 на сервер с VestaCP | HMDW/me - блог веб-разработчика</title>
+  <meta name="viewport" content="width=device-width">
+  
+  <meta name="keywords" content="Vesta, PHP">
+  
+  
+  <meta name="description" content="Костыльный вариант с ручной сборкой необходимой версии PHP и добавлением в панель управления Vesta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ставим PHP 5.6 на сервер с VestaCP">
+<meta property="og:url" content="https://hmdw.me/php-5-6-vesta/">
+<meta property="og:site_name" content="HMDW&#x2F;me">
+<meta property="og:description" content="Костыльный вариант с ручной сборкой необходимой версии PHP и добавлением в панель управления Vesta">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://hmdw.me/images/aaa.jpg">
+<meta property="og:image" content="https://hmdw.me/images/vesta-package.png">
+<meta property="og:image" content="https://hmdw.me/images/vesta-new-user.png">
+<meta property="og:image" content="https://hmdw.me/images/vesta-php56.png">
+<meta property="article:published_time" content="2016-12-14T12:40:38.000Z">
+<meta property="article:modified_time" content="2025-12-20T11:03:02.061Z">
+<meta property="article:author" content="Rail">
+<meta property="article:tag" content="Vesta">
+<meta property="article:tag" content=" PHP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hmdw.me/images/aaa.jpg">
+<meta name="twitter:creator" content="@rhamdeew">
+  
+  
+  <link rel="alternate" href="/atom.xml" title="HMDW/me" type="application/atom+xml">
+  
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+  <i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+  <h2 class="blog-title">
+    <a href="/">HMDW/me</a>
+  </h2>
+  <nav class="nav">
+    <ul>
+      <li><a href="/">Home</a></li><li><a href="/projects/">Projects</a></li><li><a href="/about/">About</a></li>
+      <li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+      <li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+    </ul>
+  </nav>
+  <div id="search-form-wrap">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Поискать"><button type="submit" class="search-form-submit">&#xF002;</button></form>
+  </div>
+</header>
+
+    <div id="main">
+      <article id="post-php-5-6-vesta" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      Ставим PHP 5.6 на сервер с VestaCP
+    </h1>
+    
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/php-5-6-vesta/" class="article-date">
+  <time datetime="2016-12-14T12:40:38.000Z" itemprop="datePublished">дек. 14 2016</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="articleBody">
+    
+    <p><img src="/images/aaa.jpg" alt="Winter ulsk"></p>
+<p>Всем привет!</p>
+<p>Пишу данный пост дабы не самому не забыть как все это быстро провернуть.<br>Итак, в наличии есть сервер на CentOS 6.7 с установленной на него VestaCP. Там в комплекте идет уже далеко не самый свежий PHP из ветки 5.4.<br>Сейчас я покажу вам как быстро поставить PHP 5.6 со всем необходимым и включить его из панели.</p>
+<a id="more"></a>
+<h4 id="1-Собираем-PHP"><a href="#1-Собираем-PHP" class="headerlink" title="1. Собираем PHP"></a>1. Собираем PHP</h4><pre>
+cd /opt
+
+wget http://ua2.php.net/get/php-5.6.29.tar.gz/from/this/mirror
+
+tar zxf mirror
+
+cd /opt/php-5.6.29/
+
+yum install libxml2-devel openssl-devel libcurl-devel libjpeg-devel libpng-devel libXpm-devel freetype-devel libmcrypt-devel readline-devel libtidy-devel
+
+yum install --enablerepo remi mysql-devel
+
+./configure --prefix=/usr/local/php-5.6.29 --with-config-file-path=/usr/local/php-5.6.29 --with-config-file-scan-dir=/usr/local/php-5.6.29/conf.d --with-gd --with-jpeg-dir --with-freetype-dir --with-png-dir --with-xpm-dir --enable-gd-native-ttf --with-mysqli=mysqlnd --with-mysql=mysqlnd --with-mysql-sock --with-pdo-mysql=mysqlnd --with-openssl --with-zlib --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-bcmath --enable-calendar --enable-exif --enable-ftp --enable-gd-native-ttf --enable-gd-jis-conv --with-iconv-dir --with-gettext --enable-mbstring --with-mcrypt --with-mhash --with-readline --enable-soap --enable-sockets --with-pdo-sqlite --enable-wddx --with-xmlrpc --enable-zip --with-kerberos --with-tidy --with-curl --with-libdir=lib64
+
+make
+
+make test
+
+make install
+
+cd /usr/local/php-5.6.29
+
+mkdir conf.d
+
+touch conf.d/my.ini - сюда будем добавлять свои директивы
+</pre>
+
+<p>Мой пример my.ini</p>
+<pre>
+date.timezone = Europe/Moscow
+mbstring.func_overload = 2
+mbstring.internal_encoding = "utf-8"
+</pre>
+
+<h4 id="2-Подключаем-новый-php-в-панели"><a href="#2-Подключаем-новый-php-в-панели" class="headerlink" title="2. Подключаем новый php в панели"></a>2. Подключаем новый php в панели</h4><p>Для этого нам нужно создать новый wrapper и затем создать пакет в панели который использует этот wrapper.</p>
+<pre>
+cd /usr/local/vesta/data/templates/web/httpd
+
+cp phpfcgid.sh phpfcgid56.sh
+
+----------------------------
+
+vim phpfcgi56.sh
+
+--- и тут меняем PHPRC на новый путь ---
+
+PHPRC=/usr/local/php-5.6.29/lib
+
+--- меняем exec на новый путь ---
+
+exec  /usr/local/php-5.6.29/bin/php-cgi
+
+----------------------------
+
+Потом копируем шаблоны
+
+cp phpfcgid.stpl phpfcgid56.stpl
+
+cp phpfcgid.tpl phpfcgid56.tpl
+
+chmod +x phpfcgid56.*
+
+service httpd restart
+
+</pre>
+
+<p>Затем заходим в панельку под админом, идем в «Пакеты» и создаем там новый пакет (видим что появился новый wrapper - phpfcgid56):</p>
+<p><img src="/images/vesta-package.png" alt="Vesta new package"></p>
+<p>Создаем нового пользователя с новым пакетом:</p>
+<p><img src="/images/vesta-new-user.png" alt="Vesta new user"></p>
+<p>Потом создаем у него новый хост, кидаем туда скрипт с phpinfo() и видим что все круто:</p>
+<p><img src="/images/vesta-php56.png" alt="Vesta php 5.6"></p>
+<p>Вот собственно и все.</p>
+
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/" rel="tag">tech</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+  
+<nav id="article-nav">
+  
+    <a href="/2016report/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Отчет: 2016
+        
+      </div>
+    </a>
+  
+  
+    <a href="/miner-container/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          Docker-контейнер для майнинга
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+    </div>
+    <footer id="footer">
+  <h4 class="footer-blog-title">
+    <a href="/">HMDW/me</a>
+  </h4>
+  <div class="copyright">
+  <!--noindex-->
+    &copy; 2025 Rail<br>
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+  <!--/noindex-->
+  </div>
+</footer>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+  (function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+      try {
+        w.yaCounter32857010 = new Ya.Metrika({
+          id:32857010,
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true
+        });
+      } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+  })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/32857010" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+    
+<script>
+  var disqus_shortname = 'hmdw';
+  
+  var disqus_url = 'https://hmdw.me/php-5-6-vesta/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

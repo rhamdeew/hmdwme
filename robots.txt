@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+Host: hmdw.me
+Sitemap: https://hmdw.me/sitemap.xml

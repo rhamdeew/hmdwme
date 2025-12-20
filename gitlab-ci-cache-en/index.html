@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  
+  <title>How to cache dependencies in GitLab | HMDW/me - блог веб-разработчика</title>
+  <meta name="viewport" content="width=device-width">
+  
+  <meta name="keywords" content="GitLab, CI, Docker">
+  
+  
+  <meta name="description" content="Post about using cache in CI&#x2F;CD tasks">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to cache dependencies in GitLab">
+<meta property="og:url" content="https://hmdw.me/gitlab-ci-cache-en/">
+<meta property="og:site_name" content="HMDW&#x2F;me">
+<meta property="og:description" content="Post about using cache in CI&#x2F;CD tasks">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://hmdw.me/images/tests_job_cache.png">
+<meta property="og:image" content="https://hmdw.me/images/tests_job_cache2.png">
+<meta property="og:image" content="https://hmdw.me/images/tests_job_cache3.png">
+<meta property="article:published_time" content="2021-04-08T13:20:04.000Z">
+<meta property="article:modified_time" content="2025-12-20T11:03:02.057Z">
+<meta property="article:author" content="Rail">
+<meta property="article:tag" content="GitLab">
+<meta property="article:tag" content=" CI">
+<meta property="article:tag" content=" Docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hmdw.me/images/tests_job_cache.png">
+<meta name="twitter:creator" content="@rhamdeew">
+  
+  
+  <link rel="alternate" href="/atom.xml" title="HMDW/me" type="application/atom+xml">
+  
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+  <i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+  <h2 class="blog-title">
+    <a href="/">HMDW/me</a>
+  </h2>
+  <nav class="nav">
+    <ul>
+      <li><a href="/">Home</a></li><li><a href="/projects/">Projects</a></li><li><a href="/about/">About</a></li>
+      <li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+      <li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+    </ul>
+  </nav>
+  <div id="search-form-wrap">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Поискать"><button type="submit" class="search-form-submit">&#xF002;</button></form>
+  </div>
+</header>
+
+    <div id="main">
+      <article id="post-gitlab-ci-cache-en" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      How to cache dependencies in GitLab
+    </h1>
+    
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/gitlab-ci-cache-en/" class="article-date">
+  <time datetime="2021-04-08T13:20:04.000Z" itemprop="datePublished">апр. 8 2021</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="articleBody">
+    
+    <p><img src="/images/tests_job_cache.png" alt="GitLab CI job"></p>
+<p>Hi everybody!<br>Today I want to tell you about my experience of using GitLab CI dependency caching.</p>
+<a id="more"></a>
+<h3 id="Why-is-it-needed"><a href="#Why-is-it-needed" class="headerlink" title="Why is it needed"></a>Why is it needed</h3><p>I have a small pet project where I usually experiment with new technologies and approaches. The repository of this project is stored in GitLab. There I configured CI/CD tasks for testing and deploying a project.</p>
+<p>CI-task with testing usually completed in 2 minutes. But every time I thought about what actions are being performed in this time. An example is installing Python dependencies.</p>
+<p>On one hand, this guarantees reproducible builds (let’s say hello to leftpad and mimemagick 😄).</p>
+<p>But on the other hand, these actions are performed every time when I push changes to the repository. And that’s just a pet project.</p>
+<p><strong>Let’s try to enable caching 🤟</strong></p>
+<p>Here is an official GitLab documentation about CI caching with examples - <a href="https://docs.gitlab.com/ee/ci/caching" target="_blank" rel="noopener">https://docs.gitlab.com/ee/ci/caching</a></p>
+<p>The project on which I tested CI-caching is written on Django and uses poetry for dependency and virtual environments management.</p>
+<h3 id="What-gitlab-ci-yml-looked-like-before-the-changes"><a href="#What-gitlab-ci-yml-looked-like-before-the-changes" class="headerlink" title="What .gitlab-ci.yml looked like before the changes"></a>What .gitlab-ci.yml looked like before the changes</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">stages:</span><br><span class="line">  - tests</span><br><span class="line">  - deploy</span><br><span class="line"></span><br><span class="line">tests:</span><br><span class="line">  stage: tests</span><br><span class="line">  image: python:3.7-slim</span><br><span class="line">  script:</span><br><span class="line">    - apt-get update -qy &amp;&amp; apt-get install -y build-essential</span><br><span class="line">    - pip --no-cache-dir install poetry</span><br><span class="line">    - poetry config virtualenvs.create false &amp;&amp; poetry install --no-root</span><br><span class="line">    - sed &#39;s&#x2F;#DATABASE_URL&#x2F;DATABASE_URL&#x2F;g&#39; telega&#x2F;.env.example &gt; telega&#x2F;.env</span><br><span class="line">    - coverage run --source&#x3D;&#39;.&#39; manage.py test &amp;&amp; coverage report -m</span><br></pre></td></tr></table></figure>
+<p>Here We install Debian packages and then install poetry through pip and install project dependencies with poetry.</p>
+<h3 id="What-gitlab-ci-yml-looks-like-after-the-changes"><a href="#What-gitlab-ci-yml-looks-like-after-the-changes" class="headerlink" title="What .gitlab-ci.yml looks like after the changes"></a>What .gitlab-ci.yml looks like after the changes</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">stages:</span><br><span class="line">  - tests</span><br><span class="line">  - deploy</span><br><span class="line"></span><br><span class="line">variables:</span><br><span class="line">  PIP_CACHE_DIR: &quot;$CI_PROJECT_DIR&#x2F;.cache&#x2F;pip&quot;</span><br><span class="line"></span><br><span class="line">cache:</span><br><span class="line">  key:</span><br><span class="line">    files:</span><br><span class="line">      - poetry.lock</span><br><span class="line">      - .gitlab-ci.yml</span><br><span class="line">    prefix: $&#123;CI_JOB_NAME&#125;</span><br><span class="line">  paths:</span><br><span class="line">    - .venv</span><br><span class="line">    - .cache&#x2F;pip</span><br><span class="line"></span><br><span class="line">tests:</span><br><span class="line">  stage: tests</span><br><span class="line">  image: python:3.7-slim</span><br><span class="line">  script:</span><br><span class="line">    - apt-get update -qy &amp;&amp; apt-get install -y build-essential</span><br><span class="line">    - pip install poetry</span><br><span class="line">    - poetry config virtualenvs.in-project true</span><br><span class="line">    - poetry install --no-root</span><br><span class="line">    - sed &#39;s&#x2F;#DATABASE_URL&#x2F;DATABASE_URL&#x2F;g&#39; telega&#x2F;.env.example &gt; telega&#x2F;.env</span><br><span class="line">    - poetry run coverage run manage.py test &amp;&amp; poetry run coverage report -m</span><br></pre></td></tr></table></figure>
+<p>I added some settings to tell pip and poetry where packages should be stored. Then I added ‘cache’ section and set poetry.lock and .gitlab-ci.yml files as key for cache. </p>
+<p>This means that if at least one of the files is changed then packages should be installed from PyPI, but in another case will be used cached directories with already installed packages.</p>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><p>CI-task running time is decreased from 2 minutes to 1 minute. Of course, the checking and unpacking cache operation was added, but it’s still faster than installing dependencies from PyPI.</p>
+<p>On the screenshot with the task logs, we can see how pip use the cache.</p>
+<p><img src="/images/tests_job_cache2.png" alt="GitLab CI job"></p>
+<p>And here We can see that the poetry did not install anything new.</p>
+<p><img src="/images/tests_job_cache3.png" alt="GitLab CI job"></p>
+<p>Cache dependencies in GitLab CI/CD are a powerful tool for faster-running tasks and the economy of resources.</p>
+
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/english/" rel="tag">english</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gitlab/" rel="tag">gitlab</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/" rel="tag">tech</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+  
+<nav id="article-nav">
+  
+    <a href="/gcp-docker-logs/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Логи из Docker в Google Cloud
+        
+      </div>
+    </a>
+  
+  
+    <a href="/gitlab-ci-cache/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          Используем кэш в GitLab CI
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+    </div>
+    <footer id="footer">
+  <h4 class="footer-blog-title">
+    <a href="/">HMDW/me</a>
+  </h4>
+  <div class="copyright">
+  <!--noindex-->
+    &copy; 2025 Rail<br>
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+  <!--/noindex-->
+  </div>
+</footer>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+  (function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+      try {
+        w.yaCounter32857010 = new Ya.Metrika({
+          id:32857010,
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true
+        });
+      } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+  })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/32857010" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+    
+<script>
+  var disqus_shortname = 'hmdw';
+  
+  var disqus_url = 'https://hmdw.me/gitlab-ci-cache-en/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
