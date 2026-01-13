@@ -18,11 +18,13 @@
 <meta property="og:locale" content="ru_RU">
 <meta property="og:image" content="https://hmdw.me/images/gitlab_ci_settings.png">
 <meta property="article:published_time" content="2020-02-13T12:47:31.000Z">
-<meta property="article:modified_time" content="2025-12-20T11:03:02.057Z">
+<meta property="article:modified_time" content="2026-01-13T17:33:45.229Z">
 <meta property="article:author" content="Rail">
-<meta property="article:tag" content="CI">
-<meta property="article:tag" content=" deploy">
-<meta property="article:tag" content=" FTP">
+<meta property="article:tag" content="cd">
+<meta property="article:tag" content="ci">
+<meta property="article:tag" content="ftp">
+<meta property="article:tag" content="gitlab">
+<meta property="article:tag" content="tech">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://hmdw.me/images/gitlab_ci_settings.png">
 <meta name="twitter:creator" content="@rhamdeew">
@@ -101,12 +103,15 @@
   <div class="entry-content" itemprop="articleBody">
     
     <p>Привет!<br>Попросили тут помочь с заливкой обновленной версии статичного сайта на шаред хостинг где из доступов есть только FTP.</p>
-<p>Можно было просто залить все используя FileZilla/Midnight Commander/etc и забыть об этом, но появился и другой вариант - залить сайт в git-репозиторий и настроить CI/CD для деплоя мастер-ветки.</p>
-<a id="more"></a>
-<h3 id="Инструкция"><a href="#Инструкция" class="headerlink" title="Инструкция"></a>Инструкция</h3><h4 id="1-Добавляем-реквизиты-для-доступа-к-FTP-в-настройки-репозитория-в-GitLab"><a href="#1-Добавляем-реквизиты-для-доступа-к-FTP-в-настройки-репозитория-в-GitLab" class="headerlink" title="1. Добавляем реквизиты для доступа к FTP в настройки репозитория в GitLab"></a>1. Добавляем реквизиты для доступа к FTP в настройки репозитория в GitLab</h4><p><img src="/images/gitlab_ci_settings.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Эти переменные будут доступны в yml-файле</span><br><span class="line"></span><br><span class="line">$PROD_FTP_USER</span><br><span class="line">$PROD_FTP_PASSWORD</span><br><span class="line">$PROD_FTP_SERVER</span><br></pre></td></tr></table></figure>
+<p>Можно было просто залить все используя FileZilla&#x2F;Midnight Commander&#x2F;etc и забыть об этом, но появился и другой вариант - залить сайт в git-репозиторий и настроить CI&#x2F;CD для деплоя мастер-ветки.</p>
+<span id="more"></span>
+
+<h3 id="Инструкция"><a href="#Инструкция" class="headerlink" title="Инструкция"></a>Инструкция</h3><h4 id="1-Добавляем-реквизиты-для-доступа-к-FTP-в-настройки-репозитория-в-GitLab"><a href="#1-Добавляем-реквизиты-для-доступа-к-FTP-в-настройки-репозитория-в-GitLab" class="headerlink" title="1. Добавляем реквизиты для доступа к FTP в настройки репозитория в GitLab"></a>1. Добавляем реквизиты для доступа к FTP в настройки репозитория в GitLab</h4><p><img src="/images/gitlab_ci_settings.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Эти переменные будут доступны в yml-файле</span><br><span class="line"></span><br><span class="line">$PROD_FTP_USER</span><br><span class="line">$PROD_FTP_PASSWORD</span><br><span class="line">$PROD_FTP_SERVER</span><br></pre></td></tr></table></figure>
+
 <h4 id="2-Добавляем-gitlab-ci-yml-в-проект"><a href="#2-Добавляем-gitlab-ci-yml-в-проект" class="headerlink" title="2. Добавляем .gitlab-ci.yml в проект"></a>2. Добавляем .gitlab-ci.yml в проект</h4><p>.gitlab-ci.yml</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">before_script:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">'which lftp || ( apt-get update -y &amp;&amp; apt-get install lftp -y )'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="attr">deploy_master:</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">master</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">deploy</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">lftp</span> <span class="string">ftp://$PROD_FTP_USER:$PROD_FTP_PASSWORD@$PROD_FTP_SERVER</span> <span class="string">-e</span> <span class="string">\</span></span><br><span class="line">    <span class="string">"set ftp:ssl-allow no; mirror --continue --reverse --delete --verbose --exclude=^\.git/$ . /; quit"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">before_script:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">&#x27;which lftp || ( apt-get update -y &amp;&amp; apt-get install lftp -y )&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="attr">deploy_master:</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">master</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">deploy</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">lftp</span> <span class="string">ftp://$PROD_FTP_USER:$PROD_FTP_PASSWORD@$PROD_FTP_SERVER</span> <span class="string">-e</span> <span class="string">\</span></span><br><span class="line">    <span class="string">&quot;set ftp:ssl-allow no; mirror --continue --reverse --delete --verbose --exclude=^\.git/$ . /; quit&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>Тут мы устанавливаем lftp и затем просто синхронизируем текущую директорию с корневой директорией на FTP. Директорию .git игнорируем и на FTP не заливаем.</p>
 <p><strong>Важные моменты</strong></p>
 <ul>
@@ -119,9 +124,9 @@
 <h3 id="Выводы"><a href="#Выводы" class="headerlink" title="Выводы"></a>Выводы</h3><p>Тут конечно намного предпочтительнее был бы вариант с SSH-доступом. Как минимум можно было бы синкать только то что изменилось посредством rsync, а как максимум запускать на проде миграции БД, сборку ресурсов и прочие полезные вещи.</p>
 <p>Но в крайнем случае даже с FTP можно настроить автоматический деплой и не заморачиваться с ручной заливкой файлов.</p>
 <p><strong>UPD:</strong></p>
-<p>Возникла необходимость сохранять на хостинге логи (файлы вида /logs/.send_result_l45fd.log) во время деплоя.</p>
+<p>Возникла необходимость сохранять на хостинге логи (файлы вида &#x2F;logs&#x2F;.send_result_l45fd.log) во время деплоя.</p>
 <p>Добавил регулярку для исключения этих файлов:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#...</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">lftp</span> <span class="string">ftp://$PROD_FTP_USER:$PROD_FTP_PASSWORD@$PROD_FTP_SERVER</span> <span class="string">-e</span> <span class="string">\</span></span><br><span class="line">    <span class="string">"set ftp:ssl-allow no; mirror --continue --reverse --delete --exclude=^logs\/.*\.log$ --exclude=^\.git/$ . /; quit"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#...</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">lftp</span> <span class="string">ftp://$PROD_FTP_USER:$PROD_FTP_PASSWORD@$PROD_FTP_SERVER</span> <span class="string">-e</span> <span class="string">\</span></span><br><span class="line">    <span class="string">&quot;set ftp:ssl-allow no; mirror --continue --reverse --delete --exclude=^logs\/.*\.log$ --exclude=^\.git/$ . /; quit&quot;</span></span><br></pre></td></tr></table></figure>
 
   </div>
   
@@ -171,7 +176,7 @@
 
 <section id="comments">
   <div id="disqus_thread">
-  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
 
@@ -183,7 +188,7 @@
   </h4>
   <div class="copyright">
   <!--noindex-->
-    &copy; 2025 Rail<br>
+    &copy; 2026 Rail<br>
     Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
   <!--/noindex-->
   </div>

@@ -21,10 +21,10 @@
 <meta property="og:image" content="https://hmdw.me/images/balena_cloud_2.png">
 <meta property="og:image" content="https://hmdw.me/images/balena_cloud_3.png">
 <meta property="article:published_time" content="2019-11-20T23:58:48.000Z">
-<meta property="article:modified_time" content="2025-12-20T11:03:02.055Z">
+<meta property="article:modified_time" content="2026-01-13T17:33:45.228Z">
 <meta property="article:author" content="Rail">
-<meta property="article:tag" content="Balena">
-<meta property="article:tag" content=" IOT">
+<meta property="article:tag" content="raspberrypi">
+<meta property="article:tag" content="tech">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://hmdw.me/images/balena.png">
 <meta name="twitter:creator" content="@rhamdeew">
@@ -106,9 +106,10 @@
 <p>Всем привет!</p>
 <p>Сегодня речь пойдет о сервисе для управления IoT-устройствами под названием Balena Cloud. Многим видимо покажется знакомым название Balena так как существует очень популярная утилита для подготовки загрузочных флешек под названием balenaEtcher.<br>Этой программой я и сам пользуюсь уже давно.</p>
 <p>Причем тут IoT - спросите вы и будете правы. Это все дело случая.</p>
-<a id="more"></a>
+<span id="more"></span>
+
 <h2 id="Предыстория"><a href="#Предыстория" class="headerlink" title="Предыстория"></a>Предыстория</h2><p>Понадобилось мне позавчера подготовить загрузочную флешку со свежей версией Lubuntu. Ожидая окончания процесса загрузки я заинтересовался рекламой которая в этот момент крутилась в окне balenaEtcher.<br>Там было описание штуки под названием balenaSound которая может превратить Raspberry PI в Bluetooth-адаптер для старых аудиосистем которые поддерживают только AUX.</p>
-<p>Мне стало интересно и я кликнул по рекламе (да, такое тоже бывает =)). В открывшейся статье предлагалось залить на малинку balenaOS. Это минималистичная ОС которая умеет запускать docker-контейнеры и коннектиться к облаку Balena для получения команд из панели управления.</p>
+<p>Мне стало интересно и я кликнул по рекламе (да, такое тоже бывает &#x3D;)). В открывшейся статье предлагалось залить на малинку balenaOS. Это минималистичная ОС которая умеет запускать docker-контейнеры и коннектиться к облаку Balena для получения команд из панели управления.</p>
 <p>Вообще это конечно оверкилл - использовать полноценный компьютер с ОС на борту и запущенными на нем docker-контейнерами только для получения звука по Bluetooth и передачи его через аналоговый mini-jack.</p>
 <p>Но у меня уже несколько месяцев лежал без дела Raspberry PI 3B+. Поэтому я решил попробовать.</p>
 <h2 id="Ключ-на-старт"><a href="#Ключ-на-старт" class="headerlink" title="Ключ на старт"></a>Ключ на старт</h2><ol>
@@ -123,16 +124,17 @@
 </ol>
 <p><img src="/images/balena_cloud_1.png" alt="Balena Cloud dashboard Raspberry PI"></p>
 <ol start="5">
-<li><p>Если все ок то жмем Add release и выбираем один из вариантов отправки проекта на устройство - через Balena CLI или при помощи git.<br>Мне ставить какой-то дополнительный софт не хотелось, поэтому я выбрал git и добавил свой публичный ключ в появившемся модальном окне.<br>Также важный момент - на этом этапе нам предлагается скопировать команды для git.<br>Там указан адрес remote-репозитория на который необходимо будет запушить проект.<br>Будет что-то вида <a href="mailto:balena100500@git.balena-cloud.com">balena100500@git.balena-cloud.com</a>:balena100500/example.git</p>
+<li><p>Если все ок то жмем Add release и выбираем один из вариантов отправки проекта на устройство - через Balena CLI или при помощи git.<br>Мне ставить какой-то дополнительный софт не хотелось, поэтому я выбрал git и добавил свой публичный ключ в появившемся модальном окне.<br>Также важный момент - на этом этапе нам предлагается скопировать команды для git.<br>Там указан адрес remote-репозитория на который необходимо будет запушить проект.<br>Будет что-то вида <a href="mailto:&#98;&#x61;&#108;&#101;&#x6e;&#x61;&#49;&#x30;&#x30;&#x35;&#x30;&#x30;&#64;&#x67;&#105;&#116;&#46;&#x62;&#97;&#x6c;&#x65;&#x6e;&#97;&#x2d;&#x63;&#108;&#x6f;&#x75;&#100;&#46;&#99;&#x6f;&#109;">balena100500@git.balena-cloud.com</a>:balena100500&#x2F;example.git</p>
 </li>
-<li><p>Теперь нужно выбрать проект который мы хотим задеплоить на устройстве.<br>Я склонировал <a href="https://github.com/balena-io-projects/balena-sound" target="_blank" rel="noopener">https://github.com/balena-io-projects/balena-sound</a>, добавил туда remote-репозиторий из предыдущего шага и сделал пуш</p>
+<li><p>Теперь нужно выбрать проект который мы хотим задеплоить на устройстве.<br>Я склонировал <a href="https://github.com/balena-io-projects/balena-sound">https://github.com/balena-io-projects/balena-sound</a>, добавил туда remote-репозиторий из предыдущего шага и сделал пуш</p>
 </li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;balena-io-projects&#x2F;balena-sound</span><br><span class="line">cd balena-sound</span><br><span class="line">git remote add balena balena100@git.balena-cloud.com:balena100&#x2F;example.git</span><br><span class="line">git push balena master</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/balena-io-projects/balena-sound</span><br><span class="line">cd balena-sound</span><br><span class="line">git remote add balena balena100@git.balena-cloud.com:balena100/example.git</span><br><span class="line">git push balena master</span><br></pre></td></tr></table></figure>
+
 <p>После того как пуш-прошел в консоли весело забегали строчки отображающие процесс сборки докер-контейнеров проекта.</p>
 <p><img src="/images/balena_cloud_2.png" alt="Balena Cloud git push complete"></p>
 <p>В конце я увидел ASCII-единорога и отправился в дашборд смотреть как там поживает малинка. Устройство было в статусе <strong>uploading</strong> и отображало статус-бар загрузки.<br>Через пару минут оно перешло в статус <strong>online</strong>.</p>
-<p>Вот на этом моменте я взял в руки телефон и подключился с него к малинке по Bluetooth. Название устройства было вида balenaSound 1234.<br>К малинке подключил наушники и на телефоне включил первый подвернувшийся подкаст. Звук пошел =)</p>
+<p>Вот на этом моменте я взял в руки телефон и подключился с него к малинке по Bluetooth. Название устройства было вида balenaSound 1234.<br>К малинке подключил наушники и на телефоне включил первый подвернувшийся подкаст. Звук пошел &#x3D;)</p>
 <p>Удивительно, но все завелось без танцев с бубном и костылей.</p>
 <p>Также появилась возможность управлять докер-контейнерами на устройстве и подключаться к нему через терминал прямо из панели управления.</p>
 <p><img src="/images/balena_cloud_3.png" alt="Balena Cloud dashboard"></p>
@@ -141,7 +143,7 @@
 <h2 id="Выводы"><a href="#Выводы" class="headerlink" title="Выводы"></a>Выводы</h2><p>Я давно хотел попробовать что-то связанное с IoT, да все руки не доходили. А тут совершенно случайно попробовал и мне даже понравилось. Правда пока не знаю что можно более интересное на малинке запустить, но главное что разобрался с тем как это делается.</p>
 <p>Раньше эта малинка трудилась в офисе будучи подключенной к старому музыкальному центру. На ней был установлен Raspbian и для того чтобы переключить песню необходимо было зайти на нее по VNC. Это было не очень удобно.<br>Затем я попробовал вариант с плеером Mopidy который имеет свой веб-интерфейс. Но в итоге оказалось что это еще более неудобно. Потому пользовались первым вариантом.</p>
 <p>Если бы тогда я знал что можно потратить 10 минут и поднять такую удобную штуку в докер-контейнере то я выбрал бы этот вариант.</p>
-<p><strong>P.S.</strong> Теперь еще осталось куда-то Arduino Nano с кучей датчиков пристроить =)</p>
+<p><strong>P.S.</strong> Теперь еще осталось куда-то Arduino Nano с кучей датчиков пристроить &#x3D;)</p>
 
   </div>
   
@@ -191,7 +193,7 @@
 
 <section id="comments">
   <div id="disqus_thread">
-  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
 
@@ -203,7 +205,7 @@
   </h4>
   <div class="copyright">
   <!--noindex-->
-    &copy; 2025 Rail<br>
+    &copy; 2026 Rail<br>
     Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
   <!--/noindex-->
   </div>

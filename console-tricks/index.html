@@ -18,14 +18,14 @@
 <meta property="og:image" content="https://hmdw.me/images/i/2015/03/121efbf88ca029bfc011ca15c.png">
 <meta property="og:image" content="https://hmdw.me/images/i/2015/03/bca324d81c29499627608d442.png">
 <meta property="article:published_time" content="2015-03-26T12:08:14.000Z">
-<meta property="article:modified_time" content="2025-12-20T11:03:02.056Z">
+<meta property="article:modified_time" content="2026-01-13T17:33:45.228Z">
 <meta property="article:author" content="Rail">
-<meta property="article:tag" content="tech">
-<meta property="article:tag" content="linux">
-<meta property="article:tag" content="evernote">
-<meta property="article:tag" content="bitbucket">
-<meta property="article:tag" content="lifehack">
 <meta property="article:tag" content="bash">
+<meta property="article:tag" content="bitbucket">
+<meta property="article:tag" content="evernote">
+<meta property="article:tag" content="lifehack">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="tech">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://hmdw.me/images/i/2015/03/9ce6643b4291599550d2a2766.png">
 <meta name="twitter:creator" content="@rhamdeew">
@@ -103,41 +103,53 @@
   
   <div class="entry-content" itemprop="articleBody">
     
-    <p>Всем привет!<br>Сидел думал как назвать пост чтобы его заголовок точно и ёмко передавал суть написанного, но не придумал ничего лучшего чем «Консольные трюки». Да ну и пусть, фиг с ним =)</p>
+    <p>Всем привет!<br>Сидел думал как назвать пост чтобы его заголовок точно и ёмко передавал суть написанного, но не придумал ничего лучшего чем «Консольные трюки». Да ну и пусть, фиг с ним &#x3D;)</p>
 <p>Итак, суть такова. Я рассмотрю сейчас две актуальные для меня проблемы и их элегантные решения при помощи консольных утилит. В итоге возможно это кому-то поможет сэкономить время на рутине также как и мне.</p>
-<a id="more"></a>
+<span id="more"></span>
+
 <h4 id="1-Я-хочу-быстро-сохранять-заметки-в-облачное-хранилище"><a href="#1-Я-хочу-быстро-сохранять-заметки-в-облачное-хранилище" class="headerlink" title="1. Я хочу быстро сохранять заметки в облачное хранилище"></a>1. Я хочу быстро сохранять заметки в облачное хранилище</h4><p>Действительно, сейчас без облачных технологий никуда. Все мы где-то храним свои заметки, кто в Google Docs, кто в Evernote, а кто-то и вовсе в виде текстовых файликов в директории синхронизированной с Dropbox’ом.</p>
 <blockquote><p>Мне просто нужно быстро что-то записать.</p>
 </blockquote>
+
 <p>Мне же по душе вариант с Evernote т.к. тут упорядоченное представление содержимого в виде отдельных блокнотов, полнотекстовый поиск по заметкам и приятный интерфейс приложений. Но вот для того чтобы сохранить какую-то мелкую заметку мне очень лениво грузить новую вкладку с веб-приложением или запускать Windows-клиент в WINE.</p>
-<p><strong>И тут на помощь нам приходит <a href="http://geeknote.me" target="_blank" rel="noopener">Geeknote</a>.</strong></p>
+<p><strong>И тут на помощь нам приходит <a href="http://geeknote.me/">Geeknote</a>.</strong></p>
 <p><img src="/images/i/2015/03/9ce6643b4291599550d2a2766.png" alt="geeknote"></p>
 <p>Проект развивается уже давно и на мой взгляд обладает очень удобным консольным интерфейсом.<br>Теперь для того чтобы создать новую заявку нужно лишь на брать в консоли</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geeknote create --title &quot;Note title&quot; --content &quot;WRITE&quot; --notebook &quot;My note&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geeknote create --title &quot;Note title&quot; --content &quot;WRITE&quot; --notebook &quot;My note&quot;</span><br></pre></td></tr></table></figure>
+
 <p>Где нужно заменить “Note title” и “My note” на заголовок и название блокнота соответственно. В итоге после ввода команды открывается ваш любимые текстовый редактор где вы можете набирать свою заметку. После его закрытия и сохранения заметки она автоматически улетает в Evernote, а из памяти вашего компьютера растворяется без следа.</p>
 <p>Все бы ничего, но такую длинную команду писать долго и лениво.</p>
 <p>Так что делаем вот так:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~&#x2F;.bin</span><br><span class="line">vim ~&#x2F;.bin&#x2F;geeknote.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.bin</span><br><span class="line">vim ~/.bin/geeknote.sh</span><br></pre></td></tr></table></figure>
+
 <p>Внутри пишем однострочный скрипт:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;bash</span><br><span class="line">geeknote create --title &quot;$1&quot; --content &quot;WRITE&quot; --notebook &quot;Fast&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">geeknote create --title &quot;$1&quot; --content &quot;WRITE&quot; --notebook &quot;Fast&quot;</span><br></pre></td></tr></table></figure>
+
 <p>Сохраняем. Даем права на запуск:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x ~&#x2F;.bin&#x2F;geeknote.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x ~/.bin/geeknote.sh</span><br></pre></td></tr></table></figure>
+
 <p>Теперь нам осталось только прописать alias в нашей оболочке. Допустим у вас Bash:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br></pre></td></tr></table></figure>
+
 <p>В конце файла прописываем наш алиас:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias gnote&#x3D;&#39;~&#x2F;.bin&#x2F;geeknote.sh&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias gnote=&#x27;~/.bin/geeknote.sh&#x27;</span><br></pre></td></tr></table></figure>
+
 <p>Осталось только перезапустить шелл и можно писать что-то вроде:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gnote &#39;Моя первая запись&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gnote &#x27;Моя первая запись&#x27;</span><br></pre></td></tr></table></figure>
+
 <p>Единожды утилита спросит логин-пароль и после сохранения записи вы ее увидите в своем Evernote.</p>
 <p><img src="/images/i/2015/03/121efbf88ca029bfc011ca15c.png" alt="Блокнот в Evernote"></p>
 <h4 id="2-Быстро-сохранить-какой-либо-полезный-код"><a href="#2-Быстро-сохранить-какой-либо-полезный-код" class="headerlink" title="2. Быстро сохранить какой-либо полезный код"></a>2. Быстро сохранить какой-либо полезный код</h4><p>Нередко по работе возникает необходимость накидать какой-то быстрый код который возможно в будущем пригодится, но при этом качество у него совершенно не подходящее для захламления им своего публичного аккаунта на Github. Сохранять у себя где то на диске или просто заливать код в какой-нибудь cloud-storage также смысла нет ибо вряд ли вы его потом отыщете когда он вам пригодится. Тут на помощь может придти gist.github.com либо же сниппеты на bitbucket. Но у них есть существенный недостаток - нет возможности сохранить какую-либо структуру директорий. Короче не совсем то, да и открывать новую вкладку в браузере, а потом копипастить туда код с каждого файла по отдельности тоже не наш путь.</p>
 <p>И тут мы вспоминаем про приватные репозитории в Bitbucket которые можно бесплатно создавать в неограниченных количествах! Точно! Вот туда то мы и будем лить. А потом вспоминаем про то что в этом случае нам также придется идти на Bitbucket, создавать там новый репозиторий и делать вручную git remote add. Короче снова слишком много действий.<br>А вот тут нас выручат bash,curl и API Bitbucket.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~&#x2F;.bin&#x2F;bbsyc.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bin/bbsyc.sh</span><br></pre></td></tr></table></figure>
+
 <p>Пишем скрипт:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;bash</span><br><span class="line">echo &#39;Repo name?&#39;</span><br><span class="line">read repoprename</span><br><span class="line"></span><br><span class="line">reponame&#x3D;&quot;bb-&quot;$repoprename</span><br><span class="line"></span><br><span class="line">curl --user login:&#39;password&#39; https:&#x2F;&#x2F;api.bitbucket.org&#x2F;1.0&#x2F;repositories&#x2F; --data name&#x3D;$reponame --data is_private&#x3D;&#39;true&#39;</span><br><span class="line"></span><br><span class="line">if [ ! -d &quot;.git&quot; ]; then</span><br><span class="line">        git init</span><br><span class="line">        git add -A</span><br><span class="line">        git commit -m &quot;Fast&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">git remote add bitbucket git@bitbucket.org:login&#x2F;$reponame.git</span><br><span class="line">git push -u bitbucket --all</span><br><span class="line">git push -u bitbucket --tags</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">echo &#x27;Repo name?&#x27;</span><br><span class="line">read repoprename</span><br><span class="line"></span><br><span class="line">reponame=&quot;bb-&quot;$repoprename</span><br><span class="line"></span><br><span class="line">curl --user login:&#x27;password&#x27; https://api.bitbucket.org/1.0/repositories/ --data name=$reponame --data is_private=&#x27;true&#x27;</span><br><span class="line"></span><br><span class="line">if [ ! -d &quot;.git&quot; ]; then</span><br><span class="line">        git init</span><br><span class="line">        git add -A</span><br><span class="line">        git commit -m &quot;Fast&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">git remote add bitbucket git@bitbucket.org:login/$reponame.git</span><br><span class="line">git push -u bitbucket --all</span><br><span class="line">git push -u bitbucket --tags</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>Тут мы заменяем login и password на свои.</p>
 <p>Далее мы снова открываем .bashrc и добавляем алиас:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias bbsync&#x3D;&#39;~&#x2F;.bin&#x2F;bb.sh&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias bbsync=&#x27;~/.bin/bb.sh&#x27;</span><br></pre></td></tr></table></figure>
+
 <p>Затем рестартим шелл.</p>
 <p>Теперь мы можем просто перейти в любую директорию и вызвать bbsync. Скрипт спросит у нас название нового репозитория, создаст его на Bitbucket и зальет наш код.<br>Как видите все просто и удобно. Занимает считанные секунды.<br>Для удобства созданные таким способом репы я помечаю префиксом ‘bb-‘.</p>
 <p><img src="/images/i/2015/03/bca324d81c29499627608d442.png" alt="Bitbucket-репозитории"></p>
@@ -190,7 +202,7 @@
 
 <section id="comments">
   <div id="disqus_thread">
-  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
 
@@ -202,7 +214,7 @@
   </h4>
   <div class="copyright">
   <!--noindex-->
-    &copy; 2025 Rail<br>
+    &copy; 2026 Rail<br>
     Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
   <!--/noindex-->
   </div>

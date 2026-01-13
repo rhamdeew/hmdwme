@@ -19,15 +19,15 @@
 <meta property="og:image" content="https://hmdw.me/images/i/2015/08/40bb393c8e477195e5ee1790d.png">
 <meta property="og:image" content="https://hmdw.me/images/i/2015/08/2978f68cf5525a8e9ac9c94d3.JPG">
 <meta property="article:published_time" content="2015-08-27T15:01:24.000Z">
-<meta property="article:modified_time" content="2025-12-20T11:03:02.059Z">
+<meta property="article:modified_time" content="2026-01-13T17:33:45.230Z">
 <meta property="article:author" content="Rail">
-<meta property="article:tag" content="ithink">
-<meta property="article:tag" content="marathon">
 <meta property="article:tag" content="facebook">
-<meta property="article:tag" content="wordpress">
 <meta property="article:tag" content="hexo">
-<meta property="article:tag" content="jekyll">
 <meta property="article:tag" content="hugo">
+<meta property="article:tag" content="ithink">
+<meta property="article:tag" content="jekyll">
+<meta property="article:tag" content="marathon">
+<meta property="article:tag" content="wordpress">
 <meta property="article:tag" content="xiaomi">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://hmdw.me/images/i/2015/08/30fcb9bea33b35907db669dc4.png">
@@ -106,7 +106,7 @@
   
   <div class="entry-content" itemprop="articleBody">
     
-    <p>Решил полностью зафлудить свой уютный бложек. С сегодняшнего дня объявляю марафон - 30 дней постинга в блог. Посмотрим что из этого выйдет =)</p>
+    <p>Решил полностью зафлудить свой уютный бложек. С сегодняшнего дня объявляю марафон - 30 дней постинга в блог. Посмотрим что из этого выйдет &#x3D;)</p>
 <p>Завершение марафона 25 сентября.</p>
 <p>Чуть ниже темы на сегодня:</p>
 <ul>
@@ -114,19 +114,20 @@
 <li>Wordpress, Jekyll, Hexo и Hugo</li>
 <li>Yi Action Camera Remote Control</li>
 </ul>
-<a id="more"></a>
-<h4 id="Facebook-и-Page-API"><a href="#Facebook-и-Page-API" class="headerlink" title="Facebook и Page API"></a>Facebook и Page API</h4><p>Убил кучу времени на то чтобы понять как правильно использовать Graph API чтобы постить на Facebook-странице от имени самой страницы. Все мои первоначальные эксперименты с /PAGE-ID/feed заканчивались вот таким непотребством:</p>
-<p><img src="/images/i/2015/08/30fcb9bea33b35907db669dc4.png" alt=""></p>
-<p>Все результаты гугления приводили к одним и тем же ответам что нужно использовать POST-запрос к /PAGE-ID/feed.</p>
-<p>Я пробовал подставить access_token страницы который отдается при запросе к {user-id}/accounts и применить его при запросе к /PAGE-ID/feed, но получал сообщение типа</p>
+<span id="more"></span>
+
+<h4 id="Facebook-и-Page-API"><a href="#Facebook-и-Page-API" class="headerlink" title="Facebook и Page API"></a>Facebook и Page API</h4><p>Убил кучу времени на то чтобы понять как правильно использовать Graph API чтобы постить на Facebook-странице от имени самой страницы. Все мои первоначальные эксперименты с &#x2F;PAGE-ID&#x2F;feed заканчивались вот таким непотребством:</p>
+<p><img src="/images/i/2015/08/30fcb9bea33b35907db669dc4.png"></p>
+<p>Все результаты гугления приводили к одним и тем же ответам что нужно использовать POST-запрос к &#x2F;PAGE-ID&#x2F;feed.</p>
+<p>Я пробовал подставить access_token страницы который отдается при запросе к {user-id}&#x2F;accounts и применить его при запросе к &#x2F;PAGE-ID&#x2F;feed, но получал сообщение типа</p>
 <pre>
 (#200) The user hasn't authorized the application to perform this action
 </pre>
 
 <p>В итоге методом тыка удалось все это дело завести, запрос оказался правильным. Все дело оказалось в подставлении нужного токена.</p>
 <p><strong>1)</strong> На странице приложения в разделе App Details ткнул на Configure App Center Permissions, а там добавил manage_pages, publish_pages и user_status</p>
-<p><img src="/images/i/2015/08/8cd90d899d4facdc3f0243199.png" alt=""></p>
-<p><strong>2)</strong> Открыл Graph API Explorer, выбрал в первой выпадайке название своего приложения, во второй выпадайке выбрал название созданной для публикаций страницы, а потом в ней же выбрал “Request publish pages”.<br>С полученным токеном постинг идет уже от имени страницы. То что было нужно =)</p>
+<p><img src="/images/i/2015/08/8cd90d899d4facdc3f0243199.png"></p>
+<p><strong>2)</strong> Открыл Graph API Explorer, выбрал в первой выпадайке название своего приложения, во второй выпадайке выбрал название созданной для публикаций страницы, а потом в ней же выбрал “Request publish pages”.<br>С полученным токеном постинг идет уже от имени страницы. То что было нужно &#x3D;)</p>
 <p>Для быстрого теста можно воспользоваться CURL</p>
 <pre>
 curl -F access_token="CAAMs...IZD" \
@@ -137,9 +138,9 @@ https://graph.facebook.com/811091835677399/feed
 
 <p><strong>3)</strong> Еще немаловажный момент, открываем Access Token Debugger и вставляем туда наш новоиспеченный токен для страницы. В результате видим что токен ограничен по времени и скоро будет просрочен. Жмем на “Extend Access Token” и получаем новый, “вечный” токен.</p>
 <p>А, еще не забудьте где-то в недрах настроек приложения отключить режим песочницы. Вот как то так.</p>
-<h4 id="Wordpress-Jekyll-Hexo-и-Hugo"><a href="#Wordpress-Jekyll-Hexo-и-Hugo" class="headerlink" title="Wordpress, Jekyll, Hexo и Hugo"></a>Wordpress, Jekyll, Hexo и Hugo</h4><p><img src="/images/i/2015/08/40bb393c8e477195e5ee1790d.png" alt=""></p>
-<p>На днях вспомнил про один свой проект - <a href="http://clstr.ru" target="_blank" rel="noopener">CLSTR</a>. По сути это простой бложек который я второпях реализовал на Wordpress. Тут WP явно лишний так как его богатый функционал здесь практически не используется. Лишь зря расходуются ресурсы сервера на генерацию каждой страницы. Тут достаточно простого статичного блога.</p>
-<p>Чтобы не заморачиться решил сразу экспортировать посты из WP напрямую в Markdown с помощью этого <a href="https://github.com/benbalter/wordpress-to-jekyll-exporter" target="_blank" rel="noopener">плагина</a>. Ну и заодно попробовал Jekyll.</p>
+<h4 id="Wordpress-Jekyll-Hexo-и-Hugo"><a href="#Wordpress-Jekyll-Hexo-и-Hugo" class="headerlink" title="Wordpress, Jekyll, Hexo и Hugo"></a>Wordpress, Jekyll, Hexo и Hugo</h4><p><img src="/images/i/2015/08/40bb393c8e477195e5ee1790d.png"></p>
+<p>На днях вспомнил про один свой проект - <a href="http://clstr.ru/">CLSTR</a>. По сути это простой бложек который я второпях реализовал на Wordpress. Тут WP явно лишний так как его богатый функционал здесь практически не используется. Лишь зря расходуются ресурсы сервера на генерацию каждой страницы. Тут достаточно простого статичного блога.</p>
+<p>Чтобы не заморачиться решил сразу экспортировать посты из WP напрямую в Markdown с помощью этого <a href="https://github.com/benbalter/wordpress-to-jekyll-exporter">плагина</a>. Ну и заодно попробовал Jekyll.</p>
 <p>Из того что <strong>понравилось</strong> в Jekyll:</p>
 <ul>
 <li>широкий выбор качественных готовых тем</li>
@@ -153,8 +154,8 @@ https://graph.facebook.com/811091835677399/feed
 <p>Уже потом понял что формат постов Jekyll совместим с Hexo и что я мог без проблем использвать его. В Hexo уже есть встроенная поддержка тегов, категорий и даже деплой можно настроить прямо в конфиге. Короче Hexo круче Jekyll.</p>
 <p>А потом я узнал про Hugo который написан на Go. Ставится он не в пример проще первых двух кандидатов, а генерирует странички просто молниеносно! Плюс он достаточно гибкий в настройке. Думаю что это новый уровень среди статик-генераторов. В следующий раз наверное буду юзать его)</p>
 <h4 id="Yi-Action-Camera-Remote-Control"><a href="#Yi-Action-Camera-Remote-Control" class="headerlink" title="Yi Action Camera Remote Control"></a>Yi Action Camera Remote Control</h4><p>Приехала вот эта штука:</p>
-<p><img src="/images/i/2015/08/2978f68cf5525a8e9ac9c94d3.JPG" alt=""></p>
-<p>Субъективно связь по Bluetooth работает быстрее чем мобильное приложение и Wi-Fi. Да и зарядку камера в таком режиме будет меньше тратить.<br>Пульт кстати дороже своих аналогов на Ali, но он и выполнен более качественно, а также обладает приятным дизайном. Резина используемая в корпусе такого же качества как у браслета Mi Band. Внешне пульт выглядит водонепроницаемым. Надо будет попробовать его окунуть =)</p>
+<p><img src="/images/i/2015/08/2978f68cf5525a8e9ac9c94d3.JPG"></p>
+<p>Субъективно связь по Bluetooth работает быстрее чем мобильное приложение и Wi-Fi. Да и зарядку камера в таком режиме будет меньше тратить.<br>Пульт кстати дороже своих аналогов на Ali, но он и выполнен более качественно, а также обладает приятным дизайном. Резина используемая в корпусе такого же качества как у браслета Mi Band. Внешне пульт выглядит водонепроницаемым. Надо будет попробовать его окунуть &#x3D;)</p>
 
   </div>
   
@@ -204,7 +205,7 @@ https://graph.facebook.com/811091835677399/feed
 
 <section id="comments">
   <div id="disqus_thread">
-  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
 
@@ -216,7 +217,7 @@ https://graph.facebook.com/811091835677399/feed
   </h4>
   <div class="copyright">
   <!--noindex-->
-    &copy; 2025 Rail<br>
+    &copy; 2026 Rail<br>
     Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
   <!--/noindex-->
   </div>

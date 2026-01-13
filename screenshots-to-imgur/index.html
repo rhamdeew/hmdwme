@@ -17,10 +17,10 @@
 <meta property="og:image" content="https://i.imgur.com/bJITpRa.png">
 <meta property="og:image" content="https://i.imgur.com/MpS95t7.png">
 <meta property="article:published_time" content="2015-07-14T21:33:58.000Z">
-<meta property="article:modified_time" content="2025-12-20T11:03:02.063Z">
+<meta property="article:modified_time" content="2026-01-13T17:33:45.233Z">
 <meta property="article:author" content="Rail">
-<meta property="article:tag" content="tech">
 <meta property="article:tag" content="linux">
+<meta property="article:tag" content="tech">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.imgur.com/bJITpRa.png">
 <meta name="twitter:creator" content="@rhamdeew">
@@ -99,7 +99,9 @@
   <div class="entry-content" itemprop="articleBody">
     
     <p>Итак, эта короткая заметка посвящена довольно частому для веб-разработчика действию отправки скриншота коллегам и его автоматизации. Все мы знаем что популярные облачные хранилища предоставляют свои клиенты которые в том числе умеют захватывать изображение с экрана и сохранять его в облако и существуют отдельные сервисы наподобие Joxi.<br>Все, можно закрывать страницу - проблема решена!</p>
-<h4 id="Хотя-нет-погодите-ка"><a href="#Хотя-нет-погодите-ка" class="headerlink" title="Хотя нет, погодите-ка"></a>Хотя нет, погодите-ка</h4><p>У вышеперечисленных способов есть собственные минусы:<br><a id="more"></a></p>
+<h4 id="Хотя-нет-погодите-ка"><a href="#Хотя-нет-погодите-ка" class="headerlink" title="Хотя нет, погодите-ка"></a>Хотя нет, погодите-ка</h4><p>У вышеперечисленных способов есть собственные минусы:</p>
+<span id="more"></span>
+
 <ul>
 <li>отсутствие клиента с скриншотилкой под Linux</li>
 <li>захламление своего облака огромной кучей временных скриншотов</li>
@@ -107,27 +109,17 @@
 </ul>
 <p><img src="//i.imgur.com/bJITpRa.png" alt="xfce4-screenshooter умеет вот так"></p>
 <p>Если у вас оконная среда XFCE 4.12, то встроенная утилита xfce4-screenshooter умеет заливать скриншот в imgur и отдавать прямую ссылку на файл с изображением. Думаю что подобным функционалом обладают и другие утилиты, но в этом удобном решении тоже есть минус. Я вот например не знаю в чей аккаунт заливаются эти изображения и можно ли их в случае чего удалить?</p>
-<p>Поэтому сейчас мы возьмем xfce4-screenshooter (или например scrot), bash, xsel и запилим собственную реализацию этой фичи.<br>Для начала идем на imgur.com и регистрируем там аккаунт, в <a href="http://imgur.com/account/settings" target="_blank" rel="noopener">настройках</a> выставляем приватность заливаемых изображений.</p>
+<p>Поэтому сейчас мы возьмем xfce4-screenshooter (или например scrot), bash, xsel и запилим собственную реализацию этой фичи.<br>Для начала идем на imgur.com и регистрируем там аккаунт, в <a href="http://imgur.com/account/settings">настройках</a> выставляем приватность заливаемых изображений.</p>
 <p><img src="//i.imgur.com/MpS95t7.png" alt="сеттингс"></p>
-<p>Затем в разделе <a href="//imgur.com/account/settings/apps" target="_blank" rel="noopener">Applications</a> создаем новое приложение. Нам отсюда нужен только Client-ID.</p>
+<p>Затем в разделе <a href="//imgur.com/account/settings/apps">Applications</a> создаем новое приложение. Нам отсюда нужен только Client-ID.</p>
 <p>Далее пилим bash-скрипт:</p>
-<pre><code class="bash"><span class="meta">#!/bin/bash</span>
-
-<span class="comment"># Ubuntu Keyboard settings shortcut:</span>
-<span class="comment">#  xfce4-screenshooter -r -o "sh ~/.bin/imgur.sh"</span>
-
-URL=<span class="string">"https://api.imgur.com/3/image.json"</span>
-
-RESPONSE=$(curl --header <span class="string">"Authorization: Client-ID your_client_id"</span> -s -F <span class="string">"image=@<span class="variable">$1</span>"</span> <span class="variable">$URL</span>)
-<span class="built_in">echo</span> <span class="string">"<span class="variable">$RESPONSE</span>"</span> | grep -o -E <span class="string">"http:.*\.(jpg|png)"</span> | sed -e <span class="string">'s/\\//g'</span> | xsel -i -b
-notify-send -i info <span class="string">"Screenshot uploaded"</span> <span class="string">"URL has been copied to clipboard"</span>
-</code></pre>
-<p>Я такие штуки обычно ложу в /home/rail/.bin/.</p>
-<p>Ну что же, теперь можно и попробовать =)</p>
-<p>Набираем в консоли:<br>xfce4-screenshooter -r -o “sh ~/.bin/imgur.sh”</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Ubuntu Keyboard settings shortcut:</span></span><br><span class="line"><span class="comment">#  xfce4-screenshooter -r -o &quot;sh ~/.bin/imgur.sh&quot;</span></span><br><span class="line"></span><br><span class="line">URL=<span class="string">&quot;https://api.imgur.com/3/image.json&quot;</span></span><br><span class="line"></span><br><span class="line">RESPONSE=$(curl --header <span class="string">&quot;Authorization: Client-ID your_client_id&quot;</span> -s -F <span class="string">&quot;image=@<span class="variable">$1</span>&quot;</span> <span class="variable">$URL</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$RESPONSE</span>&quot;</span> | grep -o -E <span class="string">&quot;http:.*\.(jpg|png)&quot;</span> | sed -e <span class="string">&#x27;s/\\//g&#x27;</span> | xsel -i -b</span><br><span class="line">notify-send -i info <span class="string">&quot;Screenshot uploaded&quot;</span> <span class="string">&quot;URL has been copied to clipboard&quot;</span></span><br></pre></td></tr></table></figure>
+<p>Я такие штуки обычно ложу в &#x2F;home&#x2F;rail&#x2F;.bin&#x2F;.</p>
+<p>Ну что же, теперь можно и попробовать &#x3D;)</p>
+<p>Набираем в консоли:<br>xfce4-screenshooter -r -o “sh ~&#x2F;.bin&#x2F;imgur.sh”</p>
 <p>Затем выбираем область для скриншота и видим уведомление о том то изображение успешно залилось и адрес картинки сохранился в буфере обмена.</p>
 <p>Ну все, теперь можно предыдущую команду сохранить в keyboards shortcuts. Я у себя это дело навесил на Ctrl+Shift+R.</p>
-<p>А как же тот маркетинговый буллшит про возможность удаления картинки спросите вы? Спокойно, все это есть =) Все это дело возвращается в переменной RESPONSE в bash-скрипте в виде json. Мне оттуда нужна была только прямая ссылка на изображение, потому я ее вырезал при помощи grep и sed. А параноики могут дополнительно сохранять данные оттуда в свой небольшой лог файл.</p>
+<p>А как же тот маркетинговый буллшит про возможность удаления картинки спросите вы? Спокойно, все это есть &#x3D;) Все это дело возвращается в переменной RESPONSE в bash-скрипте в виде json. Мне оттуда нужна была только прямая ссылка на изображение, потому я ее вырезал при помощи grep и sed. А параноики могут дополнительно сохранять данные оттуда в свой небольшой лог файл.</p>
 <p>Вот как то так)</p>
 
   </div>
@@ -178,7 +170,7 @@ notify-send -i info <span class="string">"Screenshot uploaded"</span> <span clas
 
 <section id="comments">
   <div id="disqus_thread">
-  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
 
@@ -190,7 +182,7 @@ notify-send -i info <span class="string">"Screenshot uploaded"</span> <span clas
   </h4>
   <div class="copyright">
   <!--noindex-->
-    &copy; 2025 Rail<br>
+    &copy; 2026 Rail<br>
     Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
   <!--/noindex-->
   </div>

@@ -15,13 +15,13 @@
 <meta property="og:description" content="Блог веб-разработчика">
 <meta property="og:locale" content="ru_RU">
 <meta property="article:published_time" content="2016-01-18T22:31:52.000Z">
-<meta property="article:modified_time" content="2025-12-20T11:03:02.058Z">
+<meta property="article:modified_time" content="2026-01-13T17:33:45.230Z">
 <meta property="article:author" content="Rail">
-<meta property="article:tag" content="tech">
-<meta property="article:tag" content="linux">
 <meta property="article:tag" content="bash">
-<meta property="article:tag" content="nginx">
 <meta property="article:tag" content="english">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="nginx">
+<meta property="article:tag" content="tech">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@rhamdeew">
   
@@ -99,46 +99,65 @@
   <div class="entry-content" itemprop="articleBody">
     
     <p>Hello!<br>Today I’ll show you how to make simple and convenient hosting for static websites based on DigitalOcean droplet.</p>
-<a id="more"></a>
+<span id="more"></span>
+
 <p>Begin:</p>
-<h3 id="Prepare"><a href="#Prepare" class="headerlink" title="Prepare"></a>Prepare</h3><p>1) We register <a href="https://www.digitalocean.com/?refcode=02102c6f64b8" target="_blank" rel="noopener">VPS on DigitalOcean</a>.<br>Choose image Ubuntu 14.04.3 and suiting your region.</p>
-<p>2) Adjust our VPS</p>
-<pre><code>ssh root@ip_addr (где ip_addr адрес нашей VPS)
-</code></pre><p>Create user for static sites:</p>
+<h3 id="Prepare"><a href="#Prepare" class="headerlink" title="Prepare"></a>Prepare</h3><ol>
+<li><p>We register <a href="https://www.digitalocean.com/?refcode=02102c6f64b8">VPS on DigitalOcean</a>.<br>Choose image Ubuntu 14.04.3 and suiting your region.</p>
+</li>
+<li><p>Adjust our VPS</p>
+<p> ssh root@ip_addr (где ip_addr адрес нашей VPS)</p>
+</li>
+</ol>
+<p>Create user for static sites:</p>
 <pre><code>useradd -m -d /home/static static
 usermod -s /bin/bash static
-</code></pre><p>Install additional software</p>
+</code></pre>
+<p>Install additional software</p>
 <pre><code>apt-get update
 apt-get install nginx git nano rsync
-</code></pre><p>Give permissions to user “static” for reload Nginx</p>
+</code></pre>
+<p>Give permissions to user “static” for reload Nginx</p>
 <pre><code>nano /etc/sudoers
-</code></pre><p>Add line to end:</p>
+</code></pre>
+<p>Add line to end:</p>
 <pre><code>static ALL=(ALL) NOPASSWD: /usr/sbin/service nginx reload
-</code></pre><p>Save file</p>
-<p>3) Secure server</p>
-<pre><code>nano /etc/ssh/sshd_config
-</code></pre><p>Change standard SSH-port</p>
+</code></pre>
+<p>Save file</p>
+<ol start="3">
+<li><p>Secure server</p>
+<p> nano &#x2F;etc&#x2F;ssh&#x2F;sshd_config</p>
+</li>
+</ol>
+<p>Change standard SSH-port</p>
 <pre><code>Port 20002
-</code></pre><p>Deny root login</p>
+</code></pre>
+<p>Deny root login</p>
 <pre><code>PermitRootLogin no
-</code></pre><p>Save file</p>
+</code></pre>
+<p>Save file</p>
 <p>Restart SSH daemon</p>
 <pre><code>service ssh restart
-</code></pre><p>Set password for user “static”</p>
+</code></pre>
+<p>Set password for user “static”</p>
 <pre><code>passwd static
-</code></pre><p><em>The password should not match the root password!</em></p>
+</code></pre>
+<p><em>The password should not match the root password!</em></p>
 <p>Edit default Nginx config</p>
 <pre><code>nano /etc/nginx/nginx.conf
-</code></pre><p>Uncomment</p>
+</code></pre>
+<p>Uncomment</p>
 <pre><code>server_tokens off;
 
 gzip types ...;
 
 gzip_comp_level 6;
-</code></pre><p>Delete</p>
+</code></pre>
+<p>Delete</p>
 <pre><code>include /etc/nginx/conf.d/*.conf;
 include /etc/nginx/sites-enabled/*;
-</code></pre><p>Add line to end</p>
+</code></pre>
+<p>Add line to end</p>
 <pre><code>include /home/static/nginx/*.conf;
 
 server {
@@ -154,41 +173,45 @@ server {
                 try_files $uri $uri/ =404;
         }
 }
-</code></pre><p>Save file</p>
+</code></pre>
+<p>Save file</p>
 <p>Delete default configuration files</p>
 <pre><code>rm -rf /etc/nginx/sites-available
 rm -rf /etc/nginx/sites-enabled
-</code></pre><p>Add shared config</p>
+</code></pre>
+<p>Add shared config</p>
 <pre><code>mkdir /etc/nginx/global
 
 nano /etc/nginx/global/drop.conf
-</code></pre><p>Insert</p>
-<pre><code># log access to drop file in /etc/nginx/ but don&apos;t log 404
+</code></pre>
+<p>Insert</p>
+<pre><code># log access to drop file in /etc/nginx/ but don&#39;t log 404
 location = /robots.txt {
         access_log drop;
         log_not_found off;
 }
 
-# log access to drop file in /etc/nginx/ but don&apos;t log 404
+# log access to drop file in /etc/nginx/ but don&#39;t log 404
 location = /favicon.ico {
         access_log drop;
         log_not_found off;
 }
 
-# log access to denied file in /etc/nginx/ but don&apos;t log 404 and also deny all to dot files
+# log access to denied file in /etc/nginx/ but don&#39;t log 404 and also deny all to dot files
 location ~ /\. {
         access_log denied;
         log_not_found off;
         deny all;
 }
 
-# log access to drop file in /etc/nginx/ but don&apos;t log 404 and also deny all to files starting with a dollar sign ($temp.config.php)
+# log access to drop file in /etc/nginx/ but don&#39;t log 404 and also deny all to files starting with a dollar sign ($temp.config.php)
 location ~ ~$ {
         access_log denied;
         log_not_found off;
         deny all;
 }
-</code></pre><p>Save file</p>
+</code></pre>
+<p>Save file</p>
 <p>Create directories need for user “static”</p>
 <pre><code>su static
 mkdir ~/nginx
@@ -196,142 +219,162 @@ mkdir ~/git
 mkdir ~/bin
 mkdir ~/www
 mkdir ~/.ssh
-</code></pre><p>Do not close the terminal</p>
-<p>4) Trying connection</p>
+</code></pre>
+<p>Do not close the terminal</p>
+<ol start="4">
+<li>Trying connection</li>
+</ol>
 <p><strong>On local machine</strong></p>
-<p>Generate ssh-keys. Example <a href="https://help.github.com/articles/generating-ssh-keys/" target="_blank" rel="noopener">here</a></p>
+<p>Generate ssh-keys. Example <a href="https://help.github.com/articles/generating-ssh-keys/">here</a></p>
 <pre><code>cat ~/.ssh/id_rsa.pub
-</code></pre><p><strong>On server</strong></p>
+</code></pre>
+<p><strong>On server</strong></p>
 <pre><code>nano ~/.ssh/authorized_keys
-</code></pre><p>And paste id_rsa.pub content here</p>
+</code></pre>
+<p>And paste id_rsa.pub content here</p>
 <p><strong>On local machine</strong></p>
 <p>Trying connection</p>
 <pre><code>ssh static@ip_addr -p20002
-</code></pre><p>If success add local ssh config</p>
+</code></pre>
+<p>If success add local ssh config</p>
 <pre><code>nano ~/.ssh/config
 
 Host static
 User static
 Port 20002
 Hostname 188.166.69.147
-</code></pre><p>Now add local part of script</p>
+</code></pre>
+<p>Now add local part of script</p>
 <pre><code>mkdir ~/.bin
 
 nano ~/.bin/static.sh
-</code></pre><p>Insert</p>
-<pre><code>#!/bin/bash
-echo &quot;Site domain (without www.)?&quot;
-read domain
+</code></pre>
+<p>Insert</p>
+<pre><code>	#!/bin/bash
+	echo &quot;Site domain (without www.)?&quot;
+	read domain
 
-echo &quot;Site data directory?&quot;
-read directory
+	echo &quot;Site data directory?&quot;
+	read directory
 
-ssh static -t &quot;~/bin/static.sh $domain $directory&quot;
+	ssh static -t &quot;~/bin/static.sh $domain $directory&quot;
 
 
-echo &quot;$directory/&quot; &gt;&gt; .gitignore
-git init
-git add -A
-git commit -m \&quot;first\&quot;
-git remote add origin static:~/git/$domain
+	echo &quot;$directory/&quot; &gt;&gt; .gitignore
+	git init
+	git add -A
+	git commit -m \&quot;first\&quot;
+	git remote add origin static:~/git/$domain
 
-echo &quot;
-#!/bin/bash
-git add -A &amp;&amp; git commit -m &apos;revision&apos; &amp;&amp; git push origin master
-rsync -avz $directory/ static:~/www/$domain
-&quot; &gt; deploy.sh
-chmod +x deploy.sh
-</code></pre><p>Save file and make it executable</p>
+	echo &quot;
+	#!/bin/bash
+	git add -A &amp;&amp; git commit -m &#39;revision&#39; &amp;&amp; git push origin master
+	rsync -avz $directory/ static:~/www/$domain
+	&quot; &gt; deploy.sh
+	chmod +x deploy.sh
+</code></pre>
+<p>Save file and make it executable</p>
 <pre><code>chmod +x ~/.bin/static.sh
-</code></pre><p>Edit our bashrc</p>
+</code></pre>
+<p>Edit our bashrc</p>
 <pre><code>nano ~/bashrc
-</code></pre><p>And add alias to end of file</p>
+</code></pre>
+<p>And add alias to end of file</p>
 <pre><code>alias static=&quot;~/.bin/static.sh&quot;
-</code></pre><p>Save file</p>
+</code></pre>
+<p>Save file</p>
 <p>Execute bash</p>
 <pre><code>bash -l
-</code></pre><p><strong>On server</strong><br>For user “static”:</p>
+</code></pre>
+<p><strong>On server</strong><br>For user “static”:</p>
 <pre><code>nano ~/bin/static.sh
-</code></pre><p>Insert</p>
-<pre><code>#!/bin/bash
-domain=$1
-directory=$2
+</code></pre>
+<p>Insert</p>
+<pre><code>	#!/bin/bash
+	domain=$1
+	directory=$2
 
-echo &quot;Configure git&quot;;
-echo &quot;---------------&quot;;
-mkdir ~/git/$domain
-cd ~/git/$domain
-git --bare init
+	echo &quot;Configure git&quot;;
+	echo &quot;---------------&quot;;
+	mkdir ~/git/$domain
+	cd ~/git/$domain
+	git --bare init
 
-mkdir ~/www/$domain
-cd ~/www/$domain
-echo &quot;---------------&quot;;
+	mkdir ~/www/$domain
+	cd ~/www/$domain
+	echo &quot;---------------&quot;;
 
-echo &quot;Configure Nginx&quot;;
-echo &quot;---------------&quot;;
+	echo &quot;Configure Nginx&quot;;
+	echo &quot;---------------&quot;;
 
-echo &quot;
-server {
-        listen 80;
-        listen [::]:80;
-        server_name www.$domain;
-        rewrite ^ \$scheme://$domain\$request_uri redirect;
-}
+	echo &quot;
+	server {
+	        listen 80;
+	        listen [::]:80;
+	        server_name www.$domain;
+	        rewrite ^ \$scheme://$domain\$request_uri redirect;
+	}
 
-server {
-    listen       80;
-    listen [::]:80;
-    server_name  $domain;
+	server {
+	    listen       80;
+	    listen [::]:80;
+	    server_name  $domain;
 
-    set \$root_path /home/static/www/$domain;
+	    set \$root_path /home/static/www/$domain;
 
-    include global/drop.conf;
-    location ~* ^.+\.(jpg|jpeg|gif|png|svg|js|css|mp3|ogg|mpe?g|avi|zip|gz|bz2?|rar|swf|woff|eot|ttf)$ {
-        root   \$root_path;
-        expires 30d;
-        access_log off;
-    }
+	    include global/drop.conf;
+	    location ~* ^.+\.(jpg|jpeg|gif|png|svg|js|css|mp3|ogg|mpe?g|avi|zip|gz|bz2?|rar|swf|woff|eot|ttf)$ {
+	        root   \$root_path;
+	        expires 30d;
+	        access_log off;
+	    }
 
-    location / {
-        root   \$root_path;
-        index  index.html;
-    }
+	    location / {
+	        root   \$root_path;
+	        index  index.html;
+	    }
 
-    error_page  404  /404.html;
-}
-&quot; &gt; ~/nginx/$domain.conf
-echo &quot;---------------&quot;;
+	    error_page  404  /404.html;
+	}
+	&quot; &gt; ~/nginx/$domain.conf
+	echo &quot;---------------&quot;;
 
 
-echo &quot;Reloading Nginx\&apos;s&quot;;
-echo &quot;---------------&quot;;
+	echo &quot;Reloading Nginx\&#39;s&quot;;
+	echo &quot;---------------&quot;;
 
-sudo service nginx reload
+	sudo service nginx reload
 
-echo &quot;---------------&quot;;
-</code></pre><p>Save and make executable</p>
+	echo &quot;---------------&quot;;
+</code></pre>
+<p>Save and make executable</p>
 <pre><code>chmod +x ~/bin/static.sh
-</code></pre><h3 id="Ready-to-deploy"><a href="#Ready-to-deploy" class="headerlink" title="Ready to deploy!"></a>Ready to deploy!</h3><p>Please install git and rsync locally!</p>
+</code></pre>
+<h3 id="Ready-to-deploy"><a href="#Ready-to-deploy" class="headerlink" title="Ready to deploy!"></a>Ready to deploy!</h3><p>Please install git and rsync locally!</p>
 <p>Now we make static-site with lovely static-generator.</p>
-<p>Here is example with <a href="http://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+<p>Here is example with <a href="http://hexo.io/">Hexo</a></p>
 <p>Make new site and generate</p>
 <pre><code>mkdir ~/site1.ru
 cd ~/site1.ru
 hexo init
 npm install
 hexo generate
-</code></pre><p>Now in ~/site1.ru isset “public” directory with content.</p>
+</code></pre>
+<p>Now in ~&#x2F;site1.ru isset “public” directory with content.</p>
 <p>Trying to add site on server</p>
 <pre><code>static
-</code></pre><p>Answer to questions… (site.ru, public)</p>
+</code></pre>
+<p>Answer to questions… (site.ru, public)</p>
 <p>Now we should see “deploy.sh”</p>
 <p>Execute:</p>
 <pre><code>./deploy.sh
-</code></pre><p>It’s all!  Now server configured to site1.ru</p>
-<p>For update site simply execute script ./deploy.sh</p>
+</code></pre>
+<p>It’s all!  Now server configured to site1.ru</p>
+<p>For update site simply execute script .&#x2F;deploy.sh</p>
 <p>Also on server exists git-repository with site code. Clone it later if you need:</p>
 <pre><code>git clone static:~/git/site1.ru
-</code></pre><h3 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h3><p>We make self hosting for static sites and get easy script to add new hosts to server.</p>
+</code></pre>
+<h3 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h3><p>We make self hosting for static sites and get easy script to add new hosts to server.</p>
 
   </div>
   
@@ -381,7 +424,7 @@ hexo generate
 
 <section id="comments">
   <div id="disqus_thread">
-  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
 
@@ -393,7 +436,7 @@ hexo generate
   </h4>
   <div class="copyright">
   <!--noindex-->
-    &copy; 2025 Rail<br>
+    &copy; 2026 Rail<br>
     Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
   <!--/noindex-->
   </div>

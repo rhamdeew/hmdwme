@@ -15,12 +15,12 @@
 <meta property="og:description" content="Блог веб-разработчика">
 <meta property="og:locale" content="ru_RU">
 <meta property="article:published_time" content="2015-09-07T23:01:21.000Z">
-<meta property="article:modified_time" content="2025-12-20T11:03:02.057Z">
+<meta property="article:modified_time" content="2026-01-13T17:33:45.229Z">
 <meta property="article:author" content="Rail">
+<meta property="article:tag" content="git">
 <meta property="article:tag" content="ithink">
 <meta property="article:tag" content="marathon">
 <meta property="article:tag" content="tech">
-<meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@rhamdeew">
   
@@ -98,8 +98,9 @@
   <div class="entry-content" itemprop="articleBody">
     
     <p>Всем привет! Сегодня кратко опишу вам вредный совет по неправильному использованию git.<br>Итак, предположим у вас есть какой-то проект который по некоторым причинам нельзя развернуть на локальной машине, но очень хочется кодить локально в любимом редакторе.</p>
-<a id="more"></a>
-<p>Предположим даже что у вас какой-нибудь Битрикс который предполагает что вы будете разрабатывать сайт в его относительно медленной панели управления. В таком случае сразу скажу про вторую полезную фичу - все свои шаблоны пихайте в /local. Таким образом файловая система будет чистой, а почти все ваши наработки будут лежать в одном месте.<br>Итак, теперь мы берем вот <a href="http://mrdeveloper.ru/post-36/git-deploy-hooks" target="_blank" rel="noopener">этот мануал</a> и настраиваем деплой нашего приложения.<br>Потом переключаемся на новую ветку под названием hardcoding. В нее мы будем сильно мусорить =) Не забудьте в хуке тоже выставить checkout hardcoding!</p>
+<span id="more"></span>
+
+<p>Предположим даже что у вас какой-нибудь Битрикс который предполагает что вы будете разрабатывать сайт в его относительно медленной панели управления. В таком случае сразу скажу про вторую полезную фичу - все свои шаблоны пихайте в &#x2F;local. Таким образом файловая система будет чистой, а почти все ваши наработки будут лежать в одном месте.<br>Итак, теперь мы берем вот <a href="http://mrdeveloper.ru/post-36/git-deploy-hooks">этот мануал</a> и настраиваем деплой нашего приложения.<br>Потом переключаемся на новую ветку под названием hardcoding. В нее мы будем сильно мусорить &#x3D;) Не забудьте в хуке тоже выставить checkout hardcoding!</p>
 <p>Теперь открываем локальный терминал и переходим в директорию с проектом. Туда кладем bash-скрипт</p>
 <pre>
 #!/bin/bash
@@ -116,7 +117,7 @@ watch -n 1 ./hard.sh
 
 <p>Теперь наш скрипт будет запускаться каждую секунду и в случае обнаружения изменений будет их автоматически коммитить на сервер. Также по выполнении скрипта вам будет показываться уведомление о том что сайт обновился.</p>
 <p>Итак мы убиваем сразу двух зайцев - храним код в VCS, хоть и с мусорными коммитами, и имеем автоматическую синхронизацию с сервером!</p>
-<p>По окончании хардкодинга ветку рекомендуется слить в master и прибить =)</p>
+<p>По окончании хардкодинга ветку рекомендуется слить в master и прибить &#x3D;)</p>
 
   </div>
   
@@ -166,7 +167,7 @@ watch -n 1 ./hard.sh
 
 <section id="comments">
   <div id="disqus_thread">
-  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
 
@@ -178,7 +179,7 @@ watch -n 1 ./hard.sh
   </h4>
   <div class="copyright">
   <!--noindex-->
-    &copy; 2025 Rail<br>
+    &copy; 2026 Rail<br>
     Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
   <!--/noindex-->
   </div>

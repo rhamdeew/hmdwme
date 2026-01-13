@@ -10,19 +10,19 @@
   <meta name="description" content="Блог веб-разработчика">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Netbeans in Docker">
-<meta property="og:url" content="https://hmdw.me/netbeans-in-docker/">
+<meta property="og:url" content="https://hmdw.me/netbeans-in-docker">
 <meta property="og:site_name" content="HMDW&#x2F;me">
 <meta property="og:description" content="Блог веб-разработчика">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:image" content="https://hmdw.me/images/i/2015/02/2385e37485098b0b7063377a8.png">
 <meta property="og:image" content="https://hmdw.me/images/i/2015/02/986d3b7f8ce9e6f0751a582e2.png">
 <meta property="article:published_time" content="2015-02-27T02:54:18.000Z">
-<meta property="article:modified_time" content="2025-12-20T11:03:02.060Z">
+<meta property="article:modified_time" content="2026-01-13T17:33:45.231Z">
 <meta property="article:author" content="Rail">
-<meta property="article:tag" content="tech">
-<meta property="article:tag" content="linux">
 <meta property="article:tag" content="docker">
+<meta property="article:tag" content="linux">
 <meta property="article:tag" content="netbeans">
+<meta property="article:tag" content="tech">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://hmdw.me/images/i/2015/02/2385e37485098b0b7063377a8.png">
 <meta name="twitter:creator" content="@rhamdeew">
@@ -92,7 +92,7 @@
   </header>
   <footer class="entry-meta-header">
     <span class="meta-elements date">
-      <a href="/netbeans-in-docker/" class="article-date">
+      <a href="//netbeans-in-docker" class="article-date">
   <time datetime="2015-02-27T02:54:18.000Z" itemprop="datePublished">февр. 27 2015</time>
 </a>
     </span>
@@ -100,31 +100,41 @@
   
   <div class="entry-content" itemprop="articleBody">
     
-    <p>Не так давно я <a href="http://status.hamdeew.ru/post/109413572259/phpstorm-docker" target="_blank" rel="noopener">писал</a> что успешно запустил PhpStorm в Docker. Сделано это было по одной простой причине - убогие шрифты в Java-приложениях. Из 3 известных Java-IDE хорошо шрифты отображаются только в Eclipse. Но лично мне он понравился меньше предыдущих двух вариантов (Intellij и Netbeans).<br>Решается проблема со шрифтами установкой патченой OpenJDK под названием TuxJDK. В Debian все работает сразу же после установки, а в Fedora 21 запущенные в ней приложения вообще теряют большую часть текста. Поэтому собственно я и принял решение поднять в Docker-контейнере свежий Debian 7 вместе с TuxJDK, и запускать приложения с хорошими, годными шрифтами.</p>
-<a id="more"></a>
+    <p>Не так давно я <a href="http://status.hamdeew.ru/post/109413572259/phpstorm-docker">писал</a> что успешно запустил PhpStorm в Docker. Сделано это было по одной простой причине - убогие шрифты в Java-приложениях. Из 3 известных Java-IDE хорошо шрифты отображаются только в Eclipse. Но лично мне он понравился меньше предыдущих двух вариантов (Intellij и Netbeans).<br>Решается проблема со шрифтами установкой патченой OpenJDK под названием TuxJDK. В Debian все работает сразу же после установки, а в Fedora 21 запущенные в ней приложения вообще теряют большую часть текста. Поэтому собственно я и принял решение поднять в Docker-контейнере свежий Debian 7 вместе с TuxJDK, и запускать приложения с хорошими, годными шрифтами.</p>
+<span id="more"></span>
+
 <blockquote>
 <p>Из 3 известных Java-IDE хорошо шрифты отображаются только в Eclipse.</p>
 </blockquote>
-<p>Краткое описание того как прокидывать иксы в Docker я делал вот <a href="http://mrdeveloper.ru/post-43/how-to-launch-gui-app-in-docker" target="_blank" rel="noopener">здесь</a> на примере MySQL Workbench.</p>
+<p>Краткое описание того как прокидывать иксы в Docker я делал вот <a href="http://mrdeveloper.ru/post-43/how-to-launch-gui-app-in-docker">здесь</a> на примере MySQL Workbench.</p>
 <p>Краткий список действий:</p>
-<figure class="highlight plain"><figcaption><span>[host]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker pull debian:latest</span><br><span class="line">XSOCK&#x3D;&#x2F;tmp&#x2F;.X11-unix&#x2F;X0</span><br><span class="line">docker run --privileged -v $XSOCK:$XSOCK -v &#x2F;your_folder:&#x2F;root -it debian:latest &#x2F;bin&#x2F;bash</span><br></pre></td></tr></table></figure>
-<p>Затем устанавливаем tuxJDK и скачиваем установочный скрипт (netbeans-8.0.2-php-linux.sh). Предположим что скрипт вы скачали с хостовой машины и положили в your_folder которая прокинута в наш контейнер как /root</p>
-<figure class="highlight plain"><figcaption><span>[container]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;root</span><br><span class="line">.&#x2F;netbeans-8.0.2-php-linux.sh</span><br></pre></td></tr></table></figure>
-<p>Тут вы внезапно увидите графический инсталятор =)<br>После установки не помешает вынести дистрибутив Netbeans из контейнера наружу.<br>Я сделал это вот так:</p>
-<figure class="highlight plain"><figcaption><span>[container]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv &#x2F;usr&#x2F;lib&#x2F;netbeans &#x2F;root&#x2F;</span><br><span class="line">ln -s &#x2F;root&#x2F;netbeans &#x2F;usr&#x2F;lib&#x2F;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><figcaption><span>[host]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker pull debian:latest</span><br><span class="line">XSOCK=/tmp/.X11-unix/X0</span><br><span class="line">docker run --privileged -v $XSOCK:$XSOCK -v /your_folder:/root -it debian:latest /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>Затем устанавливаем tuxJDK и скачиваем установочный скрипт (netbeans-8.0.2-php-linux.sh). Предположим что скрипт вы скачали с хостовой машины и положили в your_folder которая прокинута в наш контейнер как &#x2F;root</p>
+<figure class="highlight plaintext"><figcaption><span>[container]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /root</span><br><span class="line">./netbeans-8.0.2-php-linux.sh</span><br></pre></td></tr></table></figure>
+
+<p>Тут вы внезапно увидите графический инсталятор &#x3D;)<br>После установки не помешает вынести дистрибутив Netbeans из контейнера наружу.<br>Я сделал это вот так:</p>
+<figure class="highlight plaintext"><figcaption><span>[container]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv /usr/lib/netbeans /root/</span><br><span class="line">ln -s /root/netbeans /usr/lib/</span><br></pre></td></tr></table></figure>
+
 <p>Еще один момент, надо создать скрипт для запуска нашего приложения</p>
-<figure class="highlight plain"><figcaption><span>[container]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;opt&#x2F;p.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><figcaption><span>[container]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /opt/p.sh</span><br></pre></td></tr></table></figure>
+
 <p>Вот его содержимое:</p>
-<figure class="highlight plain"><figcaption><span>[container]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;bash</span><br><span class="line">&#x2F;usr&#x2F;lib&#x2F;netbeans&#x2F;bin&#x2F;netbeans</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><figcaption><span>[container]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">/usr/lib/netbeans/bin/netbeans</span><br></pre></td></tr></table></figure>
+
 <p>Теперь нужно закоммитить содержимое нашего контейнера. Для этого открываем еще одну вкладку терминала на хосте.</p>
-<figure class="highlight plain"><figcaption><span>[host]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br><span class="line">docker commit your_hash netbeans</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><figcaption><span>[host]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br><span class="line">docker commit your_hash netbeans</span><br></pre></td></tr></table></figure>
+
 <p>Останавливаем наш контейнер и запиливаем Dockerfile вот с таким содержимым</p>
-<figure class="highlight plain"><figcaption><span>[host]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM netbeans</span><br><span class="line">ENV DISPLAY :0</span><br><span class="line">CMD &#x2F;opt&#x2F;p.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><figcaption><span>[host]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FROM netbeans</span><br><span class="line">ENV DISPLAY :0</span><br><span class="line">CMD /opt/p.sh</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>Собираем наш контейнер</p>
-<figure class="highlight plain"><figcaption><span>[host]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t netbeans - &lt; Dockerfile</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><figcaption><span>[host]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t netbeans - &lt; Dockerfile</span><br></pre></td></tr></table></figure>
+
 <p>Теперь остался последний штрих - скрипт для запуска нашего Netbeans</p>
-<figure class="highlight plain"><figcaption><span>[host netbeans.sh]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;bash</span><br><span class="line">XSOCK&#x3D;&#x2F;tmp&#x2F;.X11-unix&#x2F;X0</span><br><span class="line">docker run --privileged -v $XSOCK:$XSOCK -v &#x2F;your_folder:&#x2F;root -v &#x2F;your_projects_folder&#x2F;:&#x2F;work netbeans</span><br></pre></td></tr></table></figure>
-<p>Ну вот собственно и все! Теперь нашу IDE можно запустить просто набрав ./netbeans.sh</p>
+<figure class="highlight plaintext"><figcaption><span>[host netbeans.sh]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">XSOCK=/tmp/.X11-unix/X0</span><br><span class="line">docker run --privileged -v $XSOCK:$XSOCK -v /your_folder:/root -v /your_projects_folder/:/work netbeans</span><br></pre></td></tr></table></figure>
+
+<p>Ну вот собственно и все! Теперь нашу IDE можно запустить просто набрав .&#x2F;netbeans.sh</p>
 <p>Лично я добавил у себя в редакторе меню новый пункт Netbeans, прикрутил туда красивую иконку и прописал путь до нашего netbeans.sh</p>
 <p>Получилось как то так:<br><img src="/images/i/2015/02/2385e37485098b0b7063377a8.png" alt="Меню Netbeans"><br><img src="/images/i/2015/02/986d3b7f8ce9e6f0751a582e2.png" alt="Запущенный Netbeans"></p>
 
@@ -147,7 +157,7 @@
   
 <nav id="article-nav">
   
-    <a href="/tatarradio73/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="//tatarradio73" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -157,7 +167,7 @@
     </a>
   
   
-    <a href="/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="//hello-world" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">
         
@@ -176,7 +186,7 @@
 
 <section id="comments">
   <div id="disqus_thread">
-  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
 
@@ -188,7 +198,7 @@
   </h4>
   <div class="copyright">
   <!--noindex-->
-    &copy; 2025 Rail<br>
+    &copy; 2026 Rail<br>
     Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
   <!--/noindex-->
   </div>
@@ -226,7 +236,7 @@
 <script>
   var disqus_shortname = 'hmdw';
   
-  var disqus_url = 'https://hmdw.me/netbeans-in-docker/';
+  var disqus_url = 'https://hmdw.me/netbeans-in-docker';
   
   (function(){
     var dsq = document.createElement('script');

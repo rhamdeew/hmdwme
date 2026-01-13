@@ -18,10 +18,11 @@
 <meta property="og:locale" content="ru_RU">
 <meta property="og:image" content="https://hmdw.me/images/ulsk_forest.jpg">
 <meta property="article:published_time" content="2019-03-04T03:12:21.000Z">
-<meta property="article:modified_time" content="2025-12-20T11:03:02.060Z">
+<meta property="article:modified_time" content="2026-01-13T17:33:45.231Z">
 <meta property="article:author" content="Rail">
-<meta property="article:tag" content="OpenVPN">
-<meta property="article:tag" content=" Docker">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="openvpn">
+<meta property="article:tag" content="tech">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://hmdw.me/images/ulsk_forest.jpg">
 <meta name="twitter:creator" content="@rhamdeew">
@@ -101,41 +102,48 @@
     
     <p><img src="/images/ulsk_forest.jpg" alt="Ulsk forest"></p>
 <p>Всем привет!<br>Два с половиной года назад я писал пост о том <a href="/openvpn-docker/">как быстро поднять OpenVPN</a> на своем сервере при помощи Docker. Это было сильно быстрее чем устанавливать и конфигурировать OpenVPN вручную, но есть вариант настроить все еще быстрее при помощи Docker-compose.</p>
-<a id="more"></a>
+<span id="more"></span>
+
 <p><strong>Предполагается что вы установили Docker и Docker-compose.</strong></p>
 <p>Создаем директорию docker-compose-openvpn и создаем внутри нее файл docker-compose.yml с вот таким содержанием:</p>
 <p><strong>docker-compose.yml</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">version: &#39;2&#39;</span><br><span class="line">services:</span><br><span class="line">  openvpn:</span><br><span class="line">    cap_add:</span><br><span class="line">     - NET_ADMIN</span><br><span class="line">    image: kylemanna&#x2F;openvpn</span><br><span class="line">    container_name: openvpn</span><br><span class="line">    ports:</span><br><span class="line">     - &quot;1194:1194&#x2F;udp&quot;</span><br><span class="line">    restart: always</span><br><span class="line">    volumes:</span><br><span class="line">     - .&#x2F;openvpn-data&#x2F;conf:&#x2F;etc&#x2F;openvpn</span><br></pre></td></tr></table></figure>
-<p>Это копипаст из доки автора решения - <a href="https://github.com/kylemanna/docker-openvpn/blob/master/docs/docker-compose.md" target="_blank" rel="noopener">https://github.com/kylemanna/docker-openvpn/blob/master/docs/docker-compose.md</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;2&#x27;</span><br><span class="line">services:</span><br><span class="line">  openvpn:</span><br><span class="line">    cap_add:</span><br><span class="line">     - NET_ADMIN</span><br><span class="line">    image: kylemanna/openvpn</span><br><span class="line">    container_name: openvpn</span><br><span class="line">    ports:</span><br><span class="line">     - &quot;1194:1194/udp&quot;</span><br><span class="line">    restart: always</span><br><span class="line">    volumes:</span><br><span class="line">     - ./openvpn-data/conf:/etc/openvpn</span><br></pre></td></tr></table></figure>
+
+<p>Это копипаст из доки автора решения - <a href="https://github.com/kylemanna/docker-openvpn/blob/master/docs/docker-compose.md">https://github.com/kylemanna/docker-openvpn/blob/master/docs/docker-compose.md</a></p>
 <p>Затем инициализируем конфигурацию</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose run --rm openvpn ovpn_genconfig -u udp:&#x2F;&#x2F;VPN.SERVERNAME.COM</span><br><span class="line">docker-compose run --rm openvpn ovpn_initpki</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose run --rm openvpn ovpn_genconfig -u udp://VPN.SERVERNAME.COM</span><br><span class="line">docker-compose run --rm openvpn ovpn_initpki</span><br></pre></td></tr></table></figure>
+
 <p>Тут вместо VPN.SERVERNAME.COM можете просто указать IP своего сервера.</p>
 <p>В процессе генерации конфига OpenVPN попросит задать пароль. Задаем его и сохраняем. Он понадобится для управления пользователями.</p>
 <p>Затем необходимо создать новых пользователей VPN и сгенерировать им клиентские конфиги.</p>
 <p>Тут я для удобства запилил 2 bash-скрипта. Конфиги создаю менее секьюрные, без запроса пароля. За это отвечает параметр nopass.</p>
 <p><strong>new.sh</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;bash</span><br><span class="line">docker-compose run --rm openvpn easyrsa build-client-full $1 nopass</span><br><span class="line">docker-compose run --rm openvpn ovpn_getclient $1 &gt; $1.ovpn</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">docker-compose run --rm openvpn easyrsa build-client-full $1 nopass</span><br><span class="line">docker-compose run --rm openvpn ovpn_getclient $1 &gt; $1.ovpn</span><br></pre></td></tr></table></figure>
+
 <p><strong>remove.sh</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;bash</span><br><span class="line">docker-compose run --rm openvpn ovpn_revokeclient $1 remove</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">docker-compose run --rm openvpn ovpn_revokeclient $1 remove</span><br></pre></td></tr></table></figure>
+
 <p>Не забудьте сделать chmod +x new.sh &amp;&amp; chmod +x remove.sh</p>
 <p>Затем создаем первого пользователя с именем test.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;new.sh test</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./new.sh test</span><br></pre></td></tr></table></figure>
+
 <p>Здесь нам пригодится ранее заданный пароль на управление сертификатами. В итоге в директории появится конфиг test.ovpn который теперь необходимо скачать с сервера и импортировать в свой VPN-клиент.</p>
 <p>Стартуем VPN</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
 <p>Вот собственно и все!</p>
 <hr>
 <p><strong>UPD: Скомпоновал все это в отдельный репозиторий и добавил удобный мейкфайл</strong></p>
 <p>Теперь для того чтобы развернуть OpenVPN достаточно на сервере выполнить:</p>
 <ol>
-<li>git clone <a href="https://github.com/rhamdeew/docker-compose-openvpn.git" target="_blank" rel="noopener">https://github.com/rhamdeew/docker-compose-openvpn.git</a></li>
-<li>cd docker-compose-openvpn/</li>
-<li>make genconfig host=vpn.example.com</li>
+<li>git clone <a href="https://github.com/rhamdeew/docker-compose-openvpn.git">https://github.com/rhamdeew/docker-compose-openvpn.git</a></li>
+<li>cd docker-compose-openvpn&#x2F;</li>
+<li>make genconfig host&#x3D;vpn.example.com</li>
 <li>make initpki</li>
-<li>make new username=example</li>
+<li>make new username&#x3D;example</li>
 <li>make up</li>
 </ol>
-<p>Копируем example.ovpn из client_configs/example.ovpn к себе в OpenVPN-клиент и пользуемся)</p>
+<p>Копируем example.ovpn из client_configs&#x2F;example.ovpn к себе в OpenVPN-клиент и пользуемся)</p>
 
   </div>
   
@@ -185,7 +193,7 @@
 
 <section id="comments">
   <div id="disqus_thread">
-  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
 
@@ -197,7 +205,7 @@
   </h4>
   <div class="copyright">
   <!--noindex-->
-    &copy; 2025 Rail<br>
+    &copy; 2026 Rail<br>
     Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
   <!--/noindex-->
   </div>

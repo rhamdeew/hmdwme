@@ -24,11 +24,12 @@
 <meta property="og:image" content="https://hmdw.me/images/2018-02-09_01-30-43.png">
 <meta property="og:image" content="https://hmdw.me/images/2018-02-09_01-31-11.png">
 <meta property="article:published_time" content="2018-02-09T00:26:35.000Z">
-<meta property="article:modified_time" content="2025-12-20T11:03:02.055Z">
+<meta property="article:modified_time" content="2026-01-13T17:33:45.227Z">
 <meta property="article:author" content="Rail">
-<meta property="article:tag" content="1С">
-<meta property="article:tag" content=" SSL">
-<meta property="article:tag" content=" Let&#39;s Encrypt">
+<meta property="article:tag" content="1C">
+<meta property="article:tag" content="Let&#39;s Encrypt">
+<meta property="article:tag" content="tech">
+<meta property="article:tag" content="windows">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://hmdw.me/images/1c_ssl.png">
 <meta name="twitter:creator" content="@rhamdeew">
@@ -107,35 +108,42 @@
   <div class="entry-content" itemprop="articleBody">
     
     <p>Иногда в 1С может случиться вот такая проблема:</p>
-<p><img src="/images/1c_ssl.png" alt=""></p>
+<p><img src="/images/1c_ssl.png"></p>
 <p>Во время настройки профиля обмена 1С радует вот такой надписью. Тут совсем непонятно что конкретно не нравится 1Ске из-за очень информативной информации об ошибке с кучкой “или”. Но вполне возможно что проблема именно в SSL-сертификате.</p>
 <p>Итак, сейчас мы добавим поддержку используемого вами серта в 1С на примере SSL от Let’s Encrypt.</p>
-<a id="more"></a>
+<span id="more"></span>
+
 <h2 id="Генерация-файла-с-сертификатами"><a href="#Генерация-файла-с-сертификатами" class="headerlink" title="Генерация файла с сертификатами"></a>Генерация файла с сертификатами</h2><p>Для начала откроем сайт в Firefox и экспортнем сертификаты.</p>
-<h5 id="Шаг-1"><a href="#Шаг-1" class="headerlink" title="Шаг 1"></a>Шаг 1</h5><p><img src="/images/2018-02-09_00-59-44.png" alt=""></p>
-<h5 id="Шаг-2"><a href="#Шаг-2" class="headerlink" title="Шаг 2"></a>Шаг 2</h5><p><img src="/images/2018-02-09_01-00-24.png" alt=""></p>
+<h5 id="Шаг-1"><a href="#Шаг-1" class="headerlink" title="Шаг 1"></a>Шаг 1</h5><p><img src="/images/2018-02-09_00-59-44.png"></p>
+<h5 id="Шаг-2"><a href="#Шаг-2" class="headerlink" title="Шаг 2"></a>Шаг 2</h5><p><img src="/images/2018-02-09_01-00-24.png"></p>
 <p>Просматриваем сертификаты</p>
-<h5 id="Шаг-3"><a href="#Шаг-3" class="headerlink" title="Шаг 3"></a>Шаг 3</h5><p><img src="/images/2018-02-09_01-00-53.png" alt=""></p>
+<h5 id="Шаг-3"><a href="#Шаг-3" class="headerlink" title="Шаг 3"></a>Шаг 3</h5><p><img src="/images/2018-02-09_01-00-53.png"></p>
 <p>Видим здесь 3 сертификата - корневой, промежуточный и непосредственно серт от самого сайта.</p>
-<h5 id="Шаг-4"><a href="#Шаг-4" class="headerlink" title="Шаг 4"></a>Шаг 4</h5><p><img src="/images/2018-02-09_01-02-05.png" alt=""></p>
+<h5 id="Шаг-4"><a href="#Шаг-4" class="headerlink" title="Шаг 4"></a>Шаг 4</h5><p><img src="/images/2018-02-09_01-02-05.png"></p>
 <p>Экспортируем их все по отдельности.</p>
 <h5 id="Шаг-5"><a href="#Шаг-5" class="headerlink" title="Шаг 5"></a>Шаг 5</h5><p>Теперь берем консольную утилиту OpenSSL и преобразовываем формат сертификатов:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -in DSTRootCAX3.crt  -text -outform PEM -out DSTRootCAX3.pem</span><br><span class="line">openssl x509 -in Let\&#39;sEncryptAuthorityX3.crt  -text -outform PEM -out Let\&#39;sEncryptAuthorityX3.pem</span><br><span class="line">openssl x509 -in site.crt  -text -outform PEM -out site.pem</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -in DSTRootCAX3.crt  -text -outform PEM -out DSTRootCAX3.pem</span><br><span class="line">openssl x509 -in Let\&#x27;sEncryptAuthorityX3.crt  -text -outform PEM -out Let\&#x27;sEncryptAuthorityX3.pem</span><br><span class="line">openssl x509 -in site.crt  -text -outform PEM -out site.pem</span><br></pre></td></tr></table></figure>
+
 <p>Получаем md5-хэши сертификатов:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -in DSTRootCAX3.pem -noout -fingerprint -md5 &gt; DSTRootCAX3.md5</span><br><span class="line">openssl x509 -in Let\&#39;sEncryptAuthorityX3.pem -noout -fingerprint -md5 &gt; Let\&#39;sEncryptAuthorityX3.md5</span><br><span class="line">openssl x509 -in site.pem -noout -fingerprint -md5 &gt; site.md5</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -in DSTRootCAX3.pem -noout -fingerprint -md5 &gt; DSTRootCAX3.md5</span><br><span class="line">openssl x509 -in Let\&#x27;sEncryptAuthorityX3.pem -noout -fingerprint -md5 &gt; Let\&#x27;sEncryptAuthorityX3.md5</span><br><span class="line">openssl x509 -in site.pem -noout -fingerprint -md5 &gt; site.md5</span><br></pre></td></tr></table></figure>
+
 <p>Генерим заголовки</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;\nDSTRootCAX3\n&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot; &gt; DSTRootCAX3.header</span><br><span class="line">echo -e &quot;\nLet\&#39;sEncryptAuthorityX3\n&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot; &gt; Let\&#39;sEncryptAuthorityX3.header</span><br><span class="line">echo -e &quot;\nsite\n&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot; &gt; site.header</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;\nDSTRootCAX3\n======================&quot; &gt; DSTRootCAX3.header</span><br><span class="line">echo -e &quot;\nLet\&#x27;sEncryptAuthorityX3\n======================&quot; &gt; Let\&#x27;sEncryptAuthorityX3.header</span><br><span class="line">echo -e &quot;\nsite\n======================&quot; &gt; site.header</span><br></pre></td></tr></table></figure>
+
 <p>Теперь сливаем все в один файл</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat DSTRootCAX3.header DSTRootCAX3.md5 DSTRootCAX3.pem Let\&#39;sEncryptAuthorityX3.header Let\&#39;sEncryptAuthorityX3.md5 Let\&#39;sEncryptAuthorityX3.pem site.header site.md5 site.pem &gt; certificate</span><br></pre></td></tr></table></figure>
-<p>В итоге получаем файл такого вида:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">DSTRootCAX3</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">MD5 Fingerprint&#x3D;41:03:52:DC:0F:F7:50:1B:16:F0:02:8E:BA:6F:45:C5</span><br><span class="line">Certificate:</span><br><span class="line">    Data:</span><br><span class="line">        Version: 3 (0x2)</span><br><span class="line">        Serial Number:</span><br><span class="line">            44:af:b0:80:d6:a3:27:ba:89:30:39:86:2e:f8:40:6b</span><br><span class="line">        Signature Algorithm: sha1WithRSAEncryption</span><br><span class="line">        Issuer: O&#x3D;Digital Signature Trust Co., CN&#x3D;DST Root CA X3</span><br><span class="line">        Validity</span><br><span class="line">            Not Before: Sep 30 21:12:19 2000 GMT</span><br><span class="line">            Not After : Sep 30 14:01:15 2021 GMT</span><br><span class="line">        Subject: O&#x3D;Digital Signature Trust Co., CN&#x3D;DST Root CA X3</span><br><span class="line">        Subject Public Key Info:</span><br><span class="line">            Public Key Algorithm: rsaEncryption</span><br><span class="line">            RSA Public Key: (2048 bit)</span><br><span class="line">                Modulus (2048 bit):</span><br><span class="line">                    00:df:af:e9:97:50:08:83:57:b4:cc:62:65:f6:90:</span><br><span class="line">                    82:ec:c7:d3:2c:6b:30:ca:5b:ec:d9:c3:7d:c7:40:</span><br><span class="line">                    c1:18:14:8b:e0:e8:33:76:49:2a:e3:3f:21:49:93:</span><br><span class="line">                    ac:4e:0e:af:3e:48:cb:65:ee:fc:d3:21:0f:65:d2:</span><br><span class="line">                    2a:d9:32:8f:8c:e5:f7:77:b0:12:7b:b5:95:c0:89:</span><br><span class="line">                    ...</span><br></pre></td></tr></table></figure></p>
-<p>Получается довольно простой формат - название, разделитель в виде символов =====, md5-хэш и далее содержимое pem-сертификата. И так все три серта подряд.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat DSTRootCAX3.header DSTRootCAX3.md5 DSTRootCAX3.pem Let\&#x27;sEncryptAuthorityX3.header Let\&#x27;sEncryptAuthorityX3.md5 Let\&#x27;sEncryptAuthorityX3.pem site.header site.md5 site.pem &gt; certificate</span><br></pre></td></tr></table></figure>
+
+<p>В итоге получаем файл такого вида:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">DSTRootCAX3</span><br><span class="line">===================</span><br><span class="line">MD5 Fingerprint=41:03:52:DC:0F:F7:50:1B:16:F0:02:8E:BA:6F:45:C5</span><br><span class="line">Certificate:</span><br><span class="line">    Data:</span><br><span class="line">        Version: 3 (0x2)</span><br><span class="line">        Serial Number:</span><br><span class="line">            44:af:b0:80:d6:a3:27:ba:89:30:39:86:2e:f8:40:6b</span><br><span class="line">        Signature Algorithm: sha1WithRSAEncryption</span><br><span class="line">        Issuer: O=Digital Signature Trust Co., CN=DST Root CA X3</span><br><span class="line">        Validity</span><br><span class="line">            Not Before: Sep 30 21:12:19 2000 GMT</span><br><span class="line">            Not After : Sep 30 14:01:15 2021 GMT</span><br><span class="line">        Subject: O=Digital Signature Trust Co., CN=DST Root CA X3</span><br><span class="line">        Subject Public Key Info:</span><br><span class="line">            Public Key Algorithm: rsaEncryption</span><br><span class="line">            RSA Public Key: (2048 bit)</span><br><span class="line">                Modulus (2048 bit):</span><br><span class="line">                    00:df:af:e9:97:50:08:83:57:b4:cc:62:65:f6:90:</span><br><span class="line">                    82:ec:c7:d3:2c:6b:30:ca:5b:ec:d9:c3:7d:c7:40:</span><br><span class="line">                    c1:18:14:8b:e0:e8:33:76:49:2a:e3:3f:21:49:93:</span><br><span class="line">                    ac:4e:0e:af:3e:48:cb:65:ee:fc:d3:21:0f:65:d2:</span><br><span class="line">                    2a:d9:32:8f:8c:e5:f7:77:b0:12:7b:b5:95:c0:89:</span><br><span class="line">                    ...</span><br></pre></td></tr></table></figure>
+
+<p>Получается довольно простой формат - название, разделитель в виде символов &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;, md5-хэш и далее содержимое pem-сертификата. И так все три серта подряд.</p>
 <h2 id="Интеграция-сертов-в-1С"><a href="#Интеграция-сертов-в-1С" class="headerlink" title="Интеграция сертов в 1С"></a>Интеграция сертов в 1С</h2><p>Теперь ищем в установленной 1С файл cacert.pem<br>Путь может быть примерно такой - C:\Program Files\1cv8\8.3.10.2580\bin\cacert.pem</p>
-<p><img src="/images/2018-02-09_01-30-43.png" alt=""></p>
+<p><img src="/images/2018-02-09_01-30-43.png"></p>
 <p>Открываем файл и дописываем в него содержимое нашего сгенерированного файла certificate.<br>1С кстати можно не перезагружать. Пробуем подключение.</p>
-<p><img src="/images/2018-02-09_01-31-11.png" alt=""></p>
+<p><img src="/images/2018-02-09_01-31-11.png"></p>
 <p>Профит!</p>
 <h2 id="Бонус"><a href="#Бонус" class="headerlink" title="Бонус"></a>Бонус</h2><p>Серт для сайта можно не прописывать. Можно просто ограничиться корневым и промежуточным сертификатами.<br>Вот готовый файл certificate для Let’s Encrypt:</p>
-<p><a href="https://gist.github.com/rhamdeew/6d5ee8cff99fba9e2575a74e37d203d2" target="_blank" rel="noopener">https://gist.github.com/rhamdeew/6d5ee8cff99fba9e2575a74e37d203d2</a></p>
+<p><a href="https://gist.github.com/rhamdeew/6d5ee8cff99fba9e2575a74e37d203d2">https://gist.github.com/rhamdeew/6d5ee8cff99fba9e2575a74e37d203d2</a></p>
 
   </div>
   
@@ -147,7 +155,7 @@
       </div>
       <div class="tags">
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/1C/" rel="tag">1C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Let-s-Encrypt/" rel="tag">Let's Encrypt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/" rel="tag">tech</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/1C/" rel="tag">1C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Let-s-Encrypt/" rel="tag">Let&#39;s Encrypt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/" rel="tag">tech</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li></ul>
 
       </div>
     </div>
@@ -185,7 +193,7 @@
 
 <section id="comments">
   <div id="disqus_thread">
-  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
 
@@ -197,7 +205,7 @@
   </h4>
   <div class="copyright">
   <!--noindex-->
-    &copy; 2025 Rail<br>
+    &copy; 2026 Rail<br>
     Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
   <!--/noindex-->
   </div>

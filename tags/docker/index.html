@@ -155,13 +155,13 @@
     
     
       <p><img src="/images/cat.jpg" alt="unrelated"></p>
-<p>На днях снова увлекся темой майнинга биткоинов. Оказалось что при некоторых раскладах можно майнить даже на CPU (алгоритм Equihash).<br>Майнер под это дело собирается в пяток команд в консоли, но при сборке тянет пачку зависимостей и требует свежий Debian/Ubuntu.</p>
+<p>На днях снова увлекся темой майнинга биткоинов. Оказалось что при некоторых раскладах можно майнить даже на CPU (алгоритм Equihash).<br>Майнер под это дело собирается в пяток команд в консоли, но при сборке тянет пачку зависимостей и требует свежий Debian&#x2F;Ubuntu.</p>
 <p>Я решил исправить этот недочет собрав под это дело Docker-контейнер. Вбивать 2 команды вместо пяти намного быстрее и приятнее.</p>
-<p>Собрал только CPU-вариант без опций для AMD и майнинга на GPU при помощи CUDA. Все потому что в наличии таких железок у меня нет =)</p>
-<p>Запускать кстати этот майнер лучше в tmux/screen. Он почему-то не реагирует на Ctrl+С. Дело не в контейнере, а в коде самого майнера.</p>
+<p>Собрал только CPU-вариант без опций для AMD и майнинга на GPU при помощи CUDA. Все потому что в наличии таких железок у меня нет &#x3D;)</p>
+<p>Запускать кстати этот майнер лучше в tmux&#x2F;screen. Он почему-то не реагирует на Ctrl+С. Дело не в контейнере, а в коде самого майнера.</p>
 <p>Для интересующихся любезно выложил:</p>
-<p><strong>Dockerfile</strong> - <a href="https://github.com/rhamdeew/nheqminer-container" target="_blank" rel="noopener">https://github.com/rhamdeew/nheqminer-container</a><br><strong>Docker-image</strong> - <a href="https://hub.docker.com/r/rhamdeew/nheqminer/" target="_blank" rel="noopener">https://hub.docker.com/r/rhamdeew/nheqminer/</a></p>
-<p>Enjoy! =)</p>
+<p><strong>Dockerfile</strong> - <a href="https://github.com/rhamdeew/nheqminer-container">https://github.com/rhamdeew/nheqminer-container</a><br><strong>Docker-image</strong> - <a href="https://hub.docker.com/r/rhamdeew/nheqminer/">https://hub.docker.com/r/rhamdeew/nheqminer/</a></p>
+<p>Enjoy! &#x3D;)</p>
 
     
   </div>
@@ -215,7 +215,7 @@
   <div class="entry-content" itemprop="description">
     
     
-      <p><img src="/images/docker-openvpn-images.png" alt=""></p>
+      <p><img src="/images/docker-openvpn-images.png"></p>
 <p>Итак в этом посте я вам расскажу как за пару минут поднять OpenVPN на вашем сервере используя Docker.</p>
 <p>Все эксперименты проводились на серверве с Debian Jessie и примеры соответственно оттуда, но разницы в других дистрах быть не должно. Все же основной цимес у нас внутри Docker-контейнера который у всех будет одинаковым.</p>
 <p>Если вам уже интересно то прошу под кат:</p>
@@ -258,7 +258,7 @@
       
   
     <h2 itemprop="name" class="entry-title">
-      <a class="article-title" href="/netbeans-in-docker/">Netbeans in Docker</a>
+      <a class="article-title" href="//netbeans-in-docker">Netbeans in Docker</a>
     </h2>
   
 
@@ -267,7 +267,7 @@
   </header>
   <footer class="entry-meta-header">
     <span class="meta-elements date">
-      <a href="/netbeans-in-docker/" class="article-date">
+      <a href="//netbeans-in-docker" class="article-date">
   <time datetime="2015-02-27T02:54:18.000Z" itemprop="datePublished">февр. 27 2015</time>
 </a>
     </span>
@@ -276,10 +276,10 @@
   <div class="entry-content" itemprop="description">
     
     
-      <p>Не так давно я <a href="http://status.hamdeew.ru/post/109413572259/phpstorm-docker" target="_blank" rel="noopener">писал</a> что успешно запустил PhpStorm в Docker. Сделано это было по одной простой причине - убогие шрифты в Java-приложениях. Из 3 известных Java-IDE хорошо шрифты отображаются только в Eclipse. Но лично мне он понравился меньше предыдущих двух вариантов (Intellij и Netbeans).<br>Решается проблема со шрифтами установкой патченой OpenJDK под названием TuxJDK. В Debian все работает сразу же после установки, а в Fedora 21 запущенные в ней приложения вообще теряют большую часть текста. Поэтому собственно я и принял решение поднять в Docker-контейнере свежий Debian 7 вместе с TuxJDK, и запускать приложения с хорошими, годными шрифтами.</p>
+      <p>Не так давно я <a href="http://status.hamdeew.ru/post/109413572259/phpstorm-docker">писал</a> что успешно запустил PhpStorm в Docker. Сделано это было по одной простой причине - убогие шрифты в Java-приложениях. Из 3 известных Java-IDE хорошо шрифты отображаются только в Eclipse. Но лично мне он понравился меньше предыдущих двух вариантов (Intellij и Netbeans).<br>Решается проблема со шрифтами установкой патченой OpenJDK под названием TuxJDK. В Debian все работает сразу же после установки, а в Fedora 21 запущенные в ней приложения вообще теряют большую часть текста. Поэтому собственно я и принял решение поднять в Docker-контейнере свежий Debian 7 вместе с TuxJDK, и запускать приложения с хорошими, годными шрифтами.</p>
       
         <p class="article-more-link">
-          <a href="/netbeans-in-docker/">Read More</a>
+          <a href="//netbeans-in-docker">Read More</a>
         </p>
       
     
@@ -318,7 +318,7 @@
   </h4>
   <div class="copyright">
   <!--noindex-->
-    &copy; 2025 Rail<br>
+    &copy; 2026 Rail<br>
     Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
   <!--/noindex-->
   </div>

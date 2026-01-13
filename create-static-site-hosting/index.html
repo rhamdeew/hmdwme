@@ -15,12 +15,12 @@
 <meta property="og:description" content="Блог веб-разработчика">
 <meta property="og:locale" content="ru_RU">
 <meta property="article:published_time" content="2016-01-18T22:29:06.000Z">
-<meta property="article:modified_time" content="2025-12-20T11:03:02.056Z">
+<meta property="article:modified_time" content="2026-01-13T17:33:45.228Z">
 <meta property="article:author" content="Rail">
-<meta property="article:tag" content="tech">
-<meta property="article:tag" content="linux">
 <meta property="article:tag" content="bash">
+<meta property="article:tag" content="linux">
 <meta property="article:tag" content="nginx">
+<meta property="article:tag" content="tech">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@rhamdeew">
   
@@ -98,47 +98,55 @@
   <div class="entry-content" itemprop="articleBody">
     
     <p>Всем привет!<br>Сегодня я расскажу вам как сделать простой и удобный хостинг статичных сайтов на базе дроплета от DigitalOcean. Подойдет тем у кого на локальной машине Linux или OS X. Пользователям Win будет неудобно.<br>IP-адрес вашего сервера нужно вставлять вместо условной конструкции ip_addr в данной заметке.<br>Итак, начнем:</p>
-<a id="more"></a>
-<h3 id="Приготовления"><a href="#Приготовления" class="headerlink" title="Приготовления"></a>Приготовления</h3><p>1) Первым делом мы регистрируем <a href="https://www.digitalocean.com/?refcode=02102c6f64b8" target="_blank" rel="noopener">VPS на DigitalOcean</a>.<br>Выбираем образ Ubuntu 14.04.3 и регион ближайший к вам и вашим клиентам.</p>
-<p>2) Далее мы начинаем настраивать нашу VPS</p>
-<pre><code>ssh root@ip_addr (где ip_addr адрес нашей VPS)
-</code></pre><p>Создаем пользователя у которого будут храниться наши статичные сайты:</p>
+<span id="more"></span>
+
+<h3 id="Приготовления"><a href="#Приготовления" class="headerlink" title="Приготовления"></a>Приготовления</h3><ol>
+<li><p>Первым делом мы регистрируем <a href="https://www.digitalocean.com/?refcode=02102c6f64b8">VPS на DigitalOcean</a>.<br>Выбираем образ Ubuntu 14.04.3 и регион ближайший к вам и вашим клиентам.</p>
+</li>
+<li><p>Далее мы начинаем настраивать нашу VPS</p>
+<p> ssh root@ip_addr (где ip_addr адрес нашей VPS)</p>
+</li>
+</ol>
+<p>Создаем пользователя у которого будут храниться наши статичные сайты:</p>
 <pre><code>useradd -m -d /home/static static
 usermod -s /bin/bash static
-</code></pre><p>Устанавливаем необходимые нам программы</p>
+</code></pre>
+<p>Устанавливаем необходимые нам программы</p>
 <pre><code>apt-get update
 apt-get install nginx git nano rsync
-</code></pre><p>Разрешаем пользователю static перезагружать веб-сервер</p>
+</code></pre>
+<p>Разрешаем пользователю static перезагружать веб-сервер</p>
 <pre><code>nano /etc/sudoers
-</code></pre><p>И добавляем в конце файла строчку:</p>
+</code></pre>
+<p>И добавляем в конце файла строчку:</p>
 <pre><code>static ALL=(ALL) NOPASSWD: /usr/sbin/service nginx reload
-</code></pre><p>3) Делаем наш сервер чуточку безопаснее</p>
-<pre><code>nano /etc/ssh/sshd_config
-</code></pre><p>Меняем стандартный порт ssh</p>
+</code></pre>
+<ol start="3">
+<li><p>Делаем наш сервер чуточку безопаснее</p>
+<p> nano &#x2F;etc&#x2F;ssh&#x2F;sshd_config</p>
+</li>
+</ol>
+<p>Меняем стандартный порт ssh</p>
 <pre><code>Port 20002
-</code></pre><p>Запрещаем логин от пользователя root</p>
+</code></pre>
+<p>Запрещаем логин от пользователя root</p>
 <pre><code>PermitRootLogin no
-</code></pre><p>Сохраняем файл</p>
+</code></pre>
+<p>Сохраняем файл</p>
 <p>Перезапускаем ssh</p>
 <pre><code>service ssh restart
-</code></pre><p>Задаем пароль пользователю static</p>
+</code></pre>
+<p>Задаем пароль пользователю static</p>
 <pre><code>passwd static
-</code></pre><p><em>Пароль не должен совпадать с паролем пользователя root!</em></p>
+</code></pre>
+<p><em>Пароль не должен совпадать с паролем пользователя root!</em></p>
 <p>Редактируем стандартный конфиг Nginx</p>
 <pre><code>nano /etc/nginx/nginx.conf
-</code></pre><p>Раскомментируем </p>
-<pre><code>server_tokens off;
-
-gzip types ...;
-
-gzip_comp_level 6;
-</code></pre><p>Удаляем строки</p>
-<pre><code>include /etc/nginx/conf.d/*.conf;
-include /etc/nginx/sites-enabled/*;
-</code></pre><p>Добавляем в конце файла</p>
-<pre><code>include /home/static/nginx/*.conf;
-
-server {
+</code></pre>
+<p>Раскомментируем<br>	<br>	server_tokens off;<br>	<br>	gzip types …;<br>	<br>	gzip_comp_level 6;</p>
+<p>Удаляем строки<br>	<br>	include &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;<em>.conf;<br>	include &#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;</em>;</p>
+<p>Добавляем в конце файла<br>	<br>	include &#x2F;home&#x2F;static&#x2F;nginx&#x2F;*.conf;</p>
+<pre><code>server {
         listen 80 default_server;
         listen [::]:80 default_server ipv6only=on;
 
@@ -151,41 +159,45 @@ server {
                 try_files $uri $uri/ =404;
         }
 }
-</code></pre><p>Сохраняем файл</p>
+</code></pre>
+<p>Сохраняем файл</p>
 <p>Удаляем стандартные конфиги</p>
 <pre><code>rm -rf /etc/nginx/sites-available
 rm -rf /etc/nginx/sites-enabled
-</code></pre><p>Добавляем общий конфиг</p>
+</code></pre>
+<p>Добавляем общий конфиг</p>
 <pre><code>mkdir /etc/nginx/global
 
 nano /etc/nginx/global/drop.conf
-</code></pre><p>Вставляем</p>
-<pre><code># log access to drop file in /etc/nginx/ but don&apos;t log 404
+</code></pre>
+<p>Вставляем</p>
+<pre><code># log access to drop file in /etc/nginx/ but don&#39;t log 404
 location = /robots.txt {
         access_log drop;
         log_not_found off;
 }
 
-# log access to drop file in /etc/nginx/ but don&apos;t log 404
+# log access to drop file in /etc/nginx/ but don&#39;t log 404
 location = /favicon.ico {
         access_log drop;
         log_not_found off;
 }
 
-# log access to denied file in /etc/nginx/ but don&apos;t log 404 and also deny all to dot files
+# log access to denied file in /etc/nginx/ but don&#39;t log 404 and also deny all to dot files
 location ~ /\. {
         access_log denied;
         log_not_found off;
         deny all;
 }
 
-# log access to drop file in /etc/nginx/ but don&apos;t log 404 and also deny all to files starting with a dollar sign ($temp.config.php)
+# log access to drop file in /etc/nginx/ but don&#39;t log 404 and also deny all to files starting with a dollar sign ($temp.config.php)
 location ~ ~$ {
         access_log denied;
         log_not_found off;
         deny all;
 }
-</code></pre><p>Сохраняем файл    </p>
+</code></pre>
+<p>Сохраняем файл	</p>
 <p>Создаем пользователю static нужные директории</p>
 <pre><code>su static
 mkdir ~/nginx
@@ -193,139 +205,157 @@ mkdir ~/git
 mkdir ~/bin
 mkdir ~/www
 mkdir ~/.ssh
-</code></pre><p>Не закрываем терминал</p>
-<p>4) Пробуем подключаться</p>
+</code></pre>
+<p>Не закрываем терминал</p>
+<ol start="4">
+<li>Пробуем подключаться</li>
+</ol>
 <p><strong>На локальной машине</strong></p>
-<p>Генерируем ssh-ключ. Как это делать подробно описано <a href="https://help.github.com/articles/generating-ssh-keys/" target="_blank" rel="noopener">здесь</a></p>
+<p>Генерируем ssh-ключ. Как это делать подробно описано <a href="https://help.github.com/articles/generating-ssh-keys/">здесь</a></p>
 <pre><code>cat ~/.ssh/id_rsa.pub
-</code></pre><p><strong>На сервере</strong></p>
+</code></pre>
+<p><strong>На сервере</strong></p>
 <pre><code>nano ~/.ssh/authorized_keys
-</code></pre><p>И вставляем скопированную публичную часть ключа в этот файл</p>
+</code></pre>
+<p>И вставляем скопированную публичную часть ключа в этот файл</p>
 <p><strong>На локальной машине</strong> </p>
 <p>Пробуем подключиться</p>
 <pre><code>ssh static@ip_addr -p20002
-</code></pre><p>Если подключение проходит нормально то добавляем конфигурацию для удобства</p>
+</code></pre>
+<p>Если подключение проходит нормально то добавляем конфигурацию для удобства</p>
 <pre><code>nano ~/.ssh/config
 
 Host static
 User static
 Port 20002
 Hostname ip_addr
-</code></pre><p>Теперь добавляем локальную часть скрипта</p>
+</code></pre>
+<p>Теперь добавляем локальную часть скрипта</p>
 <pre><code>mkdir ~/.bin
 
 nano ~/.bin/static.sh
-</code></pre><p>Вставляем строчки</p>
-<pre><code>#!/bin/bash
-echo &quot;Site domain (without www.)?&quot;
-read domain
+</code></pre>
+<p>Вставляем строчки</p>
+<pre><code>	#!/bin/bash
+	echo &quot;Site domain (without www.)?&quot;
+	read domain
 
-echo &quot;Site data directory?&quot;
-read directory
+	echo &quot;Site data directory?&quot;
+	read directory
 
-ssh static -t &quot;~/bin/static.sh $domain $directory&quot;
+	ssh static -t &quot;~/bin/static.sh $domain $directory&quot;
 
 
-echo &quot;$directory/&quot; &gt;&gt; .gitignore
-git init
-git add -A
-git commit -m \&quot;first\&quot;
-git remote add origin static:~/git/$domain
+	echo &quot;$directory/&quot; &gt;&gt; .gitignore
+	git init
+	git add -A
+	git commit -m \&quot;first\&quot;
+	git remote add origin static:~/git/$domain
 
-echo &quot;
-#!/bin/bash
-git add -A &amp;&amp; git commit -m &apos;revision&apos; &amp;&amp; git push origin master
-rsync -avz $directory/ static:~/www/$domain
-&quot; &gt; deploy.sh
-chmod +x deploy.sh
-</code></pre><p>Сохраняем файл и делаем его исполняемым</p>
+	echo &quot;
+	#!/bin/bash
+	git add -A &amp;&amp; git commit -m &#39;revision&#39; &amp;&amp; git push origin master
+	rsync -avz $directory/ static:~/www/$domain
+	&quot; &gt; deploy.sh
+	chmod +x deploy.sh
+</code></pre>
+<p>Сохраняем файл и делаем его исполняемым</p>
 <pre><code>chmod +x ~/.bin/static.sh
-</code></pre><p>Редактируем свой bashrc    </p>
-<pre><code>nano ~/bashrc
-</code></pre><p>И добавляем последней строчкой alias</p>
+</code></pre>
+<p>Редактируем свой bashrc	<br>	<br>	nano ~&#x2F;bashrc</p>
+<p>И добавляем последней строчкой alias</p>
 <pre><code>alias static=&quot;~/.bin/static.sh&quot;
-</code></pre><p>Сохраняем файл</p>
+</code></pre>
+<p>Сохраняем файл</p>
 <p>Запускаем bash заново</p>
 <pre><code>bash -l
-</code></pre><p><strong>На сервере</strong><br>От пользователя static:</p>
+</code></pre>
+<p><strong>На сервере</strong><br>От пользователя static:</p>
 <pre><code>nano ~/bin/static.sh
-</code></pre><p>И вставляем содержимое</p>
-<pre><code>#!/bin/bash
-domain=$1
-directory=$2
+</code></pre>
+<p>И вставляем содержимое</p>
+<pre><code>	#!/bin/bash
+	domain=$1
+	directory=$2
 
-echo &quot;Configure git&quot;;
-echo &quot;---------------&quot;;
-mkdir ~/git/$domain
-cd ~/git/$domain
-git --bare init
+	echo &quot;Configure git&quot;;
+	echo &quot;---------------&quot;;
+	mkdir ~/git/$domain
+	cd ~/git/$domain
+	git --bare init
 
-mkdir ~/www/$domain
-cd ~/www/$domain
-echo &quot;---------------&quot;;
+	mkdir ~/www/$domain
+	cd ~/www/$domain
+	echo &quot;---------------&quot;;
 
-echo &quot;Configure Nginx&quot;;
-echo &quot;---------------&quot;;
+	echo &quot;Configure Nginx&quot;;
+	echo &quot;---------------&quot;;
 
-echo &quot;
-server {
-        listen 80;
-        listen [::]:80;
-        server_name www.$domain;
-        rewrite ^ \$scheme://$domain\$request_uri redirect;
-}
+	echo &quot;
+	server {
+	        listen 80;
+	        listen [::]:80;
+	        server_name www.$domain;
+	        rewrite ^ \$scheme://$domain\$request_uri redirect;
+	}
 
-server {
-    listen       80;
-    listen [::]:80;
-    server_name  $domain;
+	server {
+	    listen       80;
+	    listen [::]:80;
+	    server_name  $domain;
 
-    set \$root_path /home/static/www/$domain;
+	    set \$root_path /home/static/www/$domain;
 
-    include global/drop.conf;
-    location ~* ^.+\.(jpg|jpeg|gif|png|svg|js|css|mp3|ogg|mpe?g|avi|zip|gz|bz2?|rar|swf|woff|eot|ttf)$ {
-        root   \$root_path;
-        expires 30d;
-        access_log off;
-    }
+	    include global/drop.conf;
+	    location ~* ^.+\.(jpg|jpeg|gif|png|svg|js|css|mp3|ogg|mpe?g|avi|zip|gz|bz2?|rar|swf|woff|eot|ttf)$ {
+	        root   \$root_path;
+	        expires 30d;
+	        access_log off;
+	    }
 
-    location / {
-        root   \$root_path;
-        index  index.html;
-    }
+	    location / {
+	        root   \$root_path;
+	        index  index.html;
+	    }
 
-    error_page  404  /404.html;
-}
-&quot; &gt; ~/nginx/$domain.conf
-echo &quot;---------------&quot;;
+	    error_page  404  /404.html;
+	}
+	&quot; &gt; ~/nginx/$domain.conf
+	echo &quot;---------------&quot;;
 
 
-echo &quot;Reloading Nginx\&apos;s&quot;;
-echo &quot;---------------&quot;;
+	echo &quot;Reloading Nginx\&#39;s&quot;;
+	echo &quot;---------------&quot;;
 
-sudo service nginx reload
+	sudo service nginx reload
 
-echo &quot;---------------&quot;;
-</code></pre><p>Сохраняем и делаем скрипт исполняемым</p>
+	echo &quot;---------------&quot;;
+</code></pre>
+<p>Сохраняем и делаем скрипт исполняемым</p>
 <pre><code>chmod +x ~/bin/static.sh
-</code></pre><h3 id="Все-настройка-готова"><a href="#Все-настройка-готова" class="headerlink" title="Все, настройка готова!"></a>Все, настройка готова!</h3><p>Для корректной работы на нашей локальной машине должны быть установлены утилиты git и rsync.</p>
+</code></pre>
+<h3 id="Все-настройка-готова"><a href="#Все-настройка-готова" class="headerlink" title="Все, настройка готова!"></a>Все, настройка готова!</h3><p>Для корректной работы на нашей локальной машине должны быть установлены утилиты git и rsync.</p>
 <p>Теперь используя любимый static-генератор мы создаем на локальной машине сайт.</p>
-<p>Опишу на примере <a href="http://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+<p>Опишу на примере <a href="http://hexo.io/">Hexo</a></p>
 <p>Создаем новый сайт и генерируем статику</p>
 <pre><code>mkdir ~/site1.ru
 cd ~/site1.ru
 hexo init
 npm install
 hexo generate
-</code></pre><p>Теперь в директории ~/site1.ru у нас есть директория public со сгенерированным блогом.<br>Пробуем добавить сайт на наш сервер</p>
+</code></pre>
+<p>Теперь в директории ~&#x2F;site1.ru у нас есть директория public со сгенерированным блогом.<br>Пробуем добавить сайт на наш сервер</p>
 <pre><code>static
-</code></pre><p>Отвечаем на вопросы… (site.ru, public)</p>
+</code></pre>
+<p>Отвечаем на вопросы… (site.ru, public)</p>
 <p>В итоге у нас должен появиться скрипт deploy.sh<br>Запускаем его:</p>
 <pre><code>./deploy.sh
-</code></pre><p>Вот и все, теперь сервер настроен на отдачу сайта site1.ru<br>В следующий раз после обновления статики и генерации контента нам остается только запустить deploy.sh</p>
+</code></pre>
+<p>Вот и все, теперь сервер настроен на отдачу сайта site1.ru<br>В следующий раз после обновления статики и генерации контента нам остается только запустить deploy.sh</p>
 <p>Также на сервере хранится git-репозиторий сайта который мы можем склонировать в любой момент командой</p>
 <pre><code>git clone static:~/git/site1.ru
-</code></pre><h3 id="Выводы"><a href="#Выводы" class="headerlink" title="Выводы"></a>Выводы</h3><p>Теперь у нас есть свой собственный хостинг для статичных сайтов и удаленный git-репозиторий для них. Теперь для создания сайта достаточно лишь запустить команду static без необходимости лишний раз вручную править конфиги на сервере.</p>
+</code></pre>
+<h3 id="Выводы"><a href="#Выводы" class="headerlink" title="Выводы"></a>Выводы</h3><p>Теперь у нас есть свой собственный хостинг для статичных сайтов и удаленный git-репозиторий для них. Теперь для создания сайта достаточно лишь запустить команду static без необходимости лишний раз вручную править конфиги на сервере.</p>
 
   </div>
   
@@ -375,7 +405,7 @@ hexo generate
 
 <section id="comments">
   <div id="disqus_thread">
-  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
 
@@ -387,7 +417,7 @@ hexo generate
   </h4>
   <div class="copyright">
   <!--noindex-->
-    &copy; 2025 Rail<br>
+    &copy; 2026 Rail<br>
     Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
   <!--/noindex-->
   </div>
