@@ -15,7 +15,8 @@
     }, searchAnimDuration);
   };
 
-  $('#nav-search-btn').on('click', function(){
+  $('#nav-search-btn').on('click', function(e){
+    e.preventDefault();
     if (isSearchAnim) return;
 
     startSearchAnim();
@@ -60,9 +61,25 @@
   }
 
   // Mobile nav
-
   $(".mobile-nav-panel").click(function() {
-    $(".nav").toggleClass("active")
+    var $nav = $(".nav");
+    var isExpanded = $(this).attr('aria-expanded') === 'true';
+    $nav.toggleClass("active");
+    $(this).attr('aria-expanded', !isExpanded);
+  });
+
+  // Close mobile menu when clicking outside
+  $(document).on('click', function(e) {
+    var $nav = $(".nav");
+    var $button = $(".mobile-nav-panel");
+    if ($nav.hasClass("active") &&
+        !$nav.is(e.target) &&
+        !$nav.has(e.target).length &&
+        !$button.is(e.target) &&
+        !$button.has(e.target).length) {
+      $nav.removeClass("active");
+      $button.attr('aria-expanded', 'false');
+    }
   });
 
 })(jQuery);

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   <title>Time Capsule | HMDW/me - блог веб-разработчика</title>
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
   
   <meta name="description" content="Блог веб-разработчика">
@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://hmdw.me/images/yul.jpg">
 <meta property="og:image" content="https://hmdw.me/images/agach.jpg">
 <meta property="article:published_time" content="2017-11-22T00:48:29.000Z">
-<meta property="article:modified_time" content="2026-01-13T17:33:45.235Z">
+<meta property="article:modified_time" content="2026-01-13T17:49:00.498Z">
 <meta property="article:author" content="Rail">
 <meta property="article:tag" content="ithink">
 <meta property="article:tag" content="startup">
@@ -29,52 +29,53 @@
   
   <link rel="alternate" href="/atom.xml" title="HMDW/me" type="application/atom+xml">
   
-  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+
+  <!-- DNS prefetch and preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;1,400&family=Source+Code+Pro&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
 
   
 <link rel="stylesheet" href="/css/style.css">
 
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
 <body>
+  <a href="#main" class="skip-link" aria-label="Skip to main content">Skip to content</a>
   <div id="container">
-    <div class="mobile-nav-panel">
-  <i class="icon-reorder icon-large"></i>
-</div>
+    <button class="mobile-nav-panel" aria-label="Toggle navigation menu" aria-expanded="false">
+  <i class="icon-reorder icon-large" aria-hidden="true"></i>
+</button>
 <header id="header">
-  <h2 class="blog-title">
+  <h1 class="blog-title">
     <a href="/">HMDW/me</a>
-  </h2>
+  </h1>
   <nav class="nav">
     <ul>
       <li><a href="/">Home</a></li><li><a href="/projects/">Projects</a></li><li><a href="/about/">About</a></li>
-      <li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
-      <li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+      <li><a id="nav-search-btn" class="nav-icon" href="#" aria-label="Search" role="button"></a></li>
+      <li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" aria-label="RSS Feed"></a></li>
     </ul>
   </nav>
   <div id="search-form-wrap">
-    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Поискать"><button type="submit" class="search-form-submit">&#xF002;</button></form>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form" role="search">
+      <label for="search-input" class="visually-hidden">Search</label>
+      <input id="search-input" type="search" name="q" class="search-form-input" placeholder="Поискать">
+      <button type="submit" class="search-form-submit" aria-label="Submit search">&#xF002;</button>
+    </form>
   </div>
 </header>
 
-    <div id="main">
+    <main id="main">
       <article id="post-time-capsule" class="post" itemscope itemtype="http://schema.org/Article">
   
 
@@ -114,7 +115,7 @@
 <p><em><strong>Надежность?</strong></em></p>
 <p>Вообще современные интернеты нам кажутся чем то вечным, тем что существовало настолько давно что никто и не помнит того времени когда этого не было. А между тем “Вконтакте” существует с 10 октября 2006 года, первый ролик на Youtube (в формате flv) появился 23 апреля 2005 года, Facebook стартовал 4 февраля 2004 года, Instagram появился в App Store 6 октября 2010 года и поддерживал лишь квадратные фотографии в разрешении 640x640, а первый твит был отправлен 21 марта 2006 года.</p>
 <p>Получается что довериться какому-то одному сервису в столь щепетильном вопросе хранения контента 5 лет и более довольно сложно и лучше продублировать контент на 2-3 сервиса.</p>
-<h3 id="Капсула-времени-из-г…-кхм…-своими-руками"><a href="#Капсула-времени-из-г…-кхм…-своими-руками" class="headerlink" title="Капсула времени из г… кхм… своими руками!"></a>Капсула времени из г… кхм… своими руками!</h3><p>Вот тут я пришел к тому что раз реализовывать я такую штуку в виде какого-то отдельного сервиса не буду, а какой-то одной соцсети довериться сложно то можно не париться и организовать довольно надежную капсулу времени<br>вообще не программируя. Для этого нам понадобится смартфон с камерой, аккаунты  как минимум в 3 облачных сервисах (Яндекс.Диск, Google Drive, MS OneDrive, <a href="mailto:&#67;&#x6c;&#x6f;&#x75;&#x64;&#64;&#77;&#x61;&#x69;&#108;&#x2e;&#114;&#117;">Cloud@Mail.ru</a>, Dropbox, Box, Youtube, etc) для хранения видео и аккаунты как минимум в 3 облачных сервисах для напоминаний (Google Календарь, Календарь Mail.ru, Яндекс.Календарь, etc).</p>
+<h3 id="Капсула-времени-из-г…-кхм…-своими-руками"><a href="#Капсула-времени-из-г…-кхм…-своими-руками" class="headerlink" title="Капсула времени из г… кхм… своими руками!"></a>Капсула времени из г… кхм… своими руками!</h3><p>Вот тут я пришел к тому что раз реализовывать я такую штуку в виде какого-то отдельного сервиса не буду, а какой-то одной соцсети довериться сложно то можно не париться и организовать довольно надежную капсулу времени<br>вообще не программируя. Для этого нам понадобится смартфон с камерой, аккаунты  как минимум в 3 облачных сервисах (Яндекс.Диск, Google Drive, MS OneDrive, <a href="mailto:&#x43;&#x6c;&#x6f;&#117;&#x64;&#64;&#x4d;&#97;&#x69;&#108;&#46;&#x72;&#x75;">Cloud@Mail.ru</a>, Dropbox, Box, Youtube, etc) для хранения видео и аккаунты как минимум в 3 облачных сервисах для напоминаний (Google Календарь, Календарь Mail.ru, Яндекс.Календарь, etc).</p>
 <p><em><strong>Инструкция:</strong></em></p>
 <ol>
 <li>Записываем видео, льем в 3 облака и получаем ссылки на видео</li>
@@ -179,15 +180,15 @@
 </section>
 
 
-    </div>
+    </main>
     <footer id="footer">
-  <h4 class="footer-blog-title">
+  <h2 class="footer-blog-title">
     <a href="/">HMDW/me</a>
-  </h4>
+  </h2>
   <div class="copyright">
   <!--noindex-->
     &copy; 2026 Rail<br>
-    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    Powered by <a href="https://hexo.io/" target="_blank" rel="noopener noreferrer">Hexo</a>
   <!--/noindex-->
   </div>
 </footer>

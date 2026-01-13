@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hmdw.me/uses/index.html</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hmdw.me/progress/index.html</loc>
     
     <lastmod>2026-01-13</lastmod>
@@ -29,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/uses/index.html</loc>
+    <loc>https://hmdw.me/cinema/index.html</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -38,7 +47,25 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/weekly-digest-ru-4/</loc>
+    <loc>https://hmdw.me/weekly-digest-ru-1/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/weekly-digest-ru-2/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/weekly-digest-ru-3/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -92,7 +119,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/about/index.html</loc>
+    <loc>https://hmdw.me/weekly-digest-ru-4/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -119,7 +146,34 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/cinema/index.html</loc>
+    <loc>https://hmdw.me/about/index.html</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/ulcamp2024/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/ulsk-standup/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/unity/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -129,15 +183,6 @@
   
   <url>
     <loc>https://hmdw.me/use-bash/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hmdw.me/vhs-to-digital/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -182,15 +227,6 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/vscode-2019/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hmdw.me/wacom/</loc>
     
     <lastmod>2026-01-13</lastmod>
@@ -227,7 +263,25 @@
   </url>
   
   <url>
+    <loc>https://hmdw.me/vhs-to-digital/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hmdw.me/weekly-digest-3/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/vscode-2019/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -245,7 +299,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/weekly-digest-ru-2/</loc>
+    <loc>https://hmdw.me/telegram-club-chat/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -254,7 +308,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/weekly-digest-ru-3/</loc>
+    <loc>https://hmdw.me/telegram-club/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -263,7 +317,25 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/weekly-digest-ru-1/</loc>
+    <loc>https://hmdw.me/telegram-experience/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/telegram-ideas/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/telegram-instant-view/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -299,7 +371,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/timeofdrag2015/</loc>
+    <loc>https://hmdw.me/two-years-of-gif/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -308,7 +380,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/two-years-of-gif/</loc>
+    <loc>https://hmdw.me/ulcamp-winter-2016/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -327,15 +399,6 @@
   
   <url>
     <loc>https://hmdw.me/ulcamp2016/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hmdw.me/ulcamp-winter-2016/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -371,7 +434,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/ulcamp2024/</loc>
+    <loc>https://hmdw.me/timeofdrag2015/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -380,7 +443,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/ulsk-standup/</loc>
+    <loc>https://hmdw.me/screenshots-to-imgur/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -389,7 +452,34 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/unity/</loc>
+    <loc>https://hmdw.me/screenshots/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/servers/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/shared-ideas/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/simtech-meetup/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -452,15 +542,6 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/summer-2017/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hmdw.me/tatar-video/</loc>
     
     <lastmod>2026-01-13</lastmod>
@@ -515,7 +596,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/telegram-club-chat/</loc>
+    <loc>https://hmdw.me/summer-2017/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -524,7 +605,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/telegram-club/</loc>
+    <loc>https://hmdw.me/restrictions-3/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -533,7 +614,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/telegram-experience/</loc>
+    <loc>https://hmdw.me/restrictions-32/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -542,7 +623,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/telegram-ideas/</loc>
+    <loc>https://hmdw.me/restrictions-35/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -551,7 +632,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/telegram-instant-view/</loc>
+    <loc>https://hmdw.me/restrictions-36/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -587,25 +668,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/restrictions-4/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hmdw.me/restrictions-40/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hmdw.me/restrictions-44/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -623,7 +686,16 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/restrictions-6/</loc>
+    <loc>https://hmdw.me/restrictions-44/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/restrictions-4/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -633,15 +705,6 @@
   
   <url>
     <loc>https://hmdw.me/restrictions-7/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hmdw.me/restrictions-8/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -677,7 +740,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/screenshots-to-imgur/</loc>
+    <loc>https://hmdw.me/restrictions-8/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -686,7 +749,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/screenshots/</loc>
+    <loc>https://hmdw.me/restrictions-6/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -695,7 +758,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/servers/</loc>
+    <loc>https://hmdw.me/os/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -704,7 +767,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/shared-ideas/</loc>
+    <loc>https://hmdw.me/people-files/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -713,7 +776,25 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/simtech-meetup/</loc>
+    <loc>https://hmdw.me/php-5-6-vesta/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/pusher/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/rainy-day/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -794,15 +875,6 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/restrictions-2/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hmdw.me/restrictions-20/</loc>
     
     <lastmod>2026-01-13</lastmod>
@@ -830,7 +902,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/restrictions-3/</loc>
+    <loc>https://hmdw.me/restrictions-2/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -839,7 +911,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/restrictions-32/</loc>
+    <loc>https://hmdw.me/marathon/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -848,7 +920,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/restrictions-35/</loc>
+    <loc>https://hmdw.me/mechtamoskvicha/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -857,16 +929,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/restrictions-36/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hmdw.me/rainy-day/</loc>
+    <loc>https://hmdw.me/miner-container/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -885,15 +948,6 @@
   
   <url>
     <loc>https://hmdw.me/most-museum/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hmdw.me/mr-robot/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -965,7 +1019,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/november-1/</loc>
+    <loc>https://hmdw.me/mr-robot/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -974,7 +1028,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/november/</loc>
+    <loc>https://hmdw.me/november-1/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -992,7 +1046,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/openvpn-docker/</loc>
+    <loc>https://hmdw.me/olimp/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1010,7 +1064,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/olimp/</loc>
+    <loc>https://hmdw.me/marathon-things/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1019,7 +1073,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/os/</loc>
+    <loc>https://hmdw.me/openvpn-docker/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1028,7 +1082,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/people-files/</loc>
+    <loc>https://hmdw.me/november/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1037,7 +1091,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/php-5-6-vesta/</loc>
+    <loc>https://hmdw.me/hardware-retrospective/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1046,7 +1100,25 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/pusher/</loc>
+    <loc>https://hmdw.me/health/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/hello-github/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/hello-may/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1091,7 +1163,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/how-to-create-your-hosting-static-websites/</loc>
+    <loc>https://hmdw.me/images-from-vk/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1100,7 +1172,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/images-from-vk/</loc>
+    <loc>https://hmdw.me/how-to-create-your-hosting-static-websites/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1154,15 +1226,6 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/lateness/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hmdw.me/lazy-loading/</loc>
     
     <lastmod>2026-01-13</lastmod>
@@ -1172,7 +1235,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/limits/</loc>
+    <loc>https://hmdw.me/lateness/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1199,7 +1262,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/marathon-things/</loc>
+    <loc>https://hmdw.me/limits/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1208,7 +1271,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/marathon/</loc>
+    <loc>https://hmdw.me/default-invites/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1217,7 +1280,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/mechtamoskvicha/</loc>
+    <loc>https://hmdw.me/dialup-nostalgia/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1226,7 +1289,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/miner-container/</loc>
+    <loc>https://hmdw.me/domains/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1263,15 +1326,6 @@
   
   <url>
     <loc>https://hmdw.me/evo-telecom/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hmdw.me/fasttask/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1343,7 +1397,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/golang/</loc>
+    <loc>https://hmdw.me/fasttask/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1352,7 +1406,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/handwriting-blog/</loc>
+    <loc>https://hmdw.me/golang/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1370,7 +1424,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/hardware-retrospective/</loc>
+    <loc>https://hmdw.me/dot/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1379,7 +1433,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/health/</loc>
+    <loc>https://hmdw.me/handwriting-blog/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1388,7 +1442,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/hello-github/</loc>
+    <loc>https://hmdw.me/ahref-1/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1397,7 +1451,16 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/hello-may/</loc>
+    <loc>https://hmdw.me/ahref-2/</loc>
+    
+    <lastmod>2026-01-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/akbars-museum/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1425,15 +1488,6 @@
   
   <url>
     <loc>https://hmdw.me/archinews/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hmdw.me/atom-for-php-development/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1514,7 +1568,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/create-static-site-hosting/</loc>
+    <loc>https://hmdw.me/atom-for-php-development/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1523,7 +1577,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/cs-cart-3-slow-query-fix/</loc>
+    <loc>https://hmdw.me/create-static-site-hosting/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1541,34 +1595,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/default-invites/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hmdw.me/dialup-nostalgia/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hmdw.me/domains/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hmdw.me/dot/</loc>
+    <loc>https://hmdw.me/cs-cart-3-slow-query-fix/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1650,33 +1677,6 @@
   
   <url>
     <loc>https://hmdw.me/add-ssl-support-in-1C/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hmdw.me/ahref-1/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hmdw.me/ahref-2/</loc>
-    
-    <lastmod>2026-01-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hmdw.me/akbars-museum/</loc>
     
     <lastmod>2026-01-13</lastmod>
     
@@ -1799,13 +1799,6 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/tags/atom/</loc>
-    <lastmod>2026-01-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://hmdw.me/tags/raspberrypi/</loc>
     <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -1904,6 +1897,13 @@
   </url>
   
   <url>
+    <loc>https://hmdw.me/tags/atom/</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://hmdw.me/tags/nginx/</loc>
     <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -1912,13 +1912,6 @@
   
   <url>
     <loc>https://hmdw.me/tags/domains/</loc>
-    <lastmod>2026-01-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hmdw.me/tags/specialfordot/</loc>
     <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1953,13 +1946,6 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/tags/idea/</loc>
-    <lastmod>2026-01-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://hmdw.me/tags/english/</loc>
     <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -1988,7 +1974,21 @@
   </url>
   
   <url>
+    <loc>https://hmdw.me/tags/idea/</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://hmdw.me/tags/git/</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/tags/specialfordot/</loc>
     <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2072,13 +2072,6 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/tags/cinema/</loc>
-    <lastmod>2026-01-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://hmdw.me/tags/music/</loc>
     <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -2093,7 +2086,7 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/tags/openvpn/</loc>
+    <loc>https://hmdw.me/tags/cinema/</loc>
     <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2101,6 +2094,13 @@
   
   <url>
     <loc>https://hmdw.me/tags/colary/</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/tags/openvpn/</loc>
     <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -2310,20 +2310,6 @@
   </url>
   
   <url>
-    <loc>https://hmdw.me/tags/vim/</loc>
-    <lastmod>2026-01-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hmdw.me/tags/vscode/</loc>
-    <lastmod>2026-01-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://hmdw.me/tags/hangouts/</loc>
     <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -2332,6 +2318,20 @@
   
   <url>
     <loc>https://hmdw.me/tags/digest/</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/tags/vim/</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hmdw.me/tags/vscode/</loc>
     <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
