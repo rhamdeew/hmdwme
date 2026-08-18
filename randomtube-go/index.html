@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  
+  <title>RandomTube Go | HMDW/me - блог веб-разработчика</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://hmdw.me/randomtube-go/">
+  
+  
+  <meta name="description" content="Тот же проект, но теперь имплементированный на Go">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RandomTube Go">
+<meta property="og:url" content="https://hmdw.me/randomtube-go/">
+<meta property="og:site_name" content="HMDW&#x2F;me">
+<meta property="og:description" content="Тот же проект, но теперь имплементированный на Go">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://hmdw.me/images/randomtube_1.png">
+<meta property="og:image" content="https://hmdw.me/images/randomtube_2.png">
+<meta property="og:image" content="https://hmdw.me/images/randomtube_3.png">
+<meta property="og:image" content="https://hmdw.me/images/randomtube_4.png">
+<meta property="article:published_time" content="2026-08-18T23:12:49.000Z">
+<meta property="article:modified_time" content="2026-08-18T19:43:14.536Z">
+<meta property="article:author" content="Rail">
+<meta property="article:tag" content="tech">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hmdw.me/images/randomtube_1.png">
+<meta name="twitter:creator" content="@rhamdeew">
+  <meta property="og:image:alt" content="RandomTube Go">
+  
+  
+  <link rel="alternate" href="/atom.xml" title="HMDW/me" type="application/atom+xml">
+  
+
+  <!-- DNS prefetch and preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fonts - IBM Plex Sans (Cyrillic + Latin consistency) -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- JSON-LD structured data -->
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "RandomTube Go",
+    "description": "Тот же проект, но теперь имплементированный на Go",
+    "url": "https://hmdw.me/randomtube-go/",
+    "datePublished": "2026-08-18T23:12:49.000Z",
+    "dateModified": "2026-08-18T19:43:14.536Z",
+    "author": {
+      "@type": "Person",
+      "name": "Rail",
+      "url": "https://hmdw.me/about/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Rail"
+    },
+    "inLanguage": "ru",
+    "image": "https://hmdw.me/images/randomtube_screenshot.jpg"
+  }
+  </script>
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+  <a href="#main" class="skip-link" aria-label="Skip to main content">Skip to content</a>
+  <div id="container">
+    <button class="mobile-nav-panel" aria-label="Toggle navigation menu" aria-expanded="false">
+  <i class="icon-reorder icon-large" aria-hidden="true"></i>
+</button>
+<header id="header">
+  <h1 class="blog-title">
+    <a href="/">HMDW/me</a>
+  </h1>
+  <nav class="nav">
+    <ul>
+      <li><a href="/">Home</a></li><li><a href="/projects/">Projects</a></li><li><a href="/about/">About</a></li>
+      <li><a id="nav-search-btn" class="nav-icon" href="#" aria-label="Search" role="button"></a></li>
+      <li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" aria-label="RSS Feed"></a></li>
+    </ul>
+  </nav>
+  <div id="search-form-wrap">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form" role="search">
+      <label for="search-input" class="visually-hidden">Search</label>
+      <input type="hidden" name="sitesearch" value="hmdw.me">
+      <input id="search-input" type="search" name="q" class="search-form-input" placeholder="Поискать">
+      <button type="submit" class="search-form-submit" aria-label="Submit search">&#xF002;</button>
+    </form>
+  </div>
+</header>
+
+    <main id="main">
+      <article id="post-randomtube-go" class="post" itemscope itemtype="http://schema.org/Article">
+  
+
+  <header class="entry-header">
+    
+      
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      RandomTube Go
+    </h1>
+    
+
+    
+  </header>
+  <footer class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="/randomtube-go/" class="article-date">
+  <time datetime="2026-08-18T23:12:49.000Z" itemprop="datePublished">авг. 18 2026</time>
+</a>
+    </span>
+  </footer>
+  
+  <div class="entry-content" itemprop="articleBody">
+    
+        
+            <img src='/images/randomtube_screenshot.jpg' alt='RandomTube Go'>
+        
+    
+    <p>Привет!<br>Несколько месяцев назад я вспомнил что у меня <a href="/randomtube/">был такой сервис</a> и я решил снова таким обзавестись. Поднимать PHP-стек ради него не хотелось и я решил сделать более легковесный вариант. Выбор пал на Go. Теперь весь сервис умещается в один бинарник. БД в SQLite. Снаружи решил добавить Caddy - теперь еще и SSL-серты автоматически обновляются без лишних телодвижений. </p>
+<span id="more"></span>
+
+<p>Устанавливается все это дело тоже очень просто в docker compose.</p>
+<p>В предыдущей версии импорт видео с ютуб каналов и плейлистов был неудобный. Нужно было заходить на сервер по SSH и запускать Yii2 command с правильными аргументами. Теперь же импорт работает прямо из веб-интерфейса админки.</p>
+<h3 id="Что-это-вообще-такое-Как-работает"><a href="#Что-это-вообще-такое-Как-работает" class="headerlink" title="Что это вообще такое? Как работает?"></a>Что это вообще такое? Как работает?</h3><p>Да все просто - импортируем в админке как можно больше музыкальных (в моем случае) видео, затем переходим в публичную часть, запускаем плеер и наслаждаемся рандомной музыкой в фоне.</p>
+<p><strong>Какую проблему решает?</strong> </p>
+<p>Это своеобразный ответ алгоритмическим плейлистам (моя волна, flow и т.д.) в музыкальных сервисах. Здесь треки просто играют рандомно. Интересно бывает накидать туда побольше плейлистов и слушать случайные треки. Никаких предложек, анализа предпочтений и т.д. Заканчивается один трек и тут же стартует другой. </p>
+<p>Есть кнопки лайка &#x2F; дизлайка трека, но они не влияют на алгоритм. Просто у трека меняется оценка которую видит администратор.</p>
+<p>Демка сервиса: <a href="https://randomtube.vcpr.space/">https://randomtube.vcpr.space/</a></p>
+<p><strong>Скриншоты админки новой версии:</strong></p>
+<p><img src="/images/randomtube_1.png" alt="RandomTube admin panel"><br><img src="/images/randomtube_2.png" alt="RandomTube admin panel"><br><img src="/images/randomtube_3.png" alt="RandomTube admin panel"><br><img src="/images/randomtube_4.png" alt="RandomTube admin panel"></p>
+<p>Репозиторий проекта тут - <a href="https://github.com/rhamdeew/randomtube">https://github.com/rhamdeew/randomtube</a></p>
+<p>Буду рад вашим звездам, issue и вообще любой реакции.</p>
+
+  </div>
+  
+
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      <div class="category">
+        
+      </div>
+      <div class="tags">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tech/" rel="tag">tech</a></li></ul>
+
+      </div>
+    </div>
+  </footer>
+  
+  
+<nav id="article-nav">
+  
+  
+    <a href="/summer-2026/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          Лето 2026
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+    </main>
+    <footer id="footer">
+  <h2 class="footer-blog-title">
+    <a href="/">HMDW/me</a>
+  </h2>
+  <div class="copyright">
+  <!--noindex-->
+    &copy; 2026 Rail<br>
+    Powered by <a href="https://hexo.io/" target="_blank" rel="noopener noreferrer">Hexo</a>
+  <!--/noindex-->
+  </div>
+</footer>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(32857010, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/32857010" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+    
+<script>
+  var disqus_shortname = 'hmdw';
+  
+  var disqus_url = 'https://hmdw.me/randomtube-go/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
